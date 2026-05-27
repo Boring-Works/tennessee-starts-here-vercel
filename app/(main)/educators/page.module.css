@@ -1,0 +1,315 @@
+/* Educators Page Styles */
+
+.hero {
+  background: var(--color-primary);
+  color: var(--color-cream);
+  padding: 7rem 1rem 4rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 8rem 1.5rem 5rem;
+  }
+}
+
+.hero-content {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.subhead {
+  font-size: 1.125rem;
+  color: var(--color-cream-dark);
+  margin-bottom: 2rem;
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.cta-primary:hover {
+  background: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+.cta-primary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Stats Bar */
+.stats {
+  background: var(--color-secondary);
+  padding: 1.5rem;
+}
+
+.stats-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-cream);
+}
+
+.stats-icon {
+  font-size: 1.25rem;
+}
+
+.stats-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Programs */
+.programs {
+  padding: 5rem 1.5rem;
+  background: var(--color-cream);
+}
+
+.programs-inner {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.programs-headline {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.program-card {
+  background: white;
+  border: var(--border-card);
+  border-radius: 4px;
+  padding: 2rem;
+  transition: all 0.2s ease;
+}
+
+.program-card:hover {
+  border: var(--border-card-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.program-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.program-meta {
+  font-size: 0.875rem;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.program-divider {
+  margin: 0 0.5rem;
+}
+
+.program-desc {
+  font-size: 0.9375rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* Booking */
+.booking {
+  padding: 5rem 1.5rem;
+  background: var(--color-primary);
+  text-align: center;
+}
+
+.booking-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.booking-headline {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--color-cream);
+  margin-bottom: 2rem;
+}
+
+.booking-contact {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-cream-dark);
+}
+
+.booking-contact a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Funding */
+.funding {
+  padding: 3rem 1.5rem;
+  background: var(--color-cream);
+}
+
+.funding-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.funding-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.funding-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #333;
+  line-height: 1.8;
+}
+
+.funding-list strong {
+  color: var(--color-primary);
+}
+
+/* Resources */
+.resources {
+  padding: 3rem 1.5rem;
+  background: white;
+  border-top: 1px solid var(--color-cream-dark);
+}
+
+.resources-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.resources-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.resources-coming {
+  font-size: 1rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.resources-email {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* History Context */
+.history {
+  padding: 4rem 1.5rem;
+  background: var(--color-primary);
+}
+
+.history-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.history-headline {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
+}
+
+.history-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-cream-dark);
+  margin-bottom: 1.5rem;
+}
+
+.history-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--color-accent);
+  transition: opacity 0.15s;
+}
+
+.history-link:hover {
+  opacity: 0.8;
+}
+
+/* ============================================
+   ACCESSIBILITY - Reduced Motion
+   Disables animations for users who prefer reduced motion
+   WCAG 2.2.2 Pause, Stop, Hide (Level A)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .cta-primary,
+  .program-card,
+  .contact-btn-primary,
+  .contact-btn-secondary,
+  .history-link {
+    transition: none;
+  }
+
+  .cta-primary:hover,
+  .contact-btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - Touch Targets
+   Ensures minimum 44px touch targets
+   WCAG 2.5.8 Target Size Minimum (Level AA)
+   ============================================ */
+.cta-primary,
+.contact-btn-primary,
+.contact-btn-secondary {
+  min-height: 44px;
+  min-width: 44px;
+}

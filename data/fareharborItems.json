@@ -1,0 +1,658 @@
+{
+  "_meta": {
+    "description": "FareHarbor booking items mapped to website events. This file documents all bookable items in our FareHarbor account and links them to website events.",
+    "updated": "2026-01-30",
+    "purpose": "Central reference for staff to manage the connection between FareHarbor bookings and website content",
+
+    "staffInstructions": "This file helps you connect FareHarbor booking items to website events. Each 'item' in FareHarbor (tours, camps, workshops) has a unique ID number. When you create a new event on the website, you'll add that ID to link them together. This way, visitors clicking 'Book Now' on the website go directly to the right FareHarbor booking page.",
+
+    "whenToUseThisFile": [
+      "When creating a new ticketed event and need to find/add the FareHarbor item ID",
+      "When verifying that website events are correctly linked to FareHarbor",
+      "When troubleshooting a broken booking link",
+      "When onboarding new staff to understand the booking system"
+    ],
+
+    "fieldGuide": {
+      "id": "The unique number from FareHarbor. Found in the URL when viewing the item in FareHarbor Dashboard.",
+      "name": "Friendly name for staff reference. Should match the FareHarbor item name.",
+      "type": "Category of item: tour, camp, workshop, event, lecture, experience",
+      "bookingUrl": "The complete URL visitors use to book this item. Generated from shortname + ID.",
+      "linkedEvents": "Array of event IDs from events.json that use this FareHarbor item",
+      "pricing": "Ticket prices in CENTS (1200 = $12.00). Match what's configured in FareHarbor.",
+      "duration": "How long the experience lasts. Match FareHarbor settings.",
+      "capacity": "Maximum participants per booking slot. Only include if limited.",
+      "notes": "Internal notes for staff. Not shown on website.",
+      "status": "active = bookable now, seasonal = only during certain times, archived = no longer offered"
+    },
+
+    "fareHarborDashboard": "https://fareharbor.com/dashboard/rockymountmuseum/",
+    "fareHarborEmbedBase": "https://fareharbor.com/embeds/book/rockymountmuseum/",
+    "defaultBookingPage": "https://fareharbor.com/embeds/book/rockymountmuseum/",
+    "shortname": "rockymountmuseum",
+
+    "_aiRules": {
+      "description": "Rules for AI assistants editing FareHarbor item mappings",
+      "criticalRule": "FareHarbor IDs must match real items in the FareHarbor dashboard",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS verify FareHarbor item IDs with the user",
+        "ALWAYS check that linkedEvents match events.json IDs",
+        "NEVER guess or fabricate FareHarbor item IDs",
+        "NEVER change booking URLs without verification"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date",
+        "urlGeneration": "Booking URLs follow pattern: https://fareharbor.com/embeds/book/rockymountmuseum/items/{id}/"
+      },
+      "validation": [
+        "Does the FareHarbor ID exist in their system?",
+        "Does the booking URL match the ID pattern?",
+        "Are linkedEvents valid IDs from events.json?",
+        "Does pricing match what's in FareHarbor?"
+      ],
+      "prohibited": [
+        "Do NOT invent FareHarbor item IDs",
+        "Do NOT change the shortname (rockymountmuseum)",
+        "Do NOT modify item IDs without user verification",
+        "Do NOT remove items without explicit permission"
+      ],
+      "crossFileSync": {
+        "eventsJson": "fareHarborId in events.json must match id here",
+        "bookingConfig": "URLs should match patterns in bookingConfig.json"
+      },
+      "whenUnsure": "FareHarbor IDs are critical for booking - always verify with user"
+    }
+  },
+
+  "_urlBuilder": {
+    "description": "How FareHarbor booking URLs are constructed",
+    "formula": "https://fareharbor.com/embeds/book/{shortname}/items/{itemId}/",
+    "example": {
+      "shortname": "rockymountmuseum",
+      "itemId": "562814",
+      "result": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562814/"
+    },
+    "defaultUrl": {
+      "description": "When an event has requiresTicket: true but no fareHarborId, visitors go to the general booking page",
+      "url": "https://fareharbor.com/embeds/book/rockymountmuseum/"
+    },
+    "lightframeEmbed": {
+      "description": "FareHarbor can open bookings in a modal (lightframe) instead of a new page",
+      "scriptUrl": "https://fareharbor.com/embeds/script/calendar/rockymountmuseum/?fallback=simple",
+      "usage": "Already configured in the website. Booking links automatically use lightframe."
+    }
+  },
+
+  "_howToLink": {
+    "overview": "Connecting a FareHarbor item to a website event takes 3 steps",
+
+    "step1_findItemId": {
+      "title": "Find the Item ID in FareHarbor",
+      "instructions": [
+        "Log into FareHarbor Dashboard: https://fareharbor.com/dashboard/rockymountmuseum/",
+        "Click on 'Items' in the left sidebar",
+        "Find the item you want to link",
+        "Look at the URL in your browser - the number at the end is the Item ID",
+        "Example: fareharbor.com/dashboard/rockymountmuseum/items/562814/ -> ID is 562814"
+      ],
+      "tip": "You can also find the ID by clicking 'Share' on any item and looking at the booking link"
+    },
+
+    "step2_documentHere": {
+      "title": "Add the Item to This File",
+      "instructions": [
+        "Scroll down to the 'items' array below",
+        "Copy the template from '_templates.newItem'",
+        "Fill in the item details (ID, name, pricing, etc.)",
+        "Add the event IDs from events.json that should use this item"
+      ],
+      "why": "This creates a central reference so staff always know which FareHarbor items exist"
+    },
+
+    "step3_updateEvents": {
+      "title": "Link the Event in events.json",
+      "instructions": [
+        "Open data/events.json",
+        "Find your event in the 'events' array",
+        "Set 'fareHarborId' to the item ID (as a string): \"fareHarborId\": \"562814\"",
+        "The 'ticketUrl' will be auto-generated, but you can also set it explicitly",
+        "Save and commit your changes"
+      ],
+      "example": {
+        "before": {
+          "id": "harvest-fest",
+          "title": "Harvest Fest",
+          "fareHarborId": null,
+          "requiresTicket": true
+        },
+        "after": {
+          "id": "harvest-fest",
+          "title": "Harvest Fest",
+          "fareHarborId": "562814",
+          "requiresTicket": true
+        }
+      }
+    },
+
+    "troubleshooting": {
+      "bookingLinkBroken": "Check that the fareHarborId matches an active item in FareHarbor. Item may have been deleted or deactivated.",
+      "wrongItemOpens": "Verify the fareHarborId is correct. Numbers must match exactly.",
+      "noBookButton": "Make sure 'requiresTicket' is set to true in events.json",
+      "pricesMismatch": "Prices must be updated in FareHarbor, not on the website. Website displays prices from events.json for reference only."
+    }
+  },
+
+  "_templates": {
+    "_instructions": "Copy these templates when adding new items. Fill in the values and paste into the 'items' array.",
+
+    "newItem": {
+      "_description": "Basic template for any new FareHarbor item",
+      "id": "000000",
+      "name": "Your Item Name Here",
+      "type": "event",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/000000/",
+      "linkedEvents": [],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "2 hours",
+      "capacity": null,
+      "notes": ""
+    },
+
+    "campItem": {
+      "_description": "Template for summer/spring break camps",
+      "id": "000000",
+      "name": "Camp Name - Week X",
+      "type": "camp",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/000000/",
+      "linkedEvents": [],
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 22500,
+        "underFive": null,
+        "members": 18000
+      },
+      "duration": "5 days (9am-3pm)",
+      "ageRange": "7-12",
+      "capacity": 15,
+      "includes": ["Lunch", "Materials", "Take-home projects"],
+      "notes": ""
+    },
+
+    "workshopItem": {
+      "_description": "Template for hands-on workshops (blacksmith, cooking, etc.)",
+      "id": "000000",
+      "name": "Workshop Name",
+      "type": "workshop",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/000000/",
+      "linkedEvents": [],
+      "pricing": {
+        "adult": 4000,
+        "senior": 3500,
+        "child": null,
+        "underFive": null,
+        "members": 3000
+      },
+      "duration": "4 hours",
+      "capacity": 10,
+      "minimumAge": 16,
+      "includes": ["Materials", "Safety gear", "Take-home item"],
+      "notes": ""
+    },
+
+    "tourItem": {
+      "_description": "Template for guided tours",
+      "id": "000000",
+      "name": "Tour Name",
+      "type": "tour",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/000000/",
+      "linkedEvents": [],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "1 hour",
+      "capacity": 30,
+      "notes": ""
+    }
+  },
+
+  "items": [
+    {
+      "_comment": "=== SPRING BREAK CAMPS ===",
+      "id": "562803",
+      "name": "Spring Break Camp Week 1",
+      "type": "camp",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562803/",
+      "linkedEvents": ["spring-break-camp-1"],
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 18000,
+        "underFive": null,
+        "members": 15000
+      },
+      "duration": "5 days (9am-3pm)",
+      "ageRange": "7-12",
+      "capacity": 15,
+      "notes": "Johnson City & Bristol schools week. Lunch provided."
+    },
+    {
+      "id": "562804",
+      "name": "Spring Break Camp Week 2",
+      "type": "camp",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562804/",
+      "linkedEvents": ["spring-break-camp-2"],
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 13500,
+        "underFive": null,
+        "members": 11500
+      },
+      "duration": "4 days (9am-3pm)",
+      "ageRange": "7-12",
+      "capacity": 15,
+      "notes": "Sullivan County schools week. Shorter week = lower price. Lunch provided."
+    },
+
+    {
+      "_comment": "=== SIGNATURE EVENTS ===",
+      "id": "562805",
+      "name": "Woolly Days & Colonial Gardening",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562805/",
+      "linkedEvents": ["woolly-days"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "2 days",
+      "notes": "April fiber arts and gardening festival"
+    },
+    {
+      "id": "562806",
+      "name": "Stitching Independence",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562806/",
+      "linkedEvents": ["stitching-independence"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "2 days",
+      "notes": "Flag dedication weekend. Includes Betsy Ross Sip & Sew on Sunday."
+    },
+    {
+      "id": "289142",
+      "name": "Early Frontier Days & Colonial Trade Fair",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/289142/",
+      "linkedEvents": ["early-frontier-days"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "3 days",
+      "notes": "Largest Revolutionary-era gathering in region. Partnership with OVTA."
+    },
+    {
+      "id": "562810",
+      "name": "Colonial Independence Day",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562810/",
+      "linkedEvents": ["colonial-independence-day"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "1 day",
+      "notes": "America 250 celebration. First 250 ceremony."
+    },
+    {
+      "id": "562813",
+      "name": "First Families of Tennessee Reunion",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562813/",
+      "linkedEvents": ["first-families-reunion"],
+      "pricing": {
+        "adult": 2500,
+        "senior": 2000,
+        "child": 1500,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "3 days",
+      "notes": "Premium pricing for exclusive multi-day event. Friday: descendants only."
+    },
+    {
+      "id": "562814",
+      "name": "Harvest Fest",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562814/",
+      "linkedEvents": ["harvest-fest"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "2 days",
+      "notes": "October harvest festival"
+    },
+
+    {
+      "_comment": "=== SUMMER CAMPS ===",
+      "id": "562807",
+      "name": "Summer Camp Week 1",
+      "type": "camp",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562807/",
+      "linkedEvents": ["summer-camp-1"],
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 22500,
+        "underFive": null,
+        "members": 18000
+      },
+      "duration": "5 days (9am-3pm)",
+      "ageRange": "7-12",
+      "capacity": 15,
+      "notes": "Full 5-day camp. Lunch provided."
+    },
+    {
+      "id": "562809",
+      "name": "Summer Camp Week 2",
+      "type": "camp",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562809/",
+      "linkedEvents": ["summer-camp-2"],
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 22500,
+        "underFive": null,
+        "members": 18000
+      },
+      "duration": "5 days (9am-3pm)",
+      "ageRange": "7-12",
+      "capacity": 15,
+      "notes": "Full 5-day camp. Lunch provided."
+    },
+
+    {
+      "_comment": "=== WORKSHOPS ===",
+      "id": "562808",
+      "name": "Father's Day Weekend at the Forge",
+      "type": "workshop",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562808/",
+      "linkedEvents": ["fathers-day-forge"],
+      "pricing": {
+        "adult": 5000,
+        "senior": null,
+        "child": null,
+        "underFive": null,
+        "members": 4500
+      },
+      "duration": "4 hours",
+      "capacity": 10,
+      "notes": "Father-child pairs only. 10 pairs max."
+    },
+    {
+      "id": "562818",
+      "name": "Blacksmith Workshops",
+      "type": "workshop",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562818/",
+      "linkedEvents": [],
+      "linkedRecurring": "blacksmithWorkshops",
+      "pricing": {
+        "adult": 4000,
+        "senior": 3500,
+        "child": null,
+        "underFive": null,
+        "members": 3000
+      },
+      "duration": "4 hours",
+      "capacity": 6,
+      "minimumAge": 16,
+      "notes": "Select Saturdays throughout season. All materials included."
+    },
+    {
+      "id": "562819",
+      "name": "Hearth Cooking",
+      "type": "workshop",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562819/",
+      "linkedEvents": [],
+      "linkedRecurring": "hearthCooking",
+      "pricing": {
+        "adult": 3500,
+        "senior": 3000,
+        "child": null,
+        "underFive": null,
+        "members": 2500
+      },
+      "duration": "4 hours",
+      "capacity": 8,
+      "notes": "Quarterly cooking classes. Eat what you make."
+    },
+
+    {
+      "_comment": "=== TOURS ===",
+      "id": "562820",
+      "name": "Twilight on the Mount",
+      "type": "tour",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562820/",
+      "linkedEvents": [],
+      "linkedRecurring": "twilightOnTheMount",
+      "pricing": {
+        "adult": 1000,
+        "senior": 800,
+        "child": 600,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "1.5 hours",
+      "capacity": 25,
+      "notes": "Summer Thursday evening tours. May-August only."
+    },
+    {
+      "id": "658959",
+      "name": "Behind the Scenes VIP Experience",
+      "type": "experience",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/658959/",
+      "linkedEvents": [],
+      "linkedRecurring": "behindTheScenes",
+      "pricing": {
+        "adult": 4500,
+        "senior": 4000,
+        "child": null,
+        "underFive": null,
+        "members": 3500
+      },
+      "duration": "2 hours",
+      "capacity": 10,
+      "minimumAge": 18,
+      "notes": "Most exclusive experience. Collections vault access. Last Saturday monthly."
+    },
+
+    {
+      "_comment": "=== EDUCATION ===",
+      "id": "258228",
+      "name": "Homeschool Days",
+      "type": "education",
+      "status": "active",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/",
+      "linkedEvents": ["homeschool-spring", "homeschool-late-summer"],
+      "linkedRecurring": "homeschoolDays",
+      "pricing": {
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "Full day",
+      "notes": "Monthly during school year. TN Standards aligned. Same item ID used for all homeschool days."
+    },
+    {
+      "id": "562811",
+      "name": "Back to School at the Frontier",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562811/",
+      "linkedEvents": ["back-to-school"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "1 day",
+      "notes": "End of summer family event"
+    },
+
+    {
+      "_comment": "=== SEASONAL/HOLIDAY ===",
+      "id": "562815",
+      "name": "Haunting on the Mount",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562815/",
+      "linkedEvents": ["haunting"],
+      "pricing": {
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
+        "underFive": null,
+        "members": 0
+      },
+      "duration": "3 hours per evening",
+      "ageRestriction": "13+",
+      "notes": "October evening tours. 6 nights total (Thu-Sat x 2 weeks)."
+    },
+    {
+      "id": "562816",
+      "name": "Frontier Christmas",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562816/",
+      "linkedEvents": ["frontier-christmas"],
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "Regular hours",
+      "notes": "November daytime holiday experience. Wed-Sat."
+    },
+    {
+      "id": "562817",
+      "name": "Candlelight Christmas",
+      "type": "event",
+      "status": "seasonal",
+      "bookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/562817/",
+      "linkedEvents": ["candlelight-christmas"],
+      "pricing": {
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
+        "underFive": 0,
+        "members": 0
+      },
+      "duration": "3 hours per evening",
+      "notes": "Premium December evening event. 4 nights. Sells out annually."
+    }
+  ],
+
+  "_itemIndex": {
+    "_description": "Quick reference: Item ID -> Name (for fast lookup)",
+    "258228": "Homeschool Days",
+    "289142": "Early Frontier Days",
+    "562803": "Spring Break Camp Week 1",
+    "562804": "Spring Break Camp Week 2",
+    "562805": "Woolly Days",
+    "562806": "Stitching Independence",
+    "562807": "Summer Camp Week 1",
+    "562808": "Father's Day Forge",
+    "562809": "Summer Camp Week 2",
+    "562810": "Colonial Independence Day",
+    "562811": "Back to School",
+    "562813": "First Families Reunion",
+    "562814": "Harvest Fest",
+    "562815": "Haunting on the Mount",
+    "562816": "Frontier Christmas",
+    "562817": "Candlelight Christmas",
+    "562818": "Blacksmith Workshops",
+    "562819": "Hearth Cooking",
+    "562820": "Twilight Tours",
+    "658959": "Behind the Scenes VIP"
+  },
+
+  "_validation": {
+    "checklistBeforeCommit": [
+      "Is the item ID correct? (Check FareHarbor dashboard)",
+      "Does the bookingUrl use the correct item ID?",
+      "Are prices in CENTS? (1200 = $12.00)",
+      "Is the linked event ID correct? (Check events.json)",
+      "Is the status set correctly? (active, seasonal, archived)"
+    ],
+    "commonErrors": [
+      "Wrong item ID - booking goes to wrong event",
+      "Prices in dollars instead of cents - $12 should be 1200",
+      "Missing linkedEvents - item exists but not connected to website",
+      "Archived item still linked - visitors get 404 on FareHarbor"
+    ]
+  },
+
+  "_changelog": [
+    {
+      "date": "2026-01-30",
+      "change": "Initial file created with all 2026 season items",
+      "by": "System"
+    }
+  ]
+}

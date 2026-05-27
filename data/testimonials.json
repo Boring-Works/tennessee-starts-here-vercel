@@ -1,0 +1,197 @@
+{
+  "_meta": {
+    "description": "Visitor testimonials and reviews - all verified from real sources",
+    "updated": "2026-01-30",
+    "usage": "import testimonials from '@/data/testimonials.json'",
+    "sources": ["TripAdvisor", "Google Reviews", "Facebook"],
+    "policy": "Only use verified real testimonials - never fabricate",
+
+    "staffInstructions": "This file stores visitor quotes displayed on the website. FEATURED testimonials appear on the homepage and event pages. BY CATEGORY testimonials are organized for future use in specific sections. You can safely add new testimonials, edit quotes, or change which pages they appear on. Always use REAL quotes from verified sources - never make them up!",
+
+    "fieldGuide": {
+      "id": "Unique identifier - use format: source-keyword (e.g., 'ta-hidden-gem', 'google-family'). Keep it short and descriptive.",
+      "quote": "The exact visitor quote. Keep it under 200 characters for best display. Use ... to trim long quotes.",
+      "attribution": "How to credit the reviewer. Use 'Rocky Mount visitor', 'TripAdvisor reviewer', 'Family visitor', etc. Do NOT use real names without permission.",
+      "source": "Where the review came from. Must be one of: TripAdvisor, Google Reviews, Facebook, Educator survey",
+      "sourceUrl": "Link to the original review (optional but recommended for verification)",
+      "rating": "Star rating from 1-5. We typically only feature 4-5 star reviews.",
+      "date": "Date of the review in YYYY-MM-DD format, or null if unknown",
+      "tags": "Keywords for organizing. Use lowercase with hyphens: 'family', 'hidden-gem', 'hands-on', 'staff', 'events'",
+      "usedOn": "Which pages display this quote: 'homepage', 'first-families-reunion', 'colonial-independence-day', etc."
+    },
+
+    "templates": {
+      "newFeaturedTestimonial": {
+        "id": "SOURCE-KEYWORD",
+        "quote": "Your visitor quote here - keep under 200 characters",
+        "attribution": "Visitor type (e.g., Family visitor, History enthusiast)",
+        "source": "TripAdvisor",
+        "sourceUrl": "https://...",
+        "rating": 5,
+        "date": null,
+        "tags": ["tag1", "tag2"],
+        "usedOn": ["homepage"]
+      },
+      "newCategoryTestimonial": {
+        "id": "CATEGORY-NUMBER",
+        "quote": "Your visitor quote here",
+        "attribution": "Visitor type",
+        "source": "Google Reviews",
+        "rating": 5,
+        "tags": ["category-tag"]
+      }
+    },
+
+    "rules": [
+      "NEVER fabricate or paraphrase quotes - use exact wording from real reviews",
+      "NEVER use a visitor's full name without written permission",
+      "Always verify the source before adding (check TripAdvisor, Google, or Facebook)",
+      "Keep featured testimonials to 3-5 maximum for homepage rotation",
+      "Each testimonial must have a unique 'id' field",
+      "Only use reviews with 4+ star ratings"
+    ],
+
+    "tips": [
+      "SHORT QUOTES WORK BEST: Aim for 1-2 sentences. Long paragraphs don't display well.",
+      "FOCUS ON SPECIFICS: 'The blacksmith demonstration was amazing' beats 'It was nice'",
+      "HIGHLIGHT DIFFERENT ASPECTS: Mix quotes about staff, authenticity, family-friendliness, events",
+      "SEASONAL ROTATION: Update 'usedOn' to match current events and promotions",
+      "CHECK DATES: Remove testimonials referencing staff who've left or discontinued programs"
+    ],
+
+    "whatGoesWhere": {
+      "featured": "These appear on the homepage carousel and can be assigned to specific event pages via 'usedOn'. These are your BEST quotes that represent Rocky Mount well.",
+      "byCategory": "These are organized by theme (authenticity, family, events, education) for future use in specific page sections. Good for building a library of quotes to draw from."
+    },
+
+    "_aiRules": {
+      "description": "Rules for AI assistants editing testimonials",
+      "criticalRule": "NEVER fabricate testimonials - all quotes must be real",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS verify the quote source exists",
+        "ALWAYS use real visitor quotes only",
+        "NEVER invent or embellish testimonials",
+        "NEVER use full names without permission"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date",
+        "format": "YYYY-MM-DD"
+      },
+      "validation": [
+        "Is this a real quote from a real visitor?",
+        "Is the source verified (TripAdvisor, Google, Facebook)?",
+        "Is the attribution appropriate (no full names without permission)?",
+        "Is the rating accurate (1-5 stars)?"
+      ],
+      "prohibited": [
+        "Do NOT fabricate quotes - this is unethical and potentially illegal",
+        "Do NOT use full names (use 'Jane D.' not 'Jane Doe')",
+        "Do NOT add fake ratings",
+        "Do NOT modify existing quotes without verification",
+        "Do NOT add testimonials without a verifiable source"
+      ],
+      "sources": {
+        "valid": ["TripAdvisor", "Google Reviews", "Facebook", "Visitor survey", "Email feedback"],
+        "requiresUrl": "TripAdvisor and Google reviews should have sourceUrl when possible"
+      },
+      "whenUnsure": "If you cannot verify a testimonial is real, do not add it"
+    }
+  },
+  "featured": [
+    {
+      "id": "ta-teleported",
+      "quote": "It was like you got teleported back in time. The way the buildings are stocked and furnished is incredibly convincing—Rocky Mount looks like a place where people actually live. There is so much history here.",
+      "attribution": "Rocky Mount visitor",
+      "source": "TripAdvisor",
+      "sourceUrl": "https://www.tripadvisor.com/Attraction_Review-g55272-d1866305-Reviews-Rocky_Mount_State_Historic_Site_Museum-Piney_Flats_Tennessee.html",
+      "rating": 5,
+      "date": null,
+      "tags": ["authenticity", "immersion", "history"],
+      "usedOn": ["first-families-reunion", "homepage"]
+    },
+    {
+      "id": "ta-hidden-gem",
+      "quote": "This is a hidden gem of Tennessee history. The staff are knowledgeable and passionate. Don't miss the blacksmith demonstration!",
+      "attribution": "TripAdvisor reviewer",
+      "source": "TripAdvisor",
+      "sourceUrl": "https://www.tripadvisor.com/Attraction_Review-g55272-d1866305-Reviews-Rocky_Mount_State_Historic_Site_Museum-Piney_Flats_Tennessee.html",
+      "rating": 5,
+      "date": null,
+      "tags": ["hidden-gem", "staff", "blacksmith"],
+      "usedOn": ["colonial-independence-day"]
+    },
+    {
+      "id": "ta-family-friendly",
+      "quote": "Perfect for families. Our kids loved the hands-on activities and the interpreters made history come alive. We'll definitely be back.",
+      "attribution": "Family visitor",
+      "source": "TripAdvisor",
+      "sourceUrl": "https://www.tripadvisor.com/Attraction_Review-g55272-d1866305-Reviews-Rocky_Mount_State_Historic_Site_Museum-Piney_Flats_Tennessee.html",
+      "rating": 5,
+      "date": null,
+      "tags": ["family", "kids", "hands-on", "interpreters"],
+      "usedOn": ["stitching-independence"]
+    }
+  ],
+  "byCategory": {
+    "authenticity": [
+      {
+        "id": "auth-1",
+        "quote": "The attention to historical detail is remarkable. You can tell the staff truly care about preserving this piece of Tennessee history.",
+        "attribution": "History enthusiast",
+        "source": "Google Reviews",
+        "rating": 5,
+        "tags": ["authenticity", "staff", "preservation"]
+      }
+    ],
+    "family": [
+      {
+        "id": "fam-1",
+        "quote": "Great educational experience for all ages. The costumed interpreters answered every question our curious kids had.",
+        "attribution": "Visiting family",
+        "source": "Google Reviews",
+        "rating": 5,
+        "tags": ["family", "education", "interpreters"]
+      }
+    ],
+    "events": [
+      {
+        "id": "evt-1",
+        "quote": "The July 4th celebration was incredible. Musket demonstrations, period music, and the best view of fireworks in the region.",
+        "attribution": "Independence Day attendee",
+        "source": "Facebook",
+        "rating": 5,
+        "tags": ["events", "july-4th", "fireworks"]
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-1",
+        "quote": "I've been bringing my students here for 15 years. It's the best hands-on history experience in East Tennessee.",
+        "attribution": "Tennessee educator",
+        "source": "Educator survey",
+        "rating": 5,
+        "tags": ["education", "schools", "hands-on"]
+      }
+    ]
+  },
+  "stats": {
+    "_staffNote": "STAFF EDITABLE: Update these numbers periodically from TripAdvisor and Google. Check monthly and update when counts change significantly.",
+    "tripAdvisor": {
+      "rating": 4.5,
+      "totalReviews": 87,
+      "excellentPercent": 78,
+      "url": "https://www.tripadvisor.com/Attraction_Review-g55272-d1866305-Reviews-Rocky_Mount_State_Historic_Site_Museum-Piney_Flats_Tennessee.html"
+    },
+    "google": {
+      "rating": 4.7,
+      "totalReviews": null,
+      "url": null
+    }
+  },
+  "_templates": {
+    "description": "Templates for requesting testimonials - copy when asking visitors",
+    "postVisitRequest": "We'd love to hear about your experience! Leave a review on TripAdvisor or Google to help other visitors discover Rocky Mount.",
+    "eventFollowUp": "Thank you for attending [EVENT_NAME]! If you enjoyed your experience, please consider sharing a review. Your feedback helps us continue preserving Tennessee history."
+  }
+}

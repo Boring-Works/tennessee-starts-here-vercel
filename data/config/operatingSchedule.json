@@ -1,0 +1,418 @@
+{
+  "_meta": {
+    "description": "Annual operating schedule with recurrence patterns - single source of truth for hours, seasons, closures, pricing",
+    "updated": "2026-01-30",
+    "usage": "import schedule from '@/data/config/operatingSchedule.json'",
+    "maintainer": "Rocky Mount Operations",
+    "version": "1.0.0",
+    "nextReviewDate": "2027-01-01",
+    "staffInstructions": "This file controls WHEN Rocky Mount is open or closed. The website uses this to show real-time status (Open Now, Closed, etc). Update this file to add closures (staff training days, weather closures, etc.) or change season dates. IMPORTANT: Prices in this file should match prices in siteInfo.json.",
+    "_aiRules": {
+      "description": "CRITICAL: This file controls the Open/Closed status shown on the website",
+      "severity": "HIGH - mistakes here affect every page on the site",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS verify date calculations (especially Thanksgiving)",
+        "ALWAYS use YYYY-MM-DD date format",
+        "NEVER change operatingDays or closedDays without explicit permission",
+        "NEVER modify standard hours without site director approval"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date",
+        "onNewYear": "Follow _annualChecklist exactly",
+        "thanksgivingCalculation": "See _thanksgivingExplained for formula"
+      },
+      "annualTasks": {
+        "when": "Every January",
+        "tasks": [
+          "Update currentYear",
+          "Update seasonalWindow.year and dates",
+          "Calculate new Thanksgiving dates",
+          "Update pricingSchedule dates",
+          "Clear old oneOff closures"
+        ],
+        "reference": "See _annualChecklist section for details"
+      },
+      "prohibited": [
+        "Do NOT change operatingDays without site director approval",
+        "Do NOT modify hours.standard without approval",
+        "Do NOT delete annual closures (Thanksgiving)",
+        "Do NOT set season dates outside March-December",
+        "Do NOT remove _meta, _annualChecklist, or _aiRules sections"
+      ],
+      "crossFileSync": {
+        "siteInfo.json": "Prices must match admission section",
+        "events.json": "Events must fall within seasonalWindow dates"
+      },
+      "datePatterns": {
+        "firstWeekMarch": "First Wednesday in March (or first operating day)",
+        "december20": "Always December 20th regardless of day",
+        "thanksgiving": "Fourth Thursday + Friday in November"
+      },
+      "whenUnsure": "This file is critical - always ask user to verify changes"
+    },
+    "fieldGuide": {
+      "currentYear": "The calendar year this schedule applies to. Update to new year each January.",
+      "operatingDays": "Days of the week we're open. Rocky Mount is Wed-Sat. Don't change without major operational change.",
+      "closedDays": "Days of the week we're always closed. Sun-Mon-Tue. Don't change without major operational change.",
+      "hours": "Opening and closing times. 24-hour format (17:00) used by code, 12-hour (5:00 PM) for display.",
+      "seasonalWindow": "When our season starts and ends. Update dates each January.",
+      "closures.annual": "Recurring closures that happen every year (like Thanksgiving). Dates auto-calculate from patterns.",
+      "closures.oneOff": "One-time closures for this year only (staff training, weather, etc.). Add entries here.",
+      "pricingSchedule": "Admission prices by age category. UPDATE BOTH HERE AND IN siteInfo.json when prices change."
+    },
+    "whenToUpdate": {
+      "everyJanuary": [
+        "currentYear - change to the new year",
+        "seasonalWindow.year - change to new year",
+        "seasonalWindow.startDate - calculate first operating day in March",
+        "seasonalWindow.endDate - set to December 20",
+        "closures.annual[thanksgiving].startDate and endDate - calculate new dates",
+        "pricingSchedule.effectiveDate and nextReviewDate",
+        "pricingSchedule.tiers validFrom and validUntil dates",
+        "_meta.nextReviewDate"
+      ],
+      "asNeeded": [
+        "closures.oneOff - add staff training days, weather closures, etc.",
+        "pricingSchedule.tiers.priceUSD - when admission prices change (ALSO update siteInfo.json)"
+      ],
+      "rarely": [
+        "operatingDays / closedDays (only if we change which days we're open)",
+        "hours.standard (only if opening/closing times change)"
+      ]
+    },
+    "rules": [
+      "Dates must be in YYYY-MM-DD format (example: 2026-11-26)",
+      "Prices are numbers only, no dollar signs (12 not '$12')",
+      "Every closure needs a unique 'id' field",
+      "Times use 24-hour format for code (17:00) and 12-hour for display (5:00 PM)",
+      "The season ALWAYS ends December 20th regardless of what day that falls on",
+      "Thanksgiving closure is always 4th Thursday of November + the Friday after"
+    ],
+    "commonMistakes": [
+      "WRONG: '11/26/2026' - Use ISO format: '2026-11-26'",
+      "WRONG: Changing prices here but not in siteInfo.json - BOTH files must match",
+      "WRONG: Adding a closure without an 'id' field - Every closure needs a unique id",
+      "WRONG: Using 5:00 PM in closeTime24 - Use 17:00 for 24-hour fields",
+      "WRONG: Adding a closure that overlaps with another - Check existing closures first",
+      "WRONG: Forgetting to update the Thanksgiving dates for the new year"
+    ]
+  },
+  "_annualChecklist": {
+    "description": "Complete these steps in January each year to prepare the new season",
+    "timing": "Do this the first week of January",
+    "steps": [
+      {
+        "step": 1,
+        "task": "Update currentYear",
+        "example": "Change 2026 to 2027",
+        "location": "\"currentYear\": 2026"
+      },
+      {
+        "step": 2,
+        "task": "Update seasonalWindow.year",
+        "example": "Change 2026 to 2027",
+        "location": "\"seasonalWindow\": { \"year\": 2026, ... }"
+      },
+      {
+        "step": 3,
+        "task": "Calculate new season start date",
+        "howTo": "Find the first Wednesday in March. That's your start date.",
+        "example": "For 2027: March 3rd is a Wednesday, so use '2027-03-03'",
+        "location": "seasonalWindow.startDate"
+      },
+      {
+        "step": 4,
+        "task": "Set season end date",
+        "howTo": "Always December 20th of the current year",
+        "example": "'2027-12-20'",
+        "location": "seasonalWindow.endDate"
+      },
+      {
+        "step": 5,
+        "task": "Calculate Thanksgiving dates",
+        "howTo": "Find the 4th Thursday in November. That's Thanksgiving. The day after is Friday.",
+        "example": "For 2027: Nov 25 (Thu) and Nov 26 (Fri), so startDate: '2027-11-25', endDate: '2027-11-26'",
+        "location": "closures.annual[0].startDate and endDate"
+      },
+      {
+        "step": 6,
+        "task": "Update pricing dates",
+        "howTo": "Change all validFrom to January 1 of new year, validUntil to December 31",
+        "example": "validFrom: '2027-01-01', validUntil: '2027-12-31'",
+        "location": "pricingSchedule.tiers"
+      },
+      {
+        "step": 7,
+        "task": "Clear one-off closures from last year",
+        "howTo": "Delete any entries in closures.oneOff that were for the previous year",
+        "location": "closures.oneOff"
+      },
+      {
+        "step": 8,
+        "task": "Update review dates",
+        "howTo": "Set _meta.nextReviewDate and pricingSchedule.nextReviewDate to January 1 of NEXT year",
+        "example": "For 2027 season: set to '2028-01-01'",
+        "location": "_meta.nextReviewDate and pricingSchedule.nextReviewDate"
+      }
+    ]
+  },
+  "_closureTemplates": {
+    "description": "Copy-paste these templates to add new closures. Replace the values in CAPS.",
+    "howToUse": "Copy the template you need, paste it into the appropriate array (annual or oneOff), and fill in the CAPS values.",
+    "templates": {
+      "staffTrainingDay": {
+        "_instructions": "For a single-day staff training closure. Add to closures.oneOff array.",
+        "template": {
+          "id": "staff-training-YEAR",
+          "name": "Staff Professional Development Day",
+          "type": "operational",
+          "startDate": "YYYY-MM-DD",
+          "endDate": "YYYY-MM-DD",
+          "reason": "Annual staff training and development",
+          "note": "Site closed for internal staff use"
+        },
+        "example": {
+          "id": "staff-training-2026",
+          "name": "Staff Professional Development Day",
+          "type": "operational",
+          "startDate": "2026-09-15",
+          "endDate": "2026-09-15",
+          "reason": "Annual staff training and development",
+          "note": "Site closed for internal staff use"
+        }
+      },
+      "weatherClosure": {
+        "_instructions": "For emergency weather closures. Add to closures.oneOff array.",
+        "template": {
+          "id": "weather-MONTH-DAY-YEAR",
+          "name": "Weather Closure",
+          "type": "weather",
+          "startDate": "YYYY-MM-DD",
+          "endDate": "YYYY-MM-DD",
+          "reason": "DESCRIBE WEATHER (e.g., Winter storm, Flooding)",
+          "note": "Site closed due to hazardous conditions"
+        },
+        "example": {
+          "id": "weather-jan-15-2026",
+          "name": "Weather Closure",
+          "type": "weather",
+          "startDate": "2026-01-15",
+          "endDate": "2026-01-15",
+          "reason": "Winter storm warning",
+          "note": "Site closed due to hazardous conditions"
+        }
+      },
+      "specialEventClosure": {
+        "_instructions": "When the site is closed for a private event. Add to closures.oneOff array.",
+        "template": {
+          "id": "private-event-MONTH-YEAR",
+          "name": "Private Event",
+          "type": "private-event",
+          "startDate": "YYYY-MM-DD",
+          "endDate": "YYYY-MM-DD",
+          "reason": "DESCRIBE EVENT (e.g., Private wedding rental)",
+          "note": "Site closed to general public"
+        },
+        "example": {
+          "id": "private-event-june-2026",
+          "name": "Private Event",
+          "type": "private-event",
+          "startDate": "2026-06-20",
+          "endDate": "2026-06-20",
+          "reason": "Private wedding rental",
+          "note": "Site closed to general public"
+        }
+      },
+      "multiDayClosure": {
+        "_instructions": "For closures spanning multiple days. Add to closures.oneOff array.",
+        "template": {
+          "id": "CLOSURE-NAME-YEAR",
+          "name": "CLOSURE DISPLAY NAME",
+          "type": "TYPE (operational, weather, maintenance, private-event)",
+          "startDate": "YYYY-MM-DD",
+          "endDate": "YYYY-MM-DD",
+          "reason": "WHY WE'RE CLOSED",
+          "note": "ADDITIONAL INFO FOR VISITORS"
+        },
+        "example": {
+          "id": "maintenance-october-2026",
+          "name": "Fall Maintenance",
+          "type": "maintenance",
+          "startDate": "2026-10-14",
+          "endDate": "2026-10-17",
+          "reason": "Annual building maintenance and repairs",
+          "note": "Site closed for scheduled maintenance"
+        }
+      }
+    }
+  },
+  "_thanksgivingExplained": {
+    "description": "How the Thanksgiving closure works",
+    "pattern": "fourth-thursday-november-plus-friday",
+    "meaning": "Rocky Mount closes on Thanksgiving Day (4th Thursday of November) and the day after (Friday)",
+    "howToCalculate": [
+      "1. Find November 1st for the year",
+      "2. Count forward to find the first Thursday",
+      "3. Add 21 days (3 weeks) to get the 4th Thursday - that's Thanksgiving",
+      "4. The next day (Friday) is also closed",
+      "5. Update startDate to Thanksgiving Thursday",
+      "6. Update endDate to the Friday after"
+    ],
+    "examples": {
+      "2026": "November 26 (Thu) and November 27 (Fri)",
+      "2027": "November 25 (Thu) and November 26 (Fri)",
+      "2028": "November 23 (Thu) and November 24 (Fri)"
+    },
+    "note": "The website code can auto-calculate this, but we store explicit dates as a backup and for clarity"
+  },
+  "_yearAgnosticPatternsExplained": {
+    "description": "What the pattern fields mean",
+    "patterns": {
+      "first-week-march": "Season starts on the first Wednesday (or first operating day) in March",
+      "first-wednesday-march": "Same as above - the first Wednesday of March",
+      "december-20": "Season always ends December 20th, regardless of what day of the week it falls on",
+      "second-wednesday-december": "Alternative pattern - season ends on the 2nd Wednesday of December (older pattern, not currently used)",
+      "fourth-thursday-november-plus-friday": "Thanksgiving closure - 4th Thursday of November plus the Friday after"
+    },
+    "whyWeUsePatterns": "Patterns help us remember the RULE, while the actual dates are calculated each year. The pattern stays the same; only the dates change."
+  },
+  "currentYear": 2026,
+  "operatingDays": ["wednesday", "thursday", "friday", "saturday"],
+  "closedDays": ["sunday", "monday", "tuesday"],
+  "hours": {
+    "standard": {
+      "open": "10:00 AM",
+      "openTime24": "10:00",
+      "close": "5:00 PM",
+      "closeTime24": "17:00",
+      "lastTourStart": "4:00 PM",
+      "lastTourStart24": "16:00"
+    },
+    "tourInterval": 60,
+    "note": "Hours may vary for special events. See closures array for exceptions."
+  },
+  "seasonalWindow": {
+    "year": 2026,
+    "status": "active",
+    "startDate": "2026-03-04",
+    "startPattern": "first-week-march",
+    "startReason": "America 250 commemorative season opening",
+    "endDate": "2026-12-20",
+    "endPattern": "december-20",
+    "endReason": "Season always closes December 20th"
+  },
+  "nextYearTemplate": {
+    "instructions": "Season: First week of March through December 20 (every year)",
+    "year": 2027,
+    "startPattern": "first-week-march",
+    "startNote": "First Wednesday/operating day in March",
+    "endPattern": "december-20",
+    "endNote": "Always December 20th regardless of day of week"
+  },
+  "closures": {
+    "annual": [
+      {
+        "id": "thanksgiving",
+        "name": "Thanksgiving Holiday",
+        "type": "holiday",
+        "recurring": true,
+        "recurrencePattern": "fourth-thursday-november-plus-friday",
+        "startDate": "2026-11-26",
+        "endDate": "2026-11-27",
+        "daysCount": 2,
+        "note": "Closed Thursday and Friday only (Thanksgiving Day + day after)",
+        "reason": "Holiday closure"
+      }
+    ],
+    "_note": "Season ends December 20th, so no separate Christmas closure needed",
+    "oneOff": [
+      {
+        "id": "staff-training-2026",
+        "name": "Staff Professional Development Day",
+        "type": "operational",
+        "startDate": "2026-09-15",
+        "endDate": "2026-09-15",
+        "reason": "Annual staff training and development",
+        "note": "Site closed for internal staff use"
+      }
+    ]
+  },
+  "pricingSchedule": {
+    "_note": "IMPORTANT: When changing prices, also update data/siteInfo.json admission section to match",
+    "currency": "USD",
+    "effectiveDate": "2026-01-01",
+    "nextReviewDate": "2027-01-01",
+    "note": "Prices locked through end of 2026 season",
+    "tiers": [
+      {
+        "id": "adult",
+        "label": "Adults",
+        "ageMin": 18,
+        "ageMax": 64,
+        "priceUSD": 12,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-12-31",
+        "status": "active",
+        "lastUpdated": "2026-01-01"
+      },
+      {
+        "id": "senior",
+        "label": "Seniors (65+)",
+        "ageMin": 65,
+        "ageMax": null,
+        "priceUSD": 10,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-12-31",
+        "status": "active",
+        "lastUpdated": "2026-01-01"
+      },
+      {
+        "id": "child",
+        "label": "Children (6-17)",
+        "ageMin": 6,
+        "ageMax": 17,
+        "priceUSD": 8,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-12-31",
+        "status": "active",
+        "lastUpdated": "2026-01-01"
+      },
+      {
+        "id": "child-free",
+        "label": "Children (under 6)",
+        "ageMin": 0,
+        "ageMax": 5,
+        "priceUSD": 0,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-12-31",
+        "status": "active",
+        "lastUpdated": "2026-01-01"
+      }
+    ],
+    "groupRates": {
+      "minimumGroupSize": 10,
+      "requiresAdvanceNotice": "2-4 weeks",
+      "contact": "(423) 538-7396",
+      "note": "Call for group pricing"
+    }
+  },
+  "futureYears": [
+    {
+      "year": 2027,
+      "seasonalWindow": {
+        "startPattern": "first-wednesday-march",
+        "endPattern": "second-wednesday-december"
+      },
+      "notes": "Template ready - calculate dates in January 2027"
+    },
+    {
+      "year": 2028,
+      "seasonalWindow": {
+        "startPattern": "first-wednesday-march",
+        "endPattern": "second-wednesday-december"
+      },
+      "notes": "Template ready - calculate dates in January 2028"
+    }
+  ]
+}

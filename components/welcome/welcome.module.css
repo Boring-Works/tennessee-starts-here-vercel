@@ -1,0 +1,640 @@
+/* ===========================================
+   WELCOME SCREEN - STORY-LED DESIGN
+   Rocky Mount State Historic Site
+   Path A: Story-Led Experience
+   =========================================== */
+
+/* ===========================================
+   ENTRY ANIMATIONS
+   =========================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes subtleGlow {
+    0%,
+    100% {
+      text-shadow: 0 0 20px var(--gold-shimmer);
+    }
+    50% {
+      text-shadow: 0 0 30px var(--gold-shimmer);
+    }
+  }
+
+  @keyframes slideArrow {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(4px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storyHook,
+  .heroYearContainer,
+  .brandContainer,
+  .peaksContainer,
+  .ctaGroup,
+  .divider,
+  .cardsContainer {
+    animation: none;
+  }
+
+  .heroYear {
+    animation: none;
+    text-shadow: 0 0 20px var(--gold-shimmer);
+  }
+}
+
+/* ===========================================
+   STORY HOOK
+   =========================================== */
+
+.storyHook {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(16px, 3vw, 20px);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(245, 241, 232, 0.6);
+  margin: 0 auto 48px;
+  max-width: 600px;
+  width: 100%;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .storyHook {
+    animation: fadeInUp 0.8s cubic-bezier(0.05, 0.8, 0.15, 1) 0.5s both;
+  }
+}
+
+@media (max-width: 640px) {
+  .storyHook {
+    margin-bottom: 48px;
+  }
+}
+
+/* ===========================================
+   HERO YEAR
+   =========================================== */
+
+.heroYearContainer {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 24px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroYearContainer {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+}
+
+.heroYear {
+  display: block;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(40px, 8vw, 56px);
+  font-weight: 600;
+  color: var(--gold-primary);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroYear {
+    animation: subtleGlow 4s ease-in-out infinite;
+  }
+}
+
+.contextLine {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ===========================================
+   BRAND STATEMENT
+   =========================================== */
+
+.brandContainer {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brandContainer {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  }
+}
+
+@media (min-width: 768px) {
+  .brandContainer {
+    margin-bottom: 24px;
+  }
+}
+
+.brandHeadline {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 7.5vw, 56px);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #f5f1e8;
+  margin: 0 0 8px 0;
+}
+
+.brandDescriptor {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(184, 169, 145, 0.8);
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .brandDescriptor {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+}
+
+.taglineContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.taglineLine {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer));
+}
+
+.taglineLine:last-child {
+  background: linear-gradient(90deg, var(--gold-shimmer), transparent);
+}
+
+.taglineText {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--gold-shimmer);
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .taglineContainer {
+    gap: 16px;
+  }
+
+  .taglineLine {
+    width: 40px;
+  }
+
+  .taglineText {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* ===========================================
+   DUAL PEAKS COUNTDOWN
+   =========================================== */
+
+.peaksContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin: 0 auto 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .peaksContainer {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+}
+
+.peakBadge {
+  text-align: center;
+  padding: 12px 20px;
+  background: var(--gold-shimmer);
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 4px;
+  min-width: 140px;
+  transition: all 0.3s ease;
+}
+
+.peakBadge:hover {
+  border-color: var(--gold-shimmer);
+  background: var(--gold-shimmer);
+}
+
+.peakLabel {
+  display: block;
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-shimmer);
+  margin-bottom: 8px;
+}
+
+.peakDays {
+  display: block;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(52px, 10vw, 72px);
+  font-weight: 700;
+  color: var(--gold-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+  text-shadow: 0 0 8px var(--gold-shimmer);
+}
+
+.peakDays span {
+  display: block;
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-shimmer);
+  margin-top: 4px;
+  margin-left: 0;
+}
+
+.peakDate {
+  display: block;
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .peaksContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .peakBadge {
+    min-width: auto;
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* ===========================================
+   CTA GROUP
+   =========================================== */
+
+.ctaGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ctaGroup {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  }
+}
+
+.primaryCTA {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 40px;
+  background: transparent;
+  border: 2px solid var(--gold-primary);
+  color: var(--gold-primary);
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 48px;
+}
+
+.primaryCTA:hover {
+  background: var(--gold-primary);
+  border-color: var(--gold-primary);
+  color: #0c1a2e;
+  box-shadow: 0 8px 24px var(--gold-shimmer);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .primaryCTA:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 24px var(--gold-shimmer),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .primaryCTA:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.primaryCTA:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 4px;
+}
+
+.ctaOrnament {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.archiveCTA {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 28px;
+  background: transparent;
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 480px;
+  margin: 12px auto 0;
+}
+
+.archiveCTA:hover {
+  background: var(--gold-shimmer);
+  border-color: var(--gold-shimmer);
+}
+
+.archiveCTA:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 4px;
+}
+
+.archiveTitle {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-shimmer);
+  text-align: center;
+}
+
+.archiveDescription {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.archiveArrow {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-shimmer);
+  margin-top: 4px;
+  transition: transform 0.3s ease-out;
+}
+
+.archiveCTA:hover .archiveArrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .archiveCTA {
+    padding: 16px 24px;
+    max-width: 100%;
+  }
+
+  .archiveTitle {
+    font-size: 12px;
+  }
+
+  .archiveDescription {
+    font-size: 14px;
+  }
+}
+
+.secondaryLink {
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-top: 16px;
+  min-height: 48px;
+  padding: 12px 16px;
+}
+
+.secondaryLink:hover {
+  color: var(--gold-primary);
+}
+
+.secondaryLink:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
+/* ===========================================
+   DECORATIVE DIVIDER
+   =========================================== */
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 400px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .divider {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer));
+}
+
+.dividerLine:last-child {
+  background: linear-gradient(90deg, var(--gold-shimmer), transparent);
+}
+
+.dividerDiamond {
+  color: var(--gold-primary);
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+/* ===========================================
+   UTILITY CARDS
+   =========================================== */
+
+.cardsContainer {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cardsContainer {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  }
+}
+
+.utilityCard {
+  padding: 20px 28px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: left;
+  min-width: 200px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 1px 3px var(--gold-shimmer);
+}
+
+.utilityCard:hover:not(.utilityCardDisabled) {
+  background: var(--gold-shimmer);
+  border-color: var(--gold-shimmer);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.utilityCard:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
+.utilityCardDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.03) 10px,
+      rgba(0, 0, 0, 0.03) 20px
+    ),
+    rgba(255, 255, 255, 0.03);
+}
+
+.cardTitle {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold-shimmer);
+  margin: 0 0 4px 0;
+}
+
+.cardSubtitle {
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.cardCta {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gold-primary);
+}
+
+.cardComingSoon {
+  margin-top: 12px;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 500px) {
+  .cardsContainer {
+    flex-direction: column;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .utilityCard {
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryCTA,
+  .utilityCard,
+  .peakBadge {
+    transition: none;
+  }
+}

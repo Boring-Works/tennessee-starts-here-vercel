@@ -1,0 +1,1909 @@
+/* ============================================
+   VISIT PAGE
+   ============================================ */
+
+/* Visit Header */
+/* ============================================
+   VISIT PAGE - THE HOMECOMING
+   ============================================ */
+
+/* Visit Hero */
+.visit-hero {
+  position: relative;
+  background: var(--primary);
+  color: white;
+  padding: var(--space-6xl) var(--layout-page-padding-mobile) var(--space-4xl);
+  text-align: center;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .visit-hero {
+    padding: var(--space-7xl) var(--layout-page-padding-tablet) var(--space-5xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-hero {
+    padding: var(--space-7xl) var(--layout-page-padding-desktop) var(--space-5xl);
+  }
+}
+
+.visit-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.visit-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.visit-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-hero-badge-year {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.visit-hero-badge-sep {
+  opacity: 0.5;
+}
+
+.visit-hero-headline {
+  margin-bottom: var(--space-md);
+}
+
+.visit-hero-headline-small {
+  display: block;
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+  margin-bottom: var(--space-2xs);
+}
+
+.visit-hero-headline-large {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.visit-hero-significance {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-hero-promise {
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 36rem;
+  margin: 0 auto var(--space-xl);
+}
+
+.visit-hero-facts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-lg);
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 480px) {
+  .visit-hero-facts {
+    gap: var(--gap-xl);
+  }
+}
+
+.visit-hero-fact {
+  text-align: center;
+}
+
+.visit-hero-fact-value {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: white;
+}
+
+.visit-hero-fact-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.125rem;
+}
+
+.visit-hero-fact-divider {
+  width: 1px;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.visit-hero-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 44px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--accent);
+  transition: all var(--duration-base) var(--ease-smooth);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-hero-cta:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.visit-hero-cta:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.visit-hero-season {
+  margin-top: var(--space-md);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.02em;
+}
+
+.visit-hero-season a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.visit-hero-season a:hover {
+  color: white;
+}
+
+.visit-hero-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.visit-hero-scroll:hover {
+  color: var(--accent);
+}
+
+/* Who Walked Here - Historical Figures */
+.visit-figures {
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+  background: var(--cream);
+}
+
+@media (min-width: 768px) {
+  .visit-figures {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-figures {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-figures-inner {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.visit-figures-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.visit-figures-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.visit-figures-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+
+.visit-figures-intro {
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  color: var(--text-light);
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.visit-figures-grid {
+  display: grid;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 768px) {
+  .visit-figures-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-xl);
+  }
+}
+
+.visit-figures-fame-bridge {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg) 1.5rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-left: 3px solid var(--accent);
+  font-family: var(--font-serif-elegant);
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--text-color, #333);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .visit-figures-fame-bridge {
+    font-size: 1.25rem;
+    padding: var(--space-lg) var(--space-xl);
+  }
+}
+
+.visit-figure {
+  background: white;
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.visit-figure-highlight {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--secondary);
+  padding: 0.25rem 0.625rem;
+  margin-bottom: var(--space-md);
+}
+
+.visit-figure-name {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-2xs);
+}
+
+.visit-figure-title {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: var(--space-md);
+}
+
+.visit-figure-years {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 0.125rem;
+}
+
+.visit-figure-hook {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+/* The Experience - Living History Preview */
+.visit-experience {
+  padding: var(--space-4xl) var(--layout-page-padding-mobile);
+  background: white;
+}
+
+@media (min-width: 768px) {
+  .visit-experience {
+    padding: var(--space-5xl) var(--layout-page-padding-tablet);
+  }
+}
+
+.visit-experience-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.visit-experience-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.visit-experience-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.visit-experience-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+
+.visit-experience-intro {
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  line-height: 1.7;
+  color: var(--text-light);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.visit-experience-grid {
+  display: grid;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 640px) {
+  .visit-experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-lg);
+  }
+}
+
+.visit-moment {
+  display: flex;
+  gap: var(--gap-md);
+  padding: var(--space-lg);
+  background: var(--cream);
+  border-left: 3px solid var(--accent);
+}
+
+.visit-moment-number {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+  width: 1.5rem;
+}
+
+.visit-moment-title {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-2xs);
+}
+
+.visit-moment-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+.visit-experience-footer {
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+.visit-experience-note {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+/* Plan Your Visit - Practical Info */
+.visit-practical {
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+  background: var(--cream-dark);
+}
+
+@media (min-width: 768px) {
+  .visit-practical {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-practical {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-practical-inner {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.visit-practical-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: var(--space-xs);
+}
+
+@media (min-width: 768px) {
+  .visit-practical-eyebrow {
+    font-size: 0.75rem;
+  }
+}
+
+.visit-practical-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.visit-practical-grid {
+  display: grid;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 768px) {
+  .visit-practical-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-xl);
+  }
+}
+
+.visit-card {
+  background: white;
+  padding: var(--spacing-card-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 768px) {
+  .visit-card {
+    padding: var(--spacing-card-lg);
+  }
+}
+
+.visit-card--featured {
+  background: var(--primary);
+  color: white;
+}
+
+.visit-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-card--featured .visit-card-title {
+  color: white;
+}
+
+.visit-card-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--accent);
+}
+
+.visit-card--featured .visit-card-icon {
+  color: var(--accent);
+}
+
+.visit-card-note {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--text-light);
+  margin-top: var(--space-md);
+}
+
+.visit-card--featured .visit-card-note {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hours */
+.visit-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.visit-hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.9375rem;
+}
+
+.visit-hours-row:last-child {
+  border-bottom: none;
+}
+
+.visit-hours-row--closed {
+  color: var(--text-light);
+}
+
+.visit-hours-row dd {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.visit-hours-row--closed dd {
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+/* Admission */
+.visit-admission {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.visit-admission-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.9375rem;
+}
+
+.visit-admission-row:last-child {
+  border-bottom: none;
+}
+
+.visit-admission-row dd {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.visit-admission-free {
+  color: var(--accent);
+}
+
+/* Book Tour Card */
+.visit-book-desc {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-book-includes {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.visit-book-includes li {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.visit-book-includes li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.visit-book-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--accent);
+  transition: all var(--duration-base) var(--ease-standard);
+}
+
+.visit-book-btn:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.visit-book-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.visit-book-note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
+/* Before You Arrive */
+.visit-prepare {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: white;
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+  .visit-prepare {
+    padding: var(--space-xl);
+  }
+}
+
+.visit-prepare-title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-md);
+}
+
+.visit-prepare-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm) var(--gap-xl);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg);
+}
+
+.visit-prepare-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-size: 0.9375rem;
+  color: var(--foreground);
+}
+
+.visit-prepare-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.visit-prepare-accessibility {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* The Journey - Directions */
+.visit-journey {
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+  background: var(--cream);
+}
+
+@media (min-width: 768px) {
+  .visit-journey {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-journey {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-journey-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.visit-journey-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.visit-journey-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+}
+
+@media (min-width: 768px) {
+  .visit-journey-eyebrow {
+    font-size: 0.75rem;
+  }
+}
+
+.visit-journey-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+
+.visit-journey-intro {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.visit-journey-content {
+  display: grid;
+  gap: var(--gap-xl);
+}
+
+@media (min-width: 768px) {
+  .visit-journey-content {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--gap-3xl);
+  }
+}
+
+.visit-journey-address {
+  background: white;
+  padding: var(--spacing-card-lg);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-card);
+}
+
+.visit-address {
+  font-style: normal;
+  margin-bottom: var(--space-md);
+}
+
+.visit-address strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+
+.visit-address span {
+  display: block;
+  font-size: 0.9375rem;
+  color: var(--foreground);
+}
+
+.visit-journey-directions {
+  font-size: 0.9375rem;
+  color: var(--text-light);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-journey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+}
+
+.visit-journey-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  gap: var(--space-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.visit-journey-btn--primary {
+  color: white;
+  background: var(--primary);
+}
+
+.visit-journey-btn--primary:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.visit-journey-btn--secondary {
+  color: var(--primary);
+  background: var(--accent);
+}
+
+.visit-journey-btn--secondary:hover {
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.visit-journey-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.visit-journey-distances {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+@media (min-width: 768px) {
+  .visit-journey-distances {
+    padding-top: 1rem;
+  }
+}
+
+.visit-journey-distance {
+  text-align: center;
+  padding: var(--space-md) var(--space-lg);
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .visit-journey-distance {
+    text-align: left;
+    min-width: 10rem;
+  }
+}
+
+.visit-journey-distance-time {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.visit-journey-distance-from {
+  font-size: 0.8125rem;
+  color: var(--text-light);
+}
+
+/* Heritage Trail */
+.visit-trail {
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+  background: white;
+}
+
+@media (min-width: 768px) {
+  .visit-trail {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-trail {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-trail-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.visit-trail-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.visit-trail-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.visit-trail-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+
+.visit-trail-intro {
+  font-size: 1rem;
+  color: var(--text-light);
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.visit-trail-grid {
+  display: grid;
+  gap: var(--gap-md);
+}
+
+@media (min-width: 640px) {
+  .visit-trail-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-lg);
+  }
+}
+
+.visit-trail-site {
+  padding: var(--spacing-card-md);
+  background: var(--cream);
+  border-left: 3px solid var(--secondary);
+  border-radius: var(--radius-card);
+}
+
+.visit-trail-site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.visit-trail-site-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.visit-trail-site-distance {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.visit-trail-site-connection {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.visit-trail-cta-text {
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--text-light);
+  margin-top: var(--space-xl);
+}
+
+/* Groups Contact */
+.visit-groups {
+  padding: var(--space-3xl) var(--layout-page-padding-mobile);
+  background: var(--cream-dark);
+}
+
+@media (min-width: 768px) {
+  .visit-groups {
+    padding: var(--layout-section-y-mobile) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-groups {
+    padding: var(--layout-section-y-mobile) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-groups-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .visit-groups-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: var(--gap-xl);
+  }
+}
+
+.visit-groups-content {
+  flex: 1;
+}
+
+.visit-groups-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+
+.visit-groups-desc {
+  font-size: 0.9375rem;
+  color: var(--text-light);
+  max-width: 28rem;
+}
+
+.visit-groups-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .visit-groups-actions {
+    justify-content: flex-end;
+  }
+}
+
+.visit-groups-btn {
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all var(--duration-base) var(--ease-standard);
+}
+
+.visit-groups-btn--primary {
+  color: white;
+  background: var(--secondary);
+}
+
+.visit-groups-btn--primary:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.visit-groups-btn--secondary {
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.visit-groups-btn--secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.visit-groups-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Visit Closing */
+.visit-closing {
+  position: relative;
+  padding: var(--space-5xl) var(--layout-page-padding-mobile);
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .visit-closing {
+    padding: var(--space-6xl) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-closing {
+    padding: var(--space-6xl) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.visit-closing-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.visit-closing-lead {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: var(--space-xs);
+}
+
+.visit-closing-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: var(--space-xl);
+}
+
+.visit-closing-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 480px) {
+  .visit-closing-cta-group {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--gap-md);
+  }
+}
+
+.visit-closing-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.visit-closing-cta--primary {
+  color: var(--primary);
+  background: var(--accent);
+}
+
+.visit-closing-cta--primary:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.visit-closing-cta--secondary {
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.visit-closing-cta--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.visit-closing-cta:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.visit-closing-tagline {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.visit-closing-tagline em {
+  color: var(--accent);
+}
+
+/* ============================================
+   VISIT PAGE ENHANCEMENTS - Period Styling
+   ============================================ */
+
+/* Section Dividers */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  padding: var(--space-xl) var(--layout-page-padding-mobile);
+  background: var(--cream);
+}
+
+.section-divider--light {
+  background: var(--cream);
+}
+
+.section-divider--dark {
+  background: var(--primary);
+}
+
+.section-divider--default {
+  background: white;
+}
+
+.section-divider-line {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
+}
+
+.section-divider--dark .section-divider-line {
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
+}
+
+.section-divider-flourish {
+  color: var(--accent);
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.section-divider-flourish--flip {
+  transform: scaleX(-1);
+}
+
+.section-divider-ornament {
+  color: var(--accent);
+  font-size: 0.5rem;
+  opacity: 0.8;
+}
+
+.section-divider--dark .section-divider-flourish,
+.section-divider--dark .section-divider-ornament {
+  opacity: 0.8;
+}
+
+/* Hero Period Enhancements */
+.visit-hero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.visit-hero-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  opacity: 0.12;
+  z-index: 2;
+}
+
+.visit-hero-corner--tl {
+  top: 1.5rem;
+  left: 1.5rem;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+}
+
+.visit-hero-corner--tr {
+  top: 1.5rem;
+  right: 1.5rem;
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+}
+
+.visit-hero-corner--bl {
+  bottom: 1.5rem;
+  left: 1.5rem;
+  border-bottom: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+}
+
+.visit-hero-corner--br {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+}
+
+@media (min-width: 768px) {
+  .visit-hero-corner {
+    width: 40px;
+    height: 40px;
+    opacity: 0.15;
+  }
+
+  .visit-hero-corner--tl,
+  .visit-hero-corner--tr {
+    top: 2rem;
+  }
+
+  .visit-hero-corner--bl,
+  .visit-hero-corner--br {
+    bottom: 2rem;
+  }
+
+  .visit-hero-corner--tl,
+  .visit-hero-corner--bl {
+    left: 2rem;
+  }
+
+  .visit-hero-corner--tr,
+  .visit-hero-corner--br {
+    right: 2rem;
+  }
+}
+
+.visit-hero-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.visit-hero-rule-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.visit-hero-rule-ornament {
+  color: var(--accent);
+  font-size: 0.5rem;
+  opacity: 0.4;
+}
+
+.visit-hero-mid-rule {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-md) 0;
+}
+
+.visit-hero-mid-rule-flourish {
+  color: var(--accent);
+  font-size: 0.75rem;
+  opacity: 0.3;
+}
+
+.visit-hero-fact-star {
+  font-size: 0.4rem;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+.visit-hero-cta-seal {
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+/* Portrait Frame for Historical Figures */
+.portrait-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.portrait-frame-outer {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #a88920 100%);
+  padding: 3px;
+  box-shadow: var(--shadow-md);
+}
+
+.portrait-frame-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-initials {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.portrait-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-top: var(--space-xs);
+  padding: 0.25rem 0.625rem;
+  background: var(--secondary);
+  border-radius: 2px;
+}
+
+.portrait-badge-seal {
+  font-size: 0.5rem;
+  color: var(--accent);
+}
+
+.portrait-badge-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* Historical Figure Cards Enhanced */
+.visit-figure {
+  position: relative;
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #faf8f5 0%, #f5f0e6 100%);
+  text-align: center;
+  padding: var(--space-xl) 1.5rem;
+}
+
+.visit-figure-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.3;
+}
+
+.visit-figure-corner--tl {
+  top: 0.75rem;
+  left: 0.75rem;
+  border-top: 2px solid var(--secondary);
+  border-left: 2px solid var(--secondary);
+}
+
+.visit-figure-corner--br {
+  bottom: 0.75rem;
+  right: 0.75rem;
+  border-bottom: 2px solid var(--secondary);
+  border-right: 2px solid var(--secondary);
+}
+
+.visit-figure-content {
+  position: relative;
+  z-index: 1;
+}
+
+.visit-figure-highlight {
+  display: none;
+}
+
+/* Experience Moments with Period Numbers */
+.visit-moment {
+  display: flex;
+  gap: var(--gap-md);
+  padding: var(--space-lg);
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
+    var(--cream);
+  border-left: 3px solid var(--accent);
+  align-items: flex-start;
+}
+
+.visit-moment-number-frame {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--gold-shimmer);
+}
+
+.visit-moment-number {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  width: auto;
+  opacity: 1;
+}
+
+.visit-moment-content {
+  flex: 1;
+}
+
+.visit-experience-footer-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-md);
+}
+
+.visit-experience-footer-line {
+  width: 40px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.visit-experience-footer-star {
+  font-size: 0.4rem;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+/* Cards with Period Styling */
+.visit-card {
+  position: relative;
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
+    white;
+  box-shadow: var(--shadow-md);
+}
+
+.visit-card-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  opacity: 0.25;
+}
+
+.visit-card-corner--tl {
+  top: 0.5rem;
+  left: 0.5rem;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+.visit-card-corner--br {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+/* Featured Book Card Enhancements */
+.visit-card--featured {
+  position: relative;
+  overflow: visible;
+  background: var(--primary);
+  color: white;
+}
+
+/* Book Seal - Decorative 3D Effect */
+/* EXCEPTION: Inset shadows (0 2px 4px, 0 -2px 4px) are intentional decorative effects
+   to create the 3D embossed appearance of a historical book seal. These are not
+   elevation shadows and must remain custom to preserve the specific light/shadow
+   simulation on the circular seal element. The outer shadow (0 3px 8px) provides
+   the elevation effect below the seal. */
+.visit-book-seal {
+  position: absolute;
+  top: -16px;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #a82828, #722f37 50%, #5a1f26);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 3px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(8deg);
+  z-index: 10;
+}
+
+.visit-book-seal-inner {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.visit-card-border {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--gold-shimmer);
+  pointer-events: none;
+}
+
+.visit-book-btn-seal {
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+/* Heritage Trail with Compass */
+.visit-trail-compass {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+}
+
+.compass-rose {
+  width: 50px;
+  height: 50px;
+  color: var(--secondary);
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .compass-rose {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.visit-trail-site {
+  display: flex;
+  gap: var(--gap-md);
+  padding: var(--space-lg);
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
+    var(--cream);
+  border-left: 3px solid var(--secondary);
+  align-items: flex-start;
+}
+
+.visit-trail-marker {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  border-radius: 50%;
+}
+
+.visit-trail-marker-number {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.visit-trail-site-content {
+  flex: 1;
+}
+
+/* Closing Section Enhancements */
+.visit-closing-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  opacity: 0.2;
+  z-index: 2;
+}
+
+.visit-closing-corner--tl {
+  top: 1.5rem;
+  left: 1.5rem;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+.visit-closing-corner--tr {
+  top: 1.5rem;
+  right: 1.5rem;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+.visit-closing-corner--bl {
+  bottom: 1.5rem;
+  left: 1.5rem;
+  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+.visit-closing-corner--br {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+@media (min-width: 768px) {
+  .visit-closing-corner {
+    width: 50px;
+    height: 50px;
+    opacity: 0.25;
+  }
+}
+
+.visit-closing-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.visit-closing-rule--bottom {
+  margin-bottom: 0;
+  margin-top: var(--space-xl);
+}
+
+.visit-closing-rule-line {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
+}
+
+.visit-closing-rule-flourish {
+  color: var(--accent);
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+.visit-closing-rule-flourish--flip {
+  transform: scaleX(-1);
+}
+
+.visit-closing-rule-ornament {
+  color: var(--accent);
+  font-size: 0.5rem;
+  opacity: 0.7;
+}
+
+.visit-closing-rule-star {
+  color: var(--accent);
+  font-size: 0.5rem;
+  opacity: 0.5;
+}
+
+.visit-closing-cta-seal {
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+/* ============================================
+   TESTIMONIALS - Visitor Experiences
+   ============================================ */
+.visit-testimonials {
+  padding: var(--space-4xl) var(--layout-page-padding-mobile);
+  background: var(--cream);
+}
+
+@media (min-width: 768px) {
+  .visit-testimonials {
+    padding: var(--space-5xl) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-testimonials {
+    padding: var(--space-6xl) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-testimonials-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.visit-testimonials-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+}
+
+.visit-testimonials-grid {
+  display: grid;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 768px) {
+  .visit-testimonials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap-xl);
+  }
+}
+
+.visit-testimonial {
+  position: relative;
+  padding: var(--space-lg);
+  background: white;
+  border-left: 4px solid var(--accent);
+  font-style: italic;
+}
+
+.visit-testimonial::before {
+  content: '"';
+  position: absolute;
+  top: 0;
+  left: var(--space-md);
+  font-size: 3rem;
+  color: var(--accent);
+  opacity: 0.3;
+  font-family: var(--font-serif);
+}
+
+.visit-testimonial-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.visit-testimonial-source {
+  display: block;
+  font-size: 0.875rem;
+  font-style: normal;
+  color: var(--text-light);
+  margin-top: var(--space-md);
+  padding-left: 1rem;
+}
+
+/* ============================================
+   REDUCED MOTION - Accessibility
+   Disables animations for users who prefer reduced motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all transitions */
+  .visit-hero-cta,
+  .visit-hero-scroll,
+  .visit-book-btn,
+  .visit-journey-btn,
+  .visit-groups-btn,
+  .visit-closing-cta,
+  .visit-figure,
+  .visit-card,
+  .visit-trail-site,
+  .visit-journey-address,
+  .visit-faq-item,
+  .visit-faq-question {
+    transition: none;
+  }
+
+  /* Remove hover transforms */
+  .visit-hero-cta:hover,
+  .visit-journey-btn--primary:hover,
+  .visit-groups-btn:hover,
+  .visit-closing-cta--primary:hover,
+  .visit-figure:hover,
+  .portrait-frame:hover,
+  .visit-book-btn:hover {
+    transform: none;
+  }
+}

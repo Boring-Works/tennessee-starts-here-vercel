@@ -1,0 +1,318 @@
+.collectionPage {
+  min-height: 100vh;
+  background: var(--midnight, #1a1a2e);
+}
+
+.collectionContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10rem 1.5rem 4rem;
+}
+
+.collectionContent {
+  /* Layout */
+}
+
+/* Navigation */
+.collectionNav {
+  margin-bottom: 2rem;
+}
+
+.collectionBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.6);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.collectionBackLink:hover {
+  color: var(--gold-leaf, var(--gold-primary));
+}
+
+/* Header */
+.collectionHeader {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.collectionBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gold-leaf, var(--gold-primary));
+  background: rgba(212, 168, 83, 0.15);
+  border-radius: 0.125rem;
+  margin-bottom: 1rem;
+}
+
+.collectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin-bottom: 1rem;
+}
+
+.collectionDescription {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: rgba(232, 224, 208, 0.8);
+}
+
+/* Sections */
+.collectionWhy,
+.collectionDocuments,
+.collectionPassages,
+.collectionFigures,
+.collectionAbout {
+  margin-bottom: 2.5rem;
+}
+
+.collectionSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin-bottom: 1rem;
+}
+
+.collectionCount {
+  padding: 0.125rem 0.5rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(212, 168, 83, 0.15);
+  border-radius: 0.125rem;
+}
+
+.collectionWhyText {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(232, 224, 208, 0.7);
+  padding: 1.25rem;
+  background: rgba(212, 168, 83, 0.05);
+  border-left: 3px solid var(--gold-leaf, var(--gold-primary));
+  border-radius: 0.125rem;
+}
+
+/* Document List */
+.collectionDocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  overflow: hidden;
+}
+
+.collectionDocItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.collectionDocItem:last-child {
+  border-bottom: none;
+}
+
+.collectionDocLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.collectionDocLink:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.collectionDocTitle {
+  font-size: 0.9375rem;
+  color: var(--almanac-parchment, #e8e0d0);
+}
+
+.collectionDocMeta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.collectionDocDate {
+  font-size: 0.8125rem;
+  color: rgba(232, 224, 208, 0.5);
+}
+
+.collectionDocType {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  text-transform: capitalize;
+  color: rgba(232, 224, 208, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.125rem;
+}
+
+/* Passages */
+.collectionPassageList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.collectionPassageCard {
+  display: block;
+  padding: 1.25rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  transition: all 0.15s;
+}
+
+.collectionPassageCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.collectionPassageText {
+  margin: 0 0 0.75rem;
+  font-style: italic;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(232, 224, 208, 0.8);
+}
+
+.collectionPassageCite {
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: rgba(232, 224, 208, 0.5);
+}
+
+/* Key Figures */
+.collectionFigureList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.collectionFigureCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  transition: all 0.15s;
+}
+
+.collectionFigureCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--gold-leaf, var(--gold-primary));
+}
+
+.collectionFigureName {
+  font-size: 0.9375rem;
+  color: var(--gold-leaf, var(--gold-primary));
+}
+
+.collectionFigureRole {
+  font-size: 0.75rem;
+  color: rgba(232, 224, 208, 0.5);
+  margin-top: 0.25rem;
+}
+
+/* About Content */
+.collectionAbout {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.collectionHeading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin: 1.5rem 0 0.75rem;
+}
+
+.collectionSubheading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--almanac-parchment, #e8e0d0);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.collectionText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(232, 224, 208, 0.7);
+  margin-bottom: 0.75rem;
+}
+
+.collectionListItem {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(232, 224, 208, 0.7);
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.collectionFooter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.collectionFooterLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  transition: all 0.15s;
+}
+
+.collectionFooterLink:hover {
+  color: var(--almanac-parchment, #e8e0d0);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .collectionTitle {
+    font-size: 2rem;
+  }
+
+  .collectionDocLink {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .collectionFooter {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .collectionFooterLink {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Registry of all raw source materials in the Rocky Mount Digital Archive",
+  "version": "1.0",
+  "last_updated": "2026-01-30",
+  "sources": [
+    {
+      "id": "treaty-holston-1791",
+      "description": "Treaty of Holston with the Cherokee Nation",
+      "files": {
+        "transcript": "transcripts/avalon-project/treaty-holston-1791.txt"
+      },
+      "provenance": {
+        "original_archive": "National Archives",
+        "original_identifier": "Record Group 11",
+        "transcription_source": "Avalon Project, Yale Law School",
+        "transcription_url": "https://avalon.law.yale.edu/18th_century/cher1791.asp",
+        "obtained_date": "2026-01-30",
+        "obtained_by": "Cody Boring"
+      },
+      "notes": "Primary treaty text. Also available on DigiTreaties."
+    },
+    {
+      "id": "blount-arrival-1790",
+      "description": "Blount's letter describing arrival at Rocky Mount",
+      "files": {
+        "transcript": "transcripts/founders-online/blount-arrival-1790.txt"
+      },
+      "provenance": {
+        "original_archive": "National Archives",
+        "original_identifier": "RG 59, M588",
+        "transcription_source": "Tennessee Encyclopedia / Founders Online",
+        "obtained_date": "2026-01-30",
+        "obtained_by": "Cody Boring"
+      },
+      "notes": "Key document for October 11, 1790 arrival date and glass windows description."
+    }
+  ],
+  "pending_acquisition": [
+    {
+      "id": "washington-to-blount-1790-06",
+      "description": "Washington's nomination letter to Senate",
+      "target_source": "Founders Online",
+      "priority": "high",
+      "notes": "Need to download official transcription"
+    },
+    {
+      "id": "southwest-territory-act-1790",
+      "description": "Federal act establishing the Southwest Territory",
+      "target_source": "Library of Congress / Avalon Project",
+      "priority": "high",
+      "notes": "Foundational document for territorial claims"
+    }
+  ]
+}

@@ -1,0 +1,397 @@
+# Evidence Transparency Engine - Data Schema
+#
+# This schema documents the data model for migration to Laravel + Filament.
+# Current implementation: Markdown files + JSON in content/
+# Target: PostgreSQL via Laravel migrations
+#
+# Last updated: 2026-01-29
+
+# =============================================================================
+# DOCUMENTS
+# =============================================================================
+# Source: content/documents/*.md (37 files)
+#
+documents:
+  description: Primary source documents from Tennessee's founding era
+  source_files: content/documents/*.md
+
+  fields:
+    # Identifiers
+    - name: id
+      type: string
+      required: true
+      unique: true
+      description: URL-safe slug, matches filename
+      example: "blount-arrival-1790"
+
+    - name: title
+      type: string
+      required: true
+      description: Display title of the document
+      example: "Blount to Secretary of War"
+
+    # Dates
+    - name: date
+      type: date
+      required: true
+      format: YYYY-MM-DD
+      description: Date the document was created/signed
+      example: "1790-10-20"
+
+    # Classification
+    - name: content_type
+      type: enum
+      required: true
+      values: [letter, treaty, proclamation, newspaper, testimony, map, inventory]
+      description: Type of historical document
+
+    - name: collection
+      type: string
+      required: false
+      foreign_key: collections.slug
+      description: Collection this document belongs to
+      example: "blount-papers"
+
+    # Attribution
+    - name: author
+      type: string
+      required: false
+      foreign_key: people.slug
+      description: Person who wrote/signed the document
+      example: "william-blount"
+
+    - name: recipient
+      type: string
+      required: false
+      foreign_key: people.slug
+      description: Person the document was addressed to
+      example: "henry-knox"
+
+    - name: people_mentioned
+      type: array[string]
+      required: false
+      foreign_key: people.slug
+      description: People referenced in the document
+
+    # Source verification
+    - name: source
+      type: string
+      required: true
+      description: Archive or repository source
+      example: "Founders Online, National Archives"
+
+    - name: source_url
+      type: url
+      required: false
+      description: Link to original/transcription
+      example: "https://founders.archives.gov/documents/Washington/05-06-02-0135"
+
+    # Verification metadata
+    - name: verification_status
+      type: enum
+      required: true
+      default: pending
+      values: [verified, pending, unverified]
+      description: Editorial verification status
+
+    - name: verification_source_count
+      type: integer
+      required: false
+      description: Number of sources cross-referenced
+
+    - name: verification_method
+      type: string
+      required: false
+      description: How verification was performed
+
+    # Conversation threading
+    - name: responds_to
+      type: string
+      required: false
+      foreign_key: documents.id
+      description: Document this is a reply to
+      example: "knox-to-washington-1790-08"
+
+    # Content
+    - name: content
+      type: markdown
+      required: true
+      description: Full document text with passage tags
+
+  relationships:
+    - has_many: passages
+    - belongs_to: collections
+    - belongs_to: people (as author)
+    - belongs_to: people (as recipient)
+    - belongs_to_many: people (as mentioned)
+    - has_many: documents (responses via responds_to)
+    - belongs_to: documents (responds_to)
+
+# =============================================================================
+# PASSAGES
+# =============================================================================
+# Source: Embedded <passage> tags in document markdown
+#
+passages:
+  description: Quotable excerpts from documents with anchor IDs
+  source: Extracted from <passage id="...">content</passage> tags in documents
+
+  fields:
+    - name: id
+      type: uuid
+      required: true
+      description: Auto-generated primary key
+
+    - name: document_id
+      type: string
+      required: true
+      foreign_key: documents.id
+      description: Parent document
+
+    - name: anchor
+      type: string
+      required: true
+      description: URL-safe anchor ID for linking
+      example: "glass-windows"
+
+    - name: text
+      type: text
+      required: true
+      description: The quoted passage text
+
+    - name: page_number
+      type: integer
+      required: false
+      description: Page in original manuscript (if known)
+
+  relationships:
+    - belongs_to: documents
+    - has_many: claims
+
+  unique_constraints:
+    - [document_id, anchor]  # Anchor must be unique per document
+
+# =============================================================================
+# PEOPLE
+# =============================================================================
+# Source: content/people/*.md (49 files: 42 Cherokee + 7 others)
+#
+people:
+  description: Historical figures associated with Rocky Mount and Southwest Territory
+  source_files: content/people/*.md
+
+  fields:
+    - name: slug
+      type: string
+      required: true
+      unique: true
+      description: URL-safe identifier
+      example: "william-blount"
+
+    - name: name
+      type: string
+      required: true
+      description: Full name (English)
+      example: "William Blount"
+
+    - name: cherokee_name
+      type: string
+      required: false
+      description: Name in Cherokee (transliterated)
+      example: "Squollecuttah"
+
+    - name: birth_date
+      type: date
+      required: false
+      description: Birth date if known
+
+    - name: death_date
+      type: date
+      required: false
+      description: Death date if known
+
+    - name: bio
+      type: text
+      required: false
+      description: Brief biography
+
+    # Cherokee signatory fields
+    - name: is_cherokee
+      type: boolean
+      required: true
+      default: false
+      description: Is this person Cherokee
+
+    - name: is_signatory
+      type: boolean
+      required: true
+      default: false
+      description: Did they sign Treaty of Holston
+
+    - name: signature_mark
+      type: string
+      required: false
+      description: Mark made on treaty if known
+      example: "X his mark"
+
+    - name: dignitary_title
+      type: string
+      required: false
+      description: Title or role
+      example: "Principal Chief of the Overhill Cherokee"
+
+  relationships:
+    - has_many: documents (as author)
+    - has_many: documents (as recipient)
+    - belongs_to_many: documents (as mentioned)
+
+# =============================================================================
+# COLLECTIONS
+# =============================================================================
+# Source: content/collections/*.md (5 files)
+#
+collections:
+  description: Curated groupings of related documents
+  source_files: content/collections/*.md
+
+  fields:
+    - name: slug
+      type: string
+      required: true
+      unique: true
+      example: "blount-papers"
+
+    - name: title
+      type: string
+      required: true
+      example: "The Blount Papers"
+
+    - name: description
+      type: text
+      required: true
+      description: Collection overview
+
+    - name: document_count
+      type: integer
+      computed: true
+      description: Count of documents in collection
+
+  relationships:
+    - has_many: documents
+
+# =============================================================================
+# TIMELINE EVENTS
+# =============================================================================
+# Source: content/timeline-events.json (40 events)
+#
+timeline_events:
+  description: Chronological events from 1790-1796 Southwest Territory period
+  source_files: content/timeline-events.json
+
+  fields:
+    - name: id
+      type: string
+      required: true
+      unique: true
+      description: Stable identifier
+      example: "treaty-holston"
+
+    - name: date
+      type: date
+      required: true
+      format: YYYY-MM-DD
+      example: "1791-07-02"
+
+    - name: title
+      type: string
+      required: true
+      example: "Treaty of Holston Signed"
+
+    - name: description
+      type: text
+      required: true
+      description: Event description
+
+    - name: document_id
+      type: string
+      required: false
+      foreign_key: documents.id
+      description: Related document (if any)
+
+    - name: type
+      type: enum
+      required: true
+      values: [treaty, letter, proclamation, newspaper, event]
+      description: Category of event
+
+    - name: featured
+      type: boolean
+      required: true
+      default: false
+      description: Highlight on timeline
+
+  relationships:
+    - belongs_to: documents (optional)
+
+# =============================================================================
+# CLAIMS (Future)
+# =============================================================================
+# Not yet extracted - currently inline in JSX
+# Would track which passages support which narrative claims
+#
+claims:
+  status: future
+  description: Links between narrative text and supporting passages
+
+  fields:
+    - name: id
+      type: uuid
+      required: true
+
+    - name: claim_text
+      type: string
+      required: true
+      description: The verifiable claim
+      example: "Washington posed this question to Secretary Knox on August 13, 1790"
+
+    - name: passage_id
+      type: uuid
+      required: true
+      foreign_key: passages.id
+      description: Supporting evidence
+
+    - name: page_location
+      type: string
+      required: false
+      description: Where claim appears (for extraction)
+      example: "app/(main)/evidence/page.tsx:306"
+
+  relationships:
+    - belongs_to: passages
+
+# =============================================================================
+# MIGRATION NOTES
+# =============================================================================
+migration_notes:
+  seeder_approach: |
+    1. Read markdown files with symfony/yaml for frontmatter parsing
+    2. Extract passages via regex: /<passage id="([^"]+)"[^>]*>(.*?)<\/passage>/s
+    3. Load timeline-events.json directly
+    4. Build relationships after all entities seeded
+
+  passage_extraction: |
+    preg_match_all('/<passage id="([^"]+)"[^>]*>(.*?)<\/passage>/s', $content, $matches);
+    foreach ($matches[1] as $i => $anchor) {
+      Passage::create([
+        'document_id' => $document->id,
+        'anchor' => $anchor,
+        'text' => trim(strip_tags($matches[2][$i]))
+      ]);
+    }
+
+  file_counts:
+    documents: 37
+    people: 49
+    collections: 5
+    timeline_events: 40
+    passages: ~50 (embedded in documents)

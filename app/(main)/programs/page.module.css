@@ -1,0 +1,494 @@
+/* ============================================
+   PROGRAMS PAGE STYLES
+   ============================================ */
+
+/* ----------------------------------------
+   HERO
+   ---------------------------------------- */
+.programs-hero {
+  position: relative;
+  background: var(--primary);
+  color: var(--text-on-dark);
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.programs-hero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.programs-hero-content {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.programs-hero-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+
+.programs-hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: var(--space-lg);
+}
+
+.programs-hero-headline-accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.programs-hero-intro {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-on-dark-muted);
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------
+   PROGRAMS GRID
+   ---------------------------------------- */
+.programs-grid-section {
+  background: var(--cream);
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .programs-grid-section {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+.programs-grid-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.programs-grid-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.programs-grid-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.programs-grid-subtitle {
+  font-size: 1rem;
+  color: var(--text-light);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--gap-xl);
+}
+
+/* ----------------------------------------
+   PROGRAM CARD
+   ---------------------------------------- */
+.program-card {
+  background: white;
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.program-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.08);
+}
+
+.program-card-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.program-card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.program-card-content {
+  flex: 1;
+}
+
+.program-card-header {
+  margin-bottom: var(--space-md);
+}
+
+.program-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.program-card-tagline {
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.program-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-light);
+  margin-bottom: 1.25rem;
+}
+
+.program-card-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg);
+}
+
+.program-card-highlights li {
+  font-size: 0.875rem;
+  color: var(--foreground);
+  padding: 0.35rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.program-card-check {
+  color: var(--accent);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.program-card-schedule {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  padding: var(--space-md);
+  background: var(--cream);
+  border-radius: 2px;
+  margin-bottom: var(--space-md);
+}
+
+.program-card-schedule-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.program-card-schedule-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+}
+
+.program-card-schedule-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.program-card-dates-remaining {
+  font-size: 0.8125rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.program-card-cta {
+  margin-top: auto;
+  padding-top: var(--space-md);
+}
+
+.program-card-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.program-card-btn:hover {
+  background: var(--primary-dark);
+}
+
+.program-card-btn--secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.program-card-btn--secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ----------------------------------------
+   GROUP BOOKINGS
+   ---------------------------------------- */
+.programs-groups {
+  background: white;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .programs-groups {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+.programs-groups-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-xl);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .programs-groups-inner {
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+  }
+}
+
+.programs-groups-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.programs-groups-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-light);
+  margin-bottom: var(--space-md);
+}
+
+.programs-groups-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem var(--gap-lg);
+}
+
+.programs-groups-list li {
+  font-size: 0.9375rem;
+  color: var(--foreground);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.programs-groups-list li::before {
+  content: '•';
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+.programs-groups-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.programs-groups-btn {
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.programs-groups-btn--primary {
+  background: var(--primary);
+  color: white;
+}
+
+.programs-groups-btn--primary:hover {
+  background: var(--primary-dark);
+}
+
+.programs-groups-btn--secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.programs-groups-btn--secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ----------------------------------------
+   EDUCATION CTA
+   ---------------------------------------- */
+.programs-education {
+  background: var(--cream);
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .programs-education {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+.programs-education-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.programs-education-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--accent);
+  margin: 0 auto var(--space-lg);
+}
+
+.programs-education-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.programs-education-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.programs-education-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-light);
+  margin-bottom: var(--space-lg);
+}
+
+.programs-education-btn {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.programs-education-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* ----------------------------------------
+   RESPONSIVE
+   ---------------------------------------- */
+@media (max-width: 640px) {
+  .programs-hero {
+    padding: var(--space-4xl) var(--space-md) var(--space-3xl);
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .program-card {
+    padding: var(--space-lg);
+  }
+
+  .program-card-schedule {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .programs-groups-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION - Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .program-card {
+    transition: none;
+  }
+
+  .program-card-btn {
+    transition: none;
+  }
+
+  .program-card-btn--secondary {
+    transition: none;
+  }
+
+  .programs-groups-btn {
+    transition: none;
+  }
+
+  .programs-groups-btn--primary {
+    transition: none;
+  }
+
+  .programs-groups-btn--secondary {
+    transition: none;
+  }
+
+  .programs-education-btn {
+    transition: none;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - Touch Targets
+   Ensures minimum 44px touch targets
+   WCAG 2.5.8 Target Size Minimum (Level AA)
+   ============================================ */
+.program-card-btn,
+.program-card-btn--secondary,
+.programs-groups-btn,
+.programs-groups-btn--primary,
+.programs-groups-btn--secondary,
+.programs-education-btn {
+  min-height: 44px;
+  min-width: 44px;
+}

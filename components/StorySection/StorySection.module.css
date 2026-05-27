@@ -1,0 +1,553 @@
+.story-section {
+  padding: 5rem 0;
+  background: var(--cream);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .story-section {
+    padding: 6rem 0;
+  }
+}
+
+.story-container {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Decorative chapter heading */
+.story-chapter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.story-chapter-rule {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-shimmer) 50%, transparent 100%);
+}
+
+.story-chapter-number {
+  font-family: var(--font-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  opacity: 0.6;
+}
+
+.story-chapter-close {
+  margin-top: 1.5rem;
+}
+
+.story-chapter-ornament {
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+/* Section header */
+.story-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.story-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.story-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* Animated year counter */
+.story-counter {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.story-counter--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.story-counter-number {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 12vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.story-counter-unit {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+  text-transform: lowercase;
+}
+
+.story-counter-caption {
+  font-size: 0.85rem;
+  color: var(--foreground);
+  opacity: 0.7;
+}
+
+/* Map trail visualization */
+.story-trail {
+  max-width: 400px;
+  margin: 0 auto 3rem;
+}
+
+.story-trail-path {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.story-trail-path svg {
+  width: 100%;
+  height: 60px;
+}
+
+.story-trail-line {
+  stroke-dashoffset: 400;
+  animation: trailDraw 2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes trailDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.story-trail-marker {
+  animation: markerPulse 2s ease-in-out infinite;
+}
+
+@keyframes markerPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.story-trail-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--foreground);
+}
+
+.story-trail-label {
+  text-align: center;
+  line-height: 1.3;
+}
+
+.story-trail-label--mid {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.story-trail-label small {
+  opacity: 0.6;
+  font-size: 0.6rem;
+}
+
+/* Vertical timeline wrapper */
+.story-timeline-wrapper {
+  position: relative;
+  padding-left: 40px;
+}
+
+@media (min-width: 768px) {
+  .story-timeline-wrapper {
+    padding-left: 60px;
+  }
+}
+
+/* The connecting line */
+.story-timeline-line {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(10, 22, 40, 0.1);
+}
+
+@media (min-width: 768px) {
+  .story-timeline-line {
+    left: 20px;
+  }
+}
+
+.story-timeline-line-fill {
+  display: block;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(
+    180deg,
+    var(--accent) 0%,
+    var(--accent) 60%,
+    var(--gold-shimmer) 100%
+  );
+  transition: height 1.5s ease-out;
+  transition-delay: 0.3s;
+}
+
+.story-timeline-line-fill--visible {
+  height: 100%;
+}
+
+/* Timeline milestones */
+.story-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .story-timeline {
+    gap: 2rem;
+  }
+}
+
+.story-milestone {
+  position: relative;
+  padding: 1.25rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  /* Animation initial state */
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.story-milestone--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Timeline node */
+.story-milestone-node {
+  position: absolute;
+  left: -34px;
+  top: 1.5rem;
+  width: 10px;
+  height: 10px;
+  background: var(--cream);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .story-milestone-node {
+    left: -48px;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.story-milestone-node--hero {
+  width: 16px;
+  height: 16px;
+  left: -37px;
+  background: var(--accent);
+  border: 3px solid var(--cream);
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 2px 8px var(--gold-shimmer);
+}
+
+@media (min-width: 768px) {
+  .story-milestone-node--hero {
+    width: 20px;
+    height: 20px;
+    left: -52px;
+  }
+}
+
+/* Milestone icon */
+.story-milestone-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 28px;
+  height: 28px;
+  color: var(--secondary);
+  opacity: 0.25;
+}
+
+.story-milestone-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .story-milestone-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Milestone content */
+.story-milestone-content {
+  position: relative;
+}
+
+.story-milestone-year {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.story-milestone-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+}
+
+.story-milestone-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .story-milestone {
+    padding: 1.5rem;
+  }
+  .story-milestone-year {
+    font-size: 1.5rem;
+  }
+  .story-milestone-label {
+    font-size: 0.7rem;
+  }
+  .story-milestone-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* Hero milestone (1790) - Period document styling */
+.story-milestone-hero {
+  background:
+    /* Paper texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.02'/%3E%3C/svg%3E"),
+    linear-gradient(
+      135deg,
+      var(--gold-shimmer) 0%,
+      #fffdf8 30%,
+      #fefcf5 70%,
+      var(--gold-shimmer) 100%
+    );
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--gold-shimmer);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.08),
+    inset 0 0 40px var(--gold-shimmer);
+}
+
+.story-milestone-hero .story-milestone-year {
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.story-milestone-hero .story-milestone-label {
+  color: var(--accent);
+  opacity: 1;
+  font-size: 0.7rem;
+}
+
+.story-milestone-hero .story-milestone-icon {
+  opacity: 0.35;
+  color: var(--accent);
+}
+
+.story-milestone-quote {
+  font-family: var(--font-serif-elegant);
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--primary);
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
+
+.story-milestone-hero .story-milestone-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* Wax seal on hero milestone */
+.story-milestone-seal {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #9b3b3b 0%, var(--burgundy) 40%, #5a1f24 100%);
+  box-shadow:
+    inset 1px 1px 3px rgba(255, 255, 255, 0.2),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.3),
+    2px 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-5deg);
+}
+
+.story-milestone-seal-inner {
+  font-family: var(--font-serif);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+  .story-milestone-hero {
+    padding: 2.5rem 2rem;
+  }
+  .story-milestone-hero .story-milestone-year {
+    font-size: 2.5rem;
+  }
+  .story-milestone-hero .story-milestone-label {
+    font-size: 0.75rem;
+  }
+  .story-milestone-quote {
+    font-size: 1.25rem;
+    margin: 1.25rem 0;
+  }
+  .story-milestone-hero .story-milestone-text {
+    font-size: 1rem;
+  }
+  .story-milestone-seal {
+    width: 44px;
+    height: 44px;
+  }
+  .story-milestone-seal-inner {
+    font-size: 0.6rem;
+  }
+}
+
+/* Story footer */
+.story-footer {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(10, 22, 40, 0.1);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: 1s;
+}
+
+.story-footer--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.story-footer-text {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--primary);
+  margin-bottom: 1.25rem;
+}
+
+.story-footer-text strong {
+  color: var(--accent);
+}
+
+.story-footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: transparent;
+  border: 2px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.story-footer-cta:hover {
+  background: var(--primary);
+  color: white;
+  gap: 0.75rem;
+}
+
+.story-footer-cta:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Section fade-in animation */
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-animate {
+  animation: sectionFadeIn 0.8s ease-out forwards;
+}

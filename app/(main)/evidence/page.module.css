@@ -1,0 +1,2322 @@
+/* ============================================
+   THE READING ROOM
+   Evidence Page - Digital Archive Styles
+   A library experience for historical documents
+   ============================================ */
+
+.evidencePage {
+  /* === Color Palette === */
+  --wood-dark: #2a1f1a;
+  --wood-medium: #3d2e24;
+  --wood-light: #4a3728;
+  --wood-grain: #5c4333;
+
+  --cream-dark: #f5f0e6;
+  --cream-medium: #faf7f0;
+  --cream-light: #fffef8;
+
+  --brass: var(--nav-gold);
+  --brass-dark: var(--gold-hover);
+  --brass-light: var(--nav-gold-hover);
+  --brass-glow: rgba(var(--nav-gold-rgb), 0.15);
+
+  --ink: #1a1a1a;
+  --ink-faded: #2d2926;
+  --ink-light: #4a443e;
+
+  --leather: #8b4513;
+  --leather-dark: #654321;
+
+  /* === Typography === */
+  --reading-line-height: 1.85;
+  --letter-spacing-engraved: 0.15em;
+
+  /* === Transitions === */
+  --transition-dignified: 0.35s var(--nav-ease-spring);
+  --transition-slow: 0.5s ease;
+
+  /* === Paper Texture (base64 noise) === */
+  --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+
+  /* === Wood Grain Pattern === */
+  --wood-grain-pattern: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+
+  /* Page wrapper */
+  background: var(--cream-medium);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Vignette effect on entire page */
+.evidencePage::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(42, 31, 26, 0.08) 100%);
+  z-index: 1000;
+}
+
+/* ============================================
+   CARD CATALOG NAVIGATION
+   Fixed sidebar on desktop, hidden on mobile
+   ============================================ */
+
+.cardCatalog {
+  display: none;
+}
+
+.cardCatalogHeader {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(var(--nav-gold-rgb), 0.2);
+}
+
+.cardCatalogTitle {
+  font-family: var(--font-serif);
+  font-size: 0.625rem;
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-engraved);
+}
+
+.cardCatalogList {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.cardCatalogLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.625rem 1rem;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.3s var(--nav-ease-spring);
+  position: relative;
+}
+
+.cardCatalogLink:hover {
+  background: rgba(var(--nav-gold-rgb), 0.08);
+  border-left-color: rgba(var(--nav-gold-rgb), 0.5);
+}
+
+.cardCatalogLink:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+  background: rgba(var(--nav-gold-rgb), 0.1);
+}
+
+/* ACTIVE STATE - Much stronger visual */
+.cardCatalogLinkActive {
+  background: rgba(var(--nav-gold-rgb), 0.15);
+  border-left-color: var(--brass);
+  border-left-width: 3px;
+}
+
+/* Gold glow effect on active */
+.cardCatalogLinkActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--brass);
+  box-shadow: 0 0 8px rgba(var(--nav-gold-rgb), 0.5);
+}
+
+.cardCatalogLinkActive .cardCatalogCode {
+  color: var(--brass);
+  font-weight: 600;
+}
+
+.cardCatalogLinkActive .cardCatalogLabel {
+  color: #2a1f1a;
+  font-weight: 600;
+}
+
+/* Add dot indicator for active item */
+.cardCatalogLinkActive::after {
+  content: '●';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--brass);
+  font-size: 0.5rem;
+}
+
+/* Featured link (Document Library) */
+.cardCatalogLinkFeatured {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.12) 0%,
+    rgba(var(--nav-gold-rgb), 0.06) 100%
+  );
+  border-left-color: var(--brass);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(var(--nav-gold-rgb), 0.2);
+}
+
+.cardCatalogLinkFeatured:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.18) 0%,
+    rgba(var(--nav-gold-rgb), 0.1) 100%
+  );
+}
+
+.cardCatalogLinkFeatured .cardCatalogCode {
+  color: var(--brass);
+}
+
+.cardCatalogLinkFeatured .cardCatalogLabel {
+  color: var(--wood-dark);
+  font-weight: 500;
+}
+
+.cardCatalogCode {
+  font-family: var(--font-mono, 'SF Mono', 'Monaco', 'Inconsolata', monospace);
+  font-size: 0.5625rem;
+  color: var(--brass-dark);
+  letter-spacing: 0.05em;
+}
+
+.cardCatalogLabel {
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.cardCatalogCategory {
+  padding: 0.5rem 1rem 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.cardCatalogCategory:first-child {
+  margin-top: 0;
+}
+
+.cardCatalogCategoryTitle {
+  font-family: var(--font-serif);
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.cardCatalogCount {
+  font-size: 0.5625rem;
+  color: var(--brass-dark);
+  margin-left: 0.25rem;
+  opacity: 0.7;
+}
+
+/* Progress dots container */
+.cardCatalogDots {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.cardCatalogDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--brass-dark);
+  opacity: 0.4;
+}
+
+.cardCatalogLinkActive .cardCatalogDot {
+  background: var(--brass);
+  opacity: 1;
+}
+
+/* Dot variants based on count */
+.cardCatalogDots--small .cardCatalogDot {
+  /* 1-2 items: subtle */
+}
+
+.cardCatalogDots--medium .cardCatalogDot {
+  /* 3-5 items: normal */
+  opacity: 0.6;
+}
+
+.cardCatalogDots--large .cardCatalogDot {
+  /* 6-12 items: prominent */
+  opacity: 0.8;
+}
+
+.cardCatalogDots--xlarge .cardCatalogDot {
+  /* 13+ items: bold */
+  background: var(--brass);
+  opacity: 0.9;
+}
+
+/* ============================================
+   HERO SECTION - The Entrance Hall
+   Dark wood paneling with brass plate title
+   ============================================ */
+
+.hero {
+  background:
+    var(--wood-grain-pattern),
+    linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-medium) 60%, var(--wood-light) 100%);
+  padding: 140px 1rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wood texture overlay */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 40px,
+      rgba(0, 0, 0, 0.05) 40px,
+      rgba(0, 0, 0, 0.05) 41px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(255, 255, 255, 0.01) 1px,
+      transparent 2px,
+      transparent 8px
+    );
+  pointer-events: none;
+}
+
+/* Bottom edge - transition to reading surface */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(
+    180deg,
+    var(--wood-light) 0%,
+    var(--leather-dark) 50%,
+    var(--brass-dark) 100%
+  );
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.heroContent {
+  max-width: 48rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge styled as engraved brass plate */
+.heroBadge {
+  font-family: var(--font-serif);
+  font-size: 0.625rem;
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-engraved);
+  margin-bottom: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--nav-gold-rgb), 0.12) 0%,
+    rgba(184, 134, 11, 0.08) 100%
+  );
+  border: 1px solid rgba(var(--nav-gold-rgb), 0.3);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.heroBadge::before,
+.heroBadge::after {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass));
+}
+
+.heroBadge::after {
+  background: linear-gradient(90deg, var(--brass), transparent);
+}
+
+/* Title styled as brass plate engraving */
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  color: var(--cream-light);
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.heroSubtitle {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+  color: var(--cream-dark);
+  opacity: 0.9;
+  line-height: var(--reading-line-height);
+  max-width: 34rem;
+  margin: 0 auto 1.5rem;
+  font-style: italic;
+}
+
+/* Established date - small brass detail */
+.heroEstablished {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  color: var(--brass);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(var(--nav-gold-rgb), 0.25);
+}
+
+/* ============================================
+   HERO NAVIGATION - Immediate Access Grid
+   All options visible above the fold
+   ============================================ */
+
+.heroNav {
+  position: relative;
+  z-index: 1;
+  max-width: 52rem;
+  margin: 2.5rem auto 0;
+  padding: 0 1rem;
+}
+
+.heroNavGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.heroNavCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 1rem 0.75rem;
+  background: rgba(255, 254, 248, 0.06);
+  border: 1px solid rgba(var(--nav-gold-rgb), 0.2);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+}
+
+.heroNavCard:hover {
+  background: rgba(255, 254, 248, 0.12);
+  border-color: var(--brass);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.heroNavIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.heroNavName {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--cream-light);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* Document Library - Primary CTA */
+.heroLibraryLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.15) 0%,
+    rgba(var(--nav-gold-rgb), 0.08) 100%
+  );
+  border: 1px solid var(--brass);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+}
+
+.heroLibraryLink:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.25) 0%,
+    rgba(var(--nav-gold-rgb), 0.15) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 16px rgba(var(--nav-gold-rgb), 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.heroLibraryIcon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.heroLibraryText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.heroLibraryText strong {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  color: var(--brass);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.heroLibraryText span {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.75rem;
+  color: var(--cream-dark);
+  opacity: 0.85;
+  font-style: italic;
+}
+
+.heroLibraryArrow {
+  font-size: 1.5rem;
+  color: var(--brass);
+  flex-shrink: 0;
+  transition: transform var(--transition-dignified);
+}
+
+.heroLibraryLink:hover .heroLibraryArrow {
+  transform: translateX(4px);
+}
+
+/* Scroll Indicator */
+.heroScroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  opacity: 0.6;
+  animation: heroScrollPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes heroScrollPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(4px);
+  }
+}
+
+.heroScrollArrow {
+  font-size: 1.25rem;
+  color: var(--cream-light);
+}
+
+.heroScrollText {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.6875rem;
+  color: var(--cream-dark);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   READING ROOM INTRODUCTION
+   Welcome message after hero
+   ============================================ */
+
+.readingRoomIntro {
+  background: var(--cream-light);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(42, 31, 26, 0.08);
+  position: relative;
+}
+
+.readingRoomIntro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--paper-texture);
+  pointer-events: none;
+}
+
+.readingRoomText {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.0625rem);
+  color: var(--ink);
+  line-height: var(--reading-line-height);
+  max-width: 36rem;
+  margin: 0 auto 0.75rem;
+  position: relative;
+}
+
+.readingRoomNav {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--ink-light);
+  font-style: italic;
+  position: relative;
+}
+
+/* ============================================
+   COLLECTION LABELS
+   Archival reference codes above sections
+   ============================================ */
+
+.collectionLabel {
+  display: block;
+  font-family: var(--font-mono, 'SF Mono', 'Monaco', 'Inconsolata', monospace);
+  font-size: 0.625rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+/* ============================================
+   CURATOR'S NOTE
+   Editorial framing for key documents
+   ============================================ */
+
+.curatorNote {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.06) 0%,
+    rgba(var(--nav-gold-rgb), 0.02) 100%
+  );
+  border-left: 2px solid var(--brass);
+  border-radius: 0 2px 2px 0;
+  position: relative;
+}
+
+.curatorLabel {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.625rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-engraved);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.curatorNote p {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.875rem;
+  color: var(--ink-faded);
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.container {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ============================================
+   SECTION STYLES - Reading Table Areas
+   Cream paper surface with generous margins
+   ============================================ */
+
+.section,
+.featuredSection,
+.timelineSection,
+.sourcesSection {
+  padding: 4rem 1rem;
+  background: var(--cream-medium);
+  position: relative;
+}
+
+/* Paper texture on all sections */
+.section::before,
+.featuredSection::before,
+.timelineSection::before,
+.sourcesSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--paper-texture);
+  pointer-events: none;
+}
+
+.featuredSection {
+  background: linear-gradient(180deg, var(--cream-light) 0%, var(--cream-medium) 100%);
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+}
+
+.timelineSection {
+  background: linear-gradient(180deg, var(--cream-medium) 0%, var(--cream-dark) 100%);
+}
+
+.sourcesSection {
+  background: var(--cream-dark);
+}
+
+/* Section titles - library collection labels */
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.375rem, 4vw, 1.75rem);
+  color: var(--wood-dark);
+  text-align: center;
+  margin-bottom: 0.625rem;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+}
+
+.sectionSubtitle {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  color: var(--ink-light);
+  text-align: center;
+  margin-bottom: 2.25rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================
+   QUOTE CARD - Documents on the Table
+   Paper texture with organic rotation
+   ============================================ */
+
+.quoteCard {
+  background:
+    var(--paper-texture),
+    linear-gradient(145deg, var(--cream-light) 0%, var(--cream-medium) 50%, var(--cream-dark) 100%);
+  border: none;
+  border-radius: 1px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    2px 4px 12px rgba(42, 31, 26, 0.08);
+  transform: rotate(-0.3deg);
+  transition:
+    transform var(--transition-dignified),
+    box-shadow var(--transition-dignified);
+}
+
+.quoteCard:hover {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.06),
+    4px 8px 20px rgba(42, 31, 26, 0.1);
+}
+
+/* Corner shadow suggesting paper thickness */
+.quoteCard::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  left: 8px;
+  height: 8px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(42, 31, 26, 0.03) 30%,
+    rgba(42, 31, 26, 0.06)
+  );
+  filter: blur(2px);
+  border-radius: 0 0 2px 0;
+  z-index: -1;
+}
+
+/* ============================================
+   QUOTE CARD - Featured (Prominent Document)
+   ============================================ */
+
+.quoteCardFeatured {
+  background:
+    var(--paper-texture),
+    linear-gradient(
+      135deg,
+      #fffef8 0%,
+      var(--cream-light) 30%,
+      var(--cream-medium) 70%,
+      #f0ebe0 100%
+    );
+  padding: 2rem 2.25rem;
+  transform: rotate(0.5deg);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.06),
+    0 12px 32px rgba(var(--nav-gold-rgb), 0.08),
+    inset 0 0 0 1px rgba(var(--nav-gold-rgb), 0.1);
+}
+
+.quoteCardFeatured:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 12px 32px rgba(0, 0, 0, 0.08),
+    0 16px 40px rgba(var(--nav-gold-rgb), 0.1),
+    inset 0 0 0 1px rgba(var(--nav-gold-rgb), 0.15);
+}
+
+/* Aged paper edge - top border accent */
+.quoteCardFeatured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
+  border-radius: 1px 1px 0 0;
+}
+
+/* Quote text */
+.quoteText {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--ink);
+  line-height: var(--reading-line-height);
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+}
+
+.quoteCardFeatured .quoteText {
+  font-size: clamp(1.0625rem, 3vw, 1.25rem);
+  padding: 1.75rem 1rem 1rem 1rem;
+}
+
+/* Quote marks - subtle, brass tinted */
+.quoteOpen,
+.quoteClose {
+  position: absolute;
+  font-size: 2.5rem;
+  color: var(--brass);
+  opacity: 0.2;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quoteOpen {
+  top: 0;
+  left: -0.1em;
+}
+
+.quoteClose {
+  bottom: -0.35em;
+  right: 0;
+}
+
+.quoteCardFeatured .quoteOpen,
+.quoteCardFeatured .quoteClose {
+  font-size: 3.5rem;
+  opacity: 0.15;
+}
+
+.quoteCardFeatured .quoteOpen {
+  top: 0.2em;
+  left: 0;
+}
+
+.quoteCardFeatured .quoteClose {
+  bottom: -0.25em;
+  right: 0.1em;
+}
+
+/* Quote footer */
+.quoteFooter {
+  border-top: 1px solid rgba(42, 31, 26, 0.1);
+  padding-top: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.quoteAttribution {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--wood-dark);
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.quoteSource {
+  font-size: 0.8125rem;
+  color: var(--ink-light);
+  margin-bottom: 0.625rem;
+  font-family: var(--font-serif-elegant);
+}
+
+.quoteContext {
+  font-size: 0.8125rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(42, 31, 26, 0.03);
+  border-left: 2px solid var(--brass);
+  line-height: 1.7;
+}
+
+.sourceLink {
+  font-size: 0.8125rem;
+  color: var(--leather);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: color var(--transition-dignified);
+  padding: 0.5rem 0;
+  font-family: var(--font-serif);
+}
+
+.sourceLink:hover {
+  color: var(--brass-dark);
+}
+
+/* ============================================
+   RECEIPT LINK - Link to full document
+   ============================================ */
+
+.receiptLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, var(--wood-light) 0%, var(--wood-medium) 100%);
+  border: 1px solid var(--brass);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+}
+
+.receiptLink:hover {
+  background: linear-gradient(135deg, var(--wood-medium) 0%, var(--wood-dark) 100%);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 2px 6px rgba(var(--nav-gold-rgb), 0.15);
+}
+
+.receiptIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.receiptText {
+  flex: 1;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--cream-light);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.receiptArrow {
+  font-size: 1rem;
+  color: var(--brass);
+  transition: transform var(--transition-dignified);
+}
+
+.receiptLink:hover .receiptArrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   CONTEXT PANEL - Expandable Document Info
+   ============================================ */
+
+.contextPanel {
+  margin-top: 1.25rem;
+}
+
+.contextToggle {
+  background: none;
+  border: none;
+  padding: 0.625rem 0;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--leather);
+  cursor: pointer;
+  transition: color var(--transition-dignified);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  letter-spacing: 0.02em;
+  min-height: 44px;
+}
+
+.contextToggle:hover {
+  color: var(--brass-dark);
+}
+
+.contextContent {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height var(--transition-slow),
+    opacity var(--transition-dignified),
+    margin var(--transition-slow);
+  margin-top: 0;
+}
+
+.contextContentOpen {
+  max-height: 14rem;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.contextText {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  line-height: 1.8;
+  font-style: italic;
+  padding-left: 1.25rem;
+  border-left: 2px solid rgba(var(--nav-gold-rgb), 0.3);
+}
+
+/* ============================================
+   TREATY SIGNERS SECTION - Memorial Hall
+   ============================================ */
+
+.signersSection {
+  padding: 4.5rem 1rem;
+  background:
+    var(--paper-texture),
+    linear-gradient(
+      180deg,
+      var(--cream-medium) 0%,
+      var(--cream-dark) 40%,
+      var(--cream-dark) 60%,
+      var(--cream-medium) 100%
+    );
+  position: relative;
+}
+
+.signersIntro {
+  text-align: center;
+  max-width: 34rem;
+  margin: 0 auto 1.5rem;
+}
+
+.signersIntro p {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9375rem;
+  color: var(--ink-faded);
+  line-height: var(--reading-line-height);
+  font-style: italic;
+}
+
+/* Signers list */
+.signersList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 30rem;
+  margin: 2rem auto 3rem;
+}
+
+/* Individual signer card - memorial plaque style */
+.signerCard {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  background: rgba(255, 254, 248, 0.5);
+  border-radius: 2px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 0 0 1px rgba(var(--nav-gold-rgb), 0.1);
+}
+
+/* Separator ornament */
+.signerCard:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brass), transparent);
+}
+
+/* Cherokee name - primary, engraved feel */
+.signerCherokeeName {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  color: var(--wood-dark);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+}
+
+/* English name */
+.signerEnglishName {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9375rem;
+  color: var(--ink-light);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+/* Role description */
+.signerRole {
+  font-size: 0.8125rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  max-width: 22rem;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+/* Footer */
+/* Expand/Collapse Buttons */
+.signersExpandButton,
+.signersCollapseButton {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.875rem 1.75rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--brass-dark);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.08) 0%,
+    rgba(var(--nav-gold-rgb), 0.04) 100%
+  );
+  border: 1px solid rgba(var(--nav-gold-rgb), 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+}
+
+.signersExpandButton:hover,
+.signersCollapseButton:hover {
+  color: var(--wood-dark);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.15) 0%,
+    rgba(var(--nav-gold-rgb), 0.08) 100%
+  );
+  border-color: var(--brass);
+  transform: translateY(-1px);
+}
+
+.signersExpandButton:focus-visible,
+.signersCollapseButton:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.signersCollapseButton {
+  color: var(--ink-light);
+  background: transparent;
+  border-color: rgba(42, 31, 26, 0.15);
+}
+
+.signersCollapseButton:hover {
+  color: var(--ink);
+  background: rgba(42, 31, 26, 0.03);
+  border-color: rgba(42, 31, 26, 0.25);
+}
+
+.signersFooter {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(var(--nav-gold-rgb), 0.2);
+}
+
+.signersLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  color: var(--wood-dark);
+  text-decoration: none;
+  padding: 0.875rem 1.75rem;
+  border: 1px solid var(--wood-medium);
+  border-radius: 2px;
+  transition: all var(--transition-dignified);
+  margin-bottom: 1.75rem;
+  background: rgba(255, 254, 248, 0.8);
+}
+
+.signersLink:hover {
+  background: var(--wood-dark);
+  color: var(--cream-light);
+  border-color: var(--wood-dark);
+}
+
+.signersDescendants {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.875rem;
+  color: var(--ink-light);
+  font-style: italic;
+  line-height: 1.75;
+  max-width: 30rem;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* ============================================
+   TIMELINE - Archive Ledger Style
+   Ruled lines like a ledger book
+   ============================================ */
+
+.timeline {
+  position: relative;
+  padding-left: 2.25rem;
+  margin-top: 2rem;
+}
+
+/* Timeline vertical line - brass rule */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--brass) 0%,
+    var(--leather) 30%,
+    var(--leather) 70%,
+    var(--brass) 100%
+  );
+  border-radius: 1px;
+}
+
+.timelineEvent {
+  position: relative;
+  padding-bottom: 1.75rem;
+  padding-left: 1.5rem;
+}
+
+.timelineEvent:last-child {
+  padding-bottom: 0;
+}
+
+/* Date in margin - catalog entry style */
+.timelineDate {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--brass-dark);
+  font-weight: 600;
+  margin-bottom: 0.625rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Timeline dot */
+.timelineDot {
+  position: absolute;
+  left: calc(-2.25rem + 2px);
+  top: 0.375rem;
+  width: 10px;
+  height: 10px;
+  background: var(--brass);
+  border-radius: 50%;
+  border: 2px solid var(--cream-medium);
+  box-shadow: 0 0 0 2px var(--brass-glow);
+}
+
+/* Timeline content - ledger entry */
+.timelineContent {
+  background: var(--paper-texture), var(--cream-light);
+  padding: 1.25rem 1.5rem;
+  border-radius: 2px;
+  border: none;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all var(--transition-dignified);
+  position: relative;
+}
+
+/* Ruled line effect */
+.timelineContent::after {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1rem;
+  height: 1px;
+  background: rgba(42, 31, 26, 0.06);
+}
+
+.timelineContent:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  transform: translateX(2px);
+}
+
+.timelineText {
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.65;
+  margin-bottom: 0.625rem;
+  font-family: var(--font-serif);
+}
+
+.timelineLink {
+  font-size: 0.75rem;
+  color: var(--leather);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: all var(--transition-dignified);
+  font-family: var(--font-serif);
+}
+
+.timelineLink:hover {
+  opacity: 1;
+  color: var(--brass-dark);
+}
+
+/* Featured timeline event */
+.timelineEventFeatured {
+  margin: 0.75rem 0;
+}
+
+.timelineDotFeatured {
+  background: var(--brass);
+  width: 14px;
+  height: 14px;
+  box-shadow:
+    0 0 0 3px var(--brass-glow),
+    0 0 12px rgba(var(--nav-gold-rgb), 0.25);
+}
+
+.timelineContentFeatured {
+  background: var(--paper-texture), linear-gradient(135deg, #fffef8 0%, var(--cream-light) 100%);
+  border-left: 3px solid var(--brass);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    0 4px 16px rgba(var(--nav-gold-rgb), 0.08);
+  padding: 1.5rem 1.75rem;
+}
+
+.timelineContentFeatured .timelineText {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--wood-dark);
+}
+
+/* Manuscript link */
+.timelineManuscriptLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--brass-dark);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  margin-bottom: 0.375rem;
+  transition: all var(--transition-dignified);
+}
+
+.timelineManuscriptLink:hover {
+  color: var(--leather);
+}
+
+/* ============================================
+   LIBRARY PROMO - Featured link to Document Library
+   ============================================ */
+
+.libraryPromo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.08) 0%,
+    rgba(var(--nav-gold-rgb), 0.04) 100%
+  );
+  border: 1px solid rgba(var(--nav-gold-rgb), 0.25);
+  border-radius: 2px;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all var(--transition-dignified);
+}
+
+.libraryPromo:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--nav-gold-rgb), 0.12) 0%,
+    rgba(var(--nav-gold-rgb), 0.06) 100%
+  );
+  border-color: var(--brass);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(var(--nav-gold-rgb), 0.15);
+}
+
+.libraryPromoIcon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.libraryPromoText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.libraryPromoText strong {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--wood-dark);
+  font-weight: 500;
+}
+
+.libraryPromoText span {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.8125rem;
+  color: var(--ink-light);
+  font-style: italic;
+}
+
+.libraryPromoArrow {
+  font-size: 1.5rem;
+  color: var(--brass);
+  flex-shrink: 0;
+  transition: transform var(--transition-dignified);
+}
+
+.libraryPromo:hover .libraryPromoArrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   SOURCES GRID - Card Catalog Drawers
+   ============================================ */
+
+.sourcesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+/* Source card - drawer front with brass pull */
+.sourceCard {
+  background:
+    var(--wood-grain-pattern),
+    linear-gradient(180deg, var(--wood-light) 0%, var(--wood-medium) 50%, var(--wood-dark) 100%);
+  border: none;
+  border-radius: 3px;
+  padding: 1.5rem 1.75rem;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Brass label holder */
+.sourceCard::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 8rem;
+  height: 4px;
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  border-radius: 2px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Brass pull handle */
+.sourceCard::after {
+  content: '';
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 0.5rem;
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  border-radius: 3px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sourceCard:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sourceCardTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--cream-light);
+  margin-bottom: 0.625rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-dignified);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.sourceCard:hover .sourceCardTitle {
+  color: var(--brass);
+}
+
+.sourceCardDescription {
+  font-size: 0.8125rem;
+  color: var(--cream-dark);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+/* ============================================
+   CTA SECTION - Closing the Archive
+   ============================================ */
+
+/* ============================================
+   EARLY CTA - Prominent placement after hero
+   Gold button on cream background
+   ============================================ */
+
+.earlyCtaSection {
+  background: var(--cream-light);
+  padding: 4rem 1rem;
+  text-align: center;
+  position: relative;
+  border-top: 1px solid rgba(var(--nav-gold-rgb), 0.15);
+  border-bottom: 1px solid rgba(var(--nav-gold-rgb), 0.15);
+}
+
+.earlyCtaTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: var(--wood-dark);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.earlyCtaText {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--ink-faded);
+  margin-bottom: 2rem;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  line-height: 1.75;
+}
+
+.earlyCtaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  color: var(--wood-dark);
+  padding: 1rem 2.25rem;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all var(--transition-dignified);
+  box-shadow:
+    0 2px 8px rgba(var(--nav-gold-rgb), 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  font-family: var(--font-serif);
+}
+
+.earlyCtaButton:hover {
+  background: linear-gradient(180deg, var(--brass-light), var(--brass));
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(var(--nav-gold-rgb), 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.earlyCtaButton:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   CTA SECTION - Page closing CTA
+   Dark wood background
+   ============================================ */
+
+.ctaSection {
+  background: var(--wood-grain-pattern), linear-gradient(180deg, var(--wood-dark) 0%, #1e1612 100%);
+  padding: 5rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Texture overlay */
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 50px,
+    rgba(0, 0, 0, 0.03) 50px,
+    rgba(0, 0, 0, 0.03) 51px
+  );
+  pointer-events: none;
+}
+
+/* Decorative brass frame */
+.ctaSection::after {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  border: 1px solid rgba(var(--nav-gold-rgb), 0.2);
+  pointer-events: none;
+}
+
+.ctaTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  color: var(--cream-light);
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.ctaText {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--cream-dark);
+  opacity: 0.9;
+  margin-bottom: 2.25rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+  line-height: 1.75;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  color: var(--wood-dark);
+  padding: 1rem 2.25rem;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all var(--transition-dignified);
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 2px 8px rgba(var(--nav-gold-rgb), 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  font-family: var(--font-serif);
+}
+
+.ctaButton:hover {
+  background: linear-gradient(180deg, var(--brass-light), var(--brass));
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(var(--nav-gold-rgb), 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   TABLET BREAKPOINT (768px+)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 180px 1.5rem 6rem;
+  }
+
+  .heroBadge {
+    font-size: 0.6875rem;
+    padding: 0.625rem 2rem;
+    gap: 1.25rem;
+  }
+
+  .heroBadge::before,
+  .heroBadge::after {
+    width: 2rem;
+  }
+
+  .heroEstablished {
+    font-size: 0.75rem;
+    padding-top: 1.25rem;
+  }
+
+  /* Hero Navigation - Tablet */
+  .heroNav {
+    margin-top: 3rem;
+  }
+
+  .heroNavGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .heroNavCard {
+    padding: 1.25rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .heroNavIcon {
+    font-size: 1.75rem;
+  }
+
+  .heroNavName {
+    font-size: 0.875rem;
+  }
+
+  .heroLibraryLink {
+    padding: 1.25rem 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .heroLibraryIcon {
+    font-size: 2rem;
+  }
+
+  .heroLibraryText strong {
+    font-size: 1rem;
+  }
+
+  .heroLibraryText span {
+    font-size: 0.8125rem;
+  }
+
+  .heroScroll {
+    margin-top: 2.5rem;
+  }
+
+  .heroScrollText {
+    font-size: 0.75rem;
+  }
+
+  .readingRoomIntro {
+    padding: 3rem 1.5rem;
+  }
+
+  .collectionLabel {
+    font-size: 0.6875rem;
+    margin-bottom: 1rem;
+  }
+
+  .curatorNote {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .curatorNote p {
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .section,
+  .featuredSection,
+  .timelineSection,
+  .sourcesSection {
+    padding: 5rem 1.5rem;
+  }
+
+  .sectionSubtitle {
+    margin-bottom: 2.75rem;
+  }
+
+  .quoteCard {
+    padding: 1.75rem 2rem;
+    transform: rotate(-0.5deg);
+  }
+
+  .quoteCardFeatured {
+    padding: 2.25rem 2.5rem;
+    transform: rotate(0.7deg);
+  }
+
+  .quoteText {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  .quoteCardFeatured .quoteText {
+    padding: 2rem 1.25rem 1.25rem 1.25rem;
+  }
+
+  .quoteOpen,
+  .quoteClose {
+    font-size: 3rem;
+  }
+
+  .quoteCardFeatured .quoteOpen,
+  .quoteCardFeatured .quoteClose {
+    font-size: 4.5rem;
+  }
+
+  /* Timeline tablet - horizontal dates */
+  .timeline {
+    padding-left: 9.5rem;
+  }
+
+  .timeline::before {
+    left: 8rem;
+  }
+
+  .timelineEvent {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1.75rem;
+    padding-left: 0;
+    align-items: start;
+  }
+
+  .timelineDate {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 0.375rem;
+    font-size: 0.8125rem;
+  }
+
+  .timelineDot {
+    left: -0.875rem;
+    top: 0.625rem;
+    width: 12px;
+    height: 12px;
+  }
+
+  .timelineContent {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .timelineText {
+    font-size: 0.9375rem;
+  }
+
+  .timelineLink {
+    font-size: 0.8125rem;
+  }
+
+  /* Featured timeline tablet */
+  .timelineDotFeatured {
+    width: 16px;
+    height: 16px;
+  }
+
+  .timelineContentFeatured {
+    padding: 1.75rem 2rem;
+  }
+
+  .timelineContentFeatured .timelineText {
+    font-size: 1rem;
+  }
+
+  .timelineManuscriptLink {
+    font-size: 0.875rem;
+  }
+
+  .sourcesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .sourceCard {
+    padding: 1.75rem 2rem;
+  }
+
+  /* Signers section tablet */
+  .signersSection {
+    padding: 5.5rem 1.5rem;
+  }
+
+  .signersIntro {
+    margin-bottom: 2rem;
+  }
+
+  .signersIntro p {
+    font-size: 1rem;
+  }
+
+  .signersList {
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .signerCard {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .signerCherokeeName {
+    font-size: 1.5rem;
+  }
+
+  .signerEnglishName {
+    font-size: 1rem;
+  }
+
+  .signerRole {
+    font-size: 0.875rem;
+  }
+
+  .signersLink {
+    font-size: 1rem;
+    padding: 1rem 2.25rem;
+  }
+
+  .sourceCardTitle {
+    font-size: 1.0625rem;
+  }
+
+  .libraryPromo {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .libraryPromoText strong {
+    font-size: 1.0625rem;
+  }
+
+  .libraryPromoText span {
+    font-size: 0.875rem;
+  }
+
+  .ctaSection {
+    padding: 6rem 1.5rem;
+  }
+
+  .ctaSection::after {
+    top: 2.5rem;
+    left: 2.5rem;
+    right: 2.5rem;
+    bottom: 2.5rem;
+  }
+
+  .ctaButton {
+    padding: 1.125rem 2.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================
+   DESKTOP BREAKPOINT (1024px+)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  /* Card Catalog - fixed sidebar on desktop */
+  .cardCatalog {
+    display: block;
+    position: fixed;
+    left: 1.5rem;
+    top: 6rem;
+    z-index: 100;
+    background: var(--paper-texture), var(--cream-light);
+    border: 1px solid rgba(var(--nav-gold-rgb), 0.15);
+    border-radius: 2px;
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      0 8px 32px rgba(42, 31, 26, 0.06);
+    width: 12rem;
+    padding: 0;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+  }
+
+  .hero {
+    padding: 200px 2rem 7rem;
+  }
+
+  /* Hero Navigation - Desktop */
+  .heroNav {
+    max-width: 56rem;
+    margin-top: 3.5rem;
+  }
+
+  .heroNavGrid {
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .heroNavCard {
+    padding: 1.5rem 1.25rem;
+    gap: 0.625rem;
+  }
+
+  .heroNavIcon {
+    font-size: 2rem;
+  }
+
+  .heroNavName {
+    font-size: 0.9375rem;
+  }
+
+  .heroLibraryLink {
+    padding: 1.5rem 2rem;
+  }
+
+  .heroLibraryIcon {
+    font-size: 2.25rem;
+  }
+
+  .heroLibraryText strong {
+    font-size: 1.0625rem;
+  }
+
+  .heroLibraryText span {
+    font-size: 0.875rem;
+  }
+
+  .readingRoomIntro {
+    padding: 3.5rem 2rem;
+  }
+
+  .section,
+  .featuredSection,
+  .timelineSection,
+  .sourcesSection {
+    padding: 6rem 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .quoteCard {
+    transform: rotate(-0.7deg);
+  }
+
+  .quoteCardFeatured {
+    transform: rotate(1deg);
+  }
+
+  .timeline {
+    padding-left: 11rem;
+  }
+
+  .timeline::before {
+    left: 9.5rem;
+  }
+
+  .timelineEvent {
+    grid-template-columns: 9rem 1fr;
+    gap: 2rem;
+  }
+
+  .sourcesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  .sourceCard {
+    padding: 2rem 2.25rem;
+  }
+
+  /* Signers section desktop */
+  .signersSection {
+    padding: 6.5rem 2rem;
+  }
+
+  .signerCherokeeName {
+    font-size: 1.625rem;
+  }
+
+  .signerEnglishName {
+    font-size: 1.0625rem;
+  }
+
+  .ctaSection {
+    padding: 7rem 2rem;
+  }
+}
+
+/* ============================================
+   LARGE DESKTOP (1280px+)
+   ============================================ */
+
+@media (min-width: 1280px) {
+  .cardCatalog {
+    left: 2rem;
+    width: 13rem;
+  }
+
+  .container {
+    max-width: 50rem;
+  }
+
+  .quoteCardFeatured {
+    padding: 2.75rem 3rem;
+    transform: rotate(1.2deg);
+  }
+
+  .ctaTitle {
+    font-size: 2.5rem;
+  }
+}
+
+/* ============================================
+   EXTRA LARGE DESKTOP (1536px+)
+   ============================================ */
+
+@media (min-width: 1536px) {
+  .cardCatalog {
+    left: calc((100vw - 50rem) / 2 - 15rem);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .evidencePage,
+  .quoteCard,
+  .sourceCard,
+  .timelineContent,
+  .ctaButton,
+  .signersLink,
+  .contextContent,
+  .cardCatalogLink,
+  .libraryPromo,
+  .libraryPromoArrow,
+  .heroNavCard,
+  .heroLibraryLink,
+  .heroLibraryArrow {
+    transition: none;
+  }
+
+  .quoteCard,
+  .quoteCardFeatured {
+    transform: none;
+  }
+
+  .heroScroll {
+    animation: none;
+  }
+
+  .quoteCard:hover,
+  .quoteCardFeatured:hover,
+  .sourceCard:hover,
+  .timelineContent:hover,
+  .ctaButton:hover,
+  .libraryPromo:hover,
+  .libraryPromo:hover .libraryPromoArrow,
+  .heroNavCard:hover,
+  .heroLibraryLink:hover,
+  .heroLibraryLink:hover .heroLibraryArrow {
+    transform: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .evidencePage::after,
+  .cardCatalog,
+  .ctaSection,
+  .heroNav,
+  .heroScroll {
+    display: none;
+  }
+
+  .hero {
+    background: var(--cream-medium);
+    color: var(--ink);
+    padding: 2rem 1rem;
+  }
+
+  .heroTitle,
+  .heroBadge {
+    color: var(--ink);
+  }
+
+  .quoteCard,
+  .quoteCardFeatured {
+    transform: none;
+    box-shadow: none;
+    border: 1px solid var(--ink-light);
+    page-break-inside: avoid;
+  }
+
+  .sourceCard {
+    background: var(--cream-light);
+    box-shadow: none;
+    border: 1px solid var(--ink-light);
+  }
+
+  .sourceCardTitle,
+  .sourceCardDescription {
+    color: var(--ink);
+  }
+
+  .curatorNote {
+    page-break-inside: avoid;
+  }
+
+  .collectionLabel {
+    color: var(--ink);
+  }
+}
+
+.cardCatalogSearch {
+  padding: 0.5rem 0.75rem;
+  position: relative;
+}
+
+.cardCatalogSearchInput {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  padding-right: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  color: var(--ink);
+  background: rgba(250, 247, 240, 0.5);
+  border: 1px solid rgba(var(--nav-gold-rgb), 0.2);
+  border-radius: 2px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.cardCatalogSearchInput:focus {
+  border-color: var(--brass);
+  background: rgba(250, 247, 240, 0.8);
+  box-shadow: 0 0 0 2px rgba(var(--nav-gold-rgb), 0.1);
+}
+
+.cardCatalogSearchInput::placeholder {
+  color: var(--brass-dark);
+  opacity: 0.6;
+}
+
+.cardCatalogSearchClear {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--brass);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardCatalogSearchClear:hover {
+  color: var(--wood-dark);
+}
+
+.cardCatalogEmpty {
+  padding: 1rem;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  color: var(--brass-dark);
+  font-style: italic;
+}

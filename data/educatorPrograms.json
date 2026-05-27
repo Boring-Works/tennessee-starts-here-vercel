@@ -1,0 +1,203 @@
+{
+  "_meta": {
+    "description": "Educational programs for school groups and field trips - staff can update offerings, descriptions, and details",
+    "updated": "2026-01-30",
+    "usage": "import programs from '@/data/educatorPrograms.json'",
+    "usedOn": ["Educators page", "Groups page", "Booking forms"],
+    "staffInstructions": "This file controls educational program offerings on the website. Staff can add new programs, update descriptions, change durations, and adjust capacity limits.",
+    "fieldGuide": {
+      "id": "Unique identifier - use lowercase with dashes (example: 'living-history-tour')",
+      "name": "Display name for the program",
+      "duration": "How long the program takes (example: '90 minutes')",
+      "capacity": "Maximum group size or range (example: '25-60 students')",
+      "gradeRange": "Target grade levels (example: 'K-12' or '3-5')",
+      "description": "1-2 sentence description of what students experience",
+      "tnStandards": "Array of Tennessee curriculum standards covered",
+      "includes": "Array of activities included in the program",
+      "price": "Price in CENTS per student (multiply dollars by 100)",
+      "minimumStudents": "Minimum number of students required to book",
+      "bookingLeadTime": "How far in advance groups must book"
+    },
+    "rules": [
+      "Prices are in CENTS - $6.00 = 600",
+      "Keep program IDs unique and lowercase with dashes",
+      "Grade ranges should use standard format: 'K-12', '3-5', 'PreK', etc.",
+      "Duration should include units: '90 minutes', '2 hours', 'Half day'"
+    ],
+    "commonMistakes": [
+      "Using dollar amounts instead of cents for price",
+      "Forgetting to update both the program AND the booking form",
+      "Setting capacity too high without checking with operations"
+    ],
+    "templates": {
+      "newProgram": {
+        "id": "your-program-name",
+        "name": "Your Program Name",
+        "duration": "90 minutes",
+        "capacity": "25-60 students",
+        "gradeRange": "K-12",
+        "description": "Brief description of what students will experience and learn.",
+        "tnStandards": ["TN Standard 1", "TN Standard 2"],
+        "includes": ["Activity 1", "Activity 2", "Activity 3"],
+        "price": 600,
+        "minimumStudents": 10,
+        "bookingLeadTime": "2 weeks"
+      }
+    },
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS verify changes with user before committing"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+      },
+      "prohibited": [
+        "Do NOT remove _meta or _aiRules sections",
+        "Do NOT make changes without user awareness",
+        "Do NOT change program prices without approval"
+      ],
+      "fileSpecific": ["Prices are in CENTS", "Keep TN Standards accurate"],
+      "whenUnsure": "Ask the user for clarification"
+    }
+  },
+  "programs": [
+    {
+      "id": "living-history-tour",
+      "name": "Living History Tour",
+      "duration": "90 minutes",
+      "capacity": "25-60 students",
+      "gradeRange": "K-12",
+      "description": "Full site tour with costumed interpreters demonstrating frontier life. Students interact with historical characters and see authentic 1790s activities.",
+      "tnStandards": ["4.1", "4.5", "8.1", "US.1"],
+      "includes": [
+        "Guided tour of all historic buildings",
+        "Interaction with costumed interpreters",
+        "Blacksmith demonstration",
+        "Weaving demonstration",
+        "Kitchen and cooking tour"
+      ],
+      "price": 600,
+      "minimumStudents": 10,
+      "bookingLeadTime": "2 weeks",
+      "featured": true
+    },
+    {
+      "id": "tour-and-craft",
+      "name": "Tour & Craft",
+      "duration": "2 hours",
+      "capacity": "25-40 students",
+      "gradeRange": "K-8",
+      "description": "Living history tour plus hands-on craft activity. Students create a period-appropriate craft to take home.",
+      "tnStandards": ["4.1", "4.5", "Visual Arts"],
+      "includes": [
+        "Full living history tour",
+        "Hands-on craft activity",
+        "Materials included",
+        "Take-home project"
+      ],
+      "price": 800,
+      "minimumStudents": 15,
+      "bookingLeadTime": "3 weeks",
+      "featured": true
+    },
+    {
+      "id": "living-history-sampler",
+      "name": "Living History Sampler",
+      "duration": "45 minutes",
+      "capacity": "25-100 students",
+      "gradeRange": "PreK-2",
+      "description": "Condensed experience perfect for younger learners. Focus on one or two demonstrations with age-appropriate explanations.",
+      "tnStandards": ["K.1", "1.1", "2.1"],
+      "includes": [
+        "Shortened tour of key buildings",
+        "One demonstration",
+        "Story time with interpreter"
+      ],
+      "price": 400,
+      "minimumStudents": 10,
+      "bookingLeadTime": "2 weeks",
+      "featured": false
+    },
+    {
+      "id": "preschool-program",
+      "name": "Preschool Program",
+      "duration": "30-45 minutes",
+      "capacity": "15-30 students",
+      "gradeRange": "PreK",
+      "description": "Gentle introduction to history for our youngest visitors. Interactive storytelling and sensory experiences.",
+      "tnStandards": ["PreK Standards"],
+      "includes": ["Interactive story time", "Touch-and-feel artifacts", "Simple craft activity"],
+      "price": 300,
+      "minimumStudents": 10,
+      "bookingLeadTime": "2 weeks",
+      "featured": false
+    },
+    {
+      "id": "virtual-program",
+      "name": "Virtual Programs",
+      "duration": "45-60 minutes",
+      "capacity": "1 classroom",
+      "gradeRange": "K-12",
+      "description": "Bring Rocky Mount to your classroom via live video. Interactive Q&A with costumed interpreters.",
+      "tnStandards": ["4.1", "4.5", "8.1"],
+      "includes": [
+        "Live video tour",
+        "Real-time Q&A",
+        "Pre-visit materials",
+        "Post-visit activities"
+      ],
+      "price": 7500,
+      "minimumStudents": null,
+      "bookingLeadTime": "1 week",
+      "featured": false,
+      "_note": "Price is per session, not per student"
+    }
+  ],
+  "highlights": [
+    {
+      "icon": "CheckCircle",
+      "text": "TN Standards Aligned"
+    },
+    {
+      "icon": "Hands",
+      "text": "Hands-On Learning"
+    },
+    {
+      "icon": "Bus",
+      "text": "Bus Parking Available"
+    }
+  ],
+  "funding": {
+    "_staffNote": "Update annually as grant programs change",
+    "sources": [
+      {
+        "name": "Tennessee Arts Commission",
+        "description": "Grants available for arts-integrated field trips",
+        "url": "https://tnartscommission.org/",
+        "eligibility": "Public schools"
+      },
+      {
+        "name": "OVTA Funding",
+        "description": "Overmountain Victory Trail Association educational grants",
+        "url": null,
+        "eligibility": "Schools along the trail corridor"
+      },
+      {
+        "name": "Title I Funds",
+        "description": "Many Title I schools can use funds for educational field trips",
+        "url": null,
+        "eligibility": "Title I eligible schools"
+      }
+    ]
+  },
+  "bookingInfo": {
+    "formUrl": "https://form.jotform.com/230155675460152",
+    "phone": "(423) 538-7396",
+    "email": "education@rockymountmuseum.com",
+    "leadTime": "2-4 weeks recommended",
+    "cancellationPolicy": "48 hours notice required for full refund"
+  }
+}

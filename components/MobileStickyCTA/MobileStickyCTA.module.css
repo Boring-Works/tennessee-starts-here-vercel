@@ -1,0 +1,104 @@
+/* ============================================
+   MOBILE STICKY CTA
+   Sticky bottom navigation for mobile devices
+   ============================================ */
+
+.container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .container {
+    display: block;
+  }
+}
+
+.container.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.container.hidden {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.gradient {
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(to top, rgb(156, 39, 23), transparent);
+  pointer-events: none;
+}
+
+.nav {
+  background-color: rgb(156, 39, 23);
+  border-top: 1px solid var(--gold-shimmer);
+  padding: 0.75rem 1rem;
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.buttonSecondary {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonSecondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.buttonSecondary:focus-visible {
+  outline: 2px solid rgb(201, 162, 39);
+  outline-offset: 2px;
+}
+
+.buttonPrimary {
+  flex: 1;
+  background-color: rgb(201, 162, 39);
+  color: rgb(156, 39, 23);
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonPrimary:hover {
+  background-color: var(--gold-shimmer);
+}
+
+.buttonPrimary:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}

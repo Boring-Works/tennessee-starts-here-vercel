@@ -1,0 +1,566 @@
+.homecoming-section {
+  position: relative;
+  padding: 6rem 1.5rem 5rem;
+  background: var(--primary);
+  color: white;
+  z-index: 1;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .homecoming-section {
+    padding: 8rem 2rem 6rem;
+  }
+}
+
+/* Subtle texture + radial glow */
+.homecoming-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 20%, var(--gold-shimmer) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Frontier horizon illustration */
+.homecoming-horizon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.homecoming-horizon--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homecoming-horizon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Decorative border frame */
+.homecoming-frame {
+  position: absolute;
+  inset: 2rem;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .homecoming-frame {
+    inset: 3rem;
+  }
+}
+
+.homecoming-frame-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: var(--gold-shimmer);
+  border-style: solid;
+  border-width: 0;
+}
+
+.homecoming-frame-corner--tl {
+  top: 0;
+  left: 0;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.homecoming-frame-corner--tr {
+  top: 0;
+  right: 0;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.homecoming-frame-corner--bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.homecoming-frame-corner--br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+@media (min-width: 768px) {
+  .homecoming-frame-corner {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.homecoming-container {
+  position: relative;
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Location eyebrow with reveal */
+.homecoming-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: 0.2s;
+}
+
+.homecoming-eyebrow--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homecoming-pin {
+  width: 1rem;
+  height: 1rem;
+  stroke: var(--accent);
+}
+
+@media (min-width: 768px) {
+  .homecoming-eyebrow {
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Headline with reveal */
+.homecoming-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: 0.3s;
+}
+
+.homecoming-headline--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Experiential hook with reveal */
+.homecoming-hook {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.1875rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 2.5rem;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: 0.45s;
+}
+
+.homecoming-hook--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .homecoming-hook {
+    margin-bottom: 3rem;
+  }
+}
+
+/* Vintage map location card */
+.homecoming-map-card {
+  position: relative;
+  max-width: 28rem;
+  margin: 0 auto 2.5rem;
+  padding: 2rem 1.5rem;
+  background:
+    /* Aged paper texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.03'/%3E%3C/svg%3E"),
+    linear-gradient(145deg, #f5f0e6 0%, #e8dcc8 50%, #f0e6d4 100%);
+  color: var(--primary);
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: 0.55s;
+}
+
+.homecoming-map-card--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Torn edges */
+.homecoming-map-tear {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-size: 16px 100%;
+}
+
+.homecoming-map-tear--top {
+  top: -8px;
+  background:
+    linear-gradient(135deg, #f5f0e6 33.33%, transparent 33.33%),
+    linear-gradient(225deg, #f5f0e6 33.33%, transparent 33.33%);
+  background-size: 16px 100%;
+}
+
+.homecoming-map-tear--bottom {
+  bottom: -8px;
+  background:
+    linear-gradient(315deg, #f0e6d4 33.33%, transparent 33.33%),
+    linear-gradient(45deg, #f0e6d4 33.33%, transparent 33.33%);
+  background-size: 16px 100%;
+}
+
+/* Compass rose on map */
+.homecoming-map-compass {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  color: var(--secondary);
+  opacity: 0.4;
+}
+
+.homecoming-map-compass svg {
+  width: 100%;
+  height: 100%;
+}
+
+.homecoming-map-content {
+  position: relative;
+}
+
+.homecoming-location-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.homecoming-location-coords {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.homecoming-location-distances {
+  font-size: 0.85rem;
+  color: rgba(10, 22, 40, 0.7);
+  margin-bottom: 1rem;
+}
+
+.homecoming-location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.homecoming-location-link:hover {
+  color: var(--burgundy);
+}
+
+.homecoming-location-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .homecoming-map-card {
+    padding: 2.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+  .homecoming-location-name {
+    font-size: 1.375rem;
+  }
+  .homecoming-map-compass {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Period signpost info bar */
+.homecoming-signpost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: 0.7s;
+}
+
+.homecoming-signpost--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 640px) {
+  .homecoming-signpost {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+  }
+}
+
+.homecoming-signpost-plank {
+  background: linear-gradient(180deg, #5a4a3a 0%, #4a3a2a 50%, #3a2a1a 100%);
+  padding: 0.875rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.homecoming-signpost-plank--hours {
+  border-radius: 4px 4px 0 0;
+}
+
+.homecoming-signpost-plank--admission {
+  border-radius: 0 0 4px 4px;
+  border-top: none;
+}
+
+@media (min-width: 640px) {
+  .homecoming-signpost-plank--hours {
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+  }
+  .homecoming-signpost-plank--admission {
+    border-radius: 0 4px 4px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+  }
+}
+
+/* Wood grain texture */
+.homecoming-signpost-plank::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.homecoming-signpost-post {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .homecoming-signpost-post {
+    display: block;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, #4a3a2a, #3a2a1a);
+  }
+}
+
+.homecoming-signpost-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.homecoming-signpost-value {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Pulsing CTA with wax seal */
+.homecoming-cta-wrapper {
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: 0.85s;
+}
+
+.homecoming-cta-wrapper--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homecoming-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--accent);
+  padding: 1.125rem 2.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  animation: ctaPulse 3s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--gold-shimmer);
+  }
+  50% {
+    box-shadow: 0 0 0 10px var(--gold-shimmer);
+  }
+}
+
+.homecoming-cta:hover {
+  background: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
+  animation: none;
+}
+
+.homecoming-cta:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+  animation: none;
+}
+
+/* Wax seal on CTA */
+.homecoming-cta-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #9b3b3b 0%, var(--burgundy) 40%, #5a1f24 100%);
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 768px) {
+  .homecoming-cta {
+    padding: 1.25rem 3rem;
+    font-size: 0.85rem;
+  }
+  .homecoming-cta-seal {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Animated closing tagline */
+.homecoming-closing {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3.5vw, 1.625rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.homecoming-closing--visible {
+  opacity: 1;
+}
+
+.homecoming-closing-main {
+  display: inline;
+}
+
+.homecoming-closing-question {
+  display: inline-block;
+  font-family: var(--font-serif-elegant);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  margin-left: 0.25em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: questionReveal 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.homecoming-closing--visible .homecoming-closing-question {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes questionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

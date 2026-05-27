@@ -1,0 +1,13 @@
+.medallion {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  color: var(--accent);
+  background: var(--primary);
+}

@@ -1,0 +1,1008 @@
+/* ============================================
+   NAVIGATION - Sample A Hybrid
+   Rocky Mount State Historic Site
+   ============================================ */
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: all var(--nav-duration-open) var(--nav-ease-spring);
+}
+
+.header--transparent {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  background: var(--nav-bg-transparent);
+}
+
+.header--scrolled {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background: var(--nav-bg-scrolled);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    0 4px 20px -2px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   STRIPE (Tricolor)
+   ============================================ */
+
+.stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.stripe--visible {
+  opacity: 1;
+}
+
+.stripe--crimson {
+  flex: 1;
+  background: #990000;
+}
+.stripe--gold {
+  flex: 1;
+  background: #ccaa00;
+}
+.stripe--federal {
+  flex: 1;
+  background: #003366;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.logo {
+  position: relative;
+  z-index: 102;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-text {
+  font-family: var(--nav-font-serif);
+  font-size: var(--nav-size-logo);
+  letter-spacing: 0.05em;
+  color: var(--nav-text-light);
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.logo-tagline {
+  height: auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    height 0.3s ease;
+  overflow: hidden;
+}
+
+.logo-tagline--hidden {
+  height: 0;
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+.logo-tagline-text {
+  font-family: var(--nav-font-mobile);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--nav-text-light-hover);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ============================================
+   DESKTOP NAVIGATION (Radix)
+   ============================================ */
+
+.nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: block;
+  }
+}
+
+.nav-list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-family: var(--nav-font-desktop);
+  font-size: var(--nav-size-desktop);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--nav-text-light);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--gold-hover);
+  outline: none;
+}
+
+.nav-link--active {
+  color: var(--gold-primary);
+}
+
+/* Underline effect */
+.nav-link-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover .nav-link-underline,
+.nav-link--active .nav-link-underline {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Glow effect */
+.nav-link-glow {
+  position: absolute;
+  inset: -8px -12px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 215, 0, 0.15),
+    transparent 70%
+  );
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 8px;
+}
+
+.nav-link:hover .nav-link-glow {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Divider */
+.nav-divider {
+  display: none;
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .nav-divider {
+    display: block;
+  }
+}
+
+/* CTA Button */
+.cta {
+  display: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--gold-primary);
+  border: 1px solid var(--gold-light);
+  border-radius: 2px;
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .cta {
+    display: inline-flex;
+  }
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(204, 170, 0, 0.3);
+  background: var(--gold-hover);
+}
+
+.cta-text {
+  position: relative;
+  z-index: 1;
+  font-family: var(--nav-font-desktop);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1a1a1a; /* Dark text on gold */
+}
+
+/* ============================================
+   MOBILE TOGGLE
+   ============================================ */
+
+.mobile-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: var(--nav-text-light);
+  font-family: var(--nav-font-desktop);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .mobile-toggle {
+    display: none;
+  }
+}
+
+.mobile-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   MOBILE DRAWER (Radix Dialog)
+   ============================================ */
+
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 350px;
+  background: var(--nav-bg-mobile);
+  z-index: 201;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-link {
+  display: block;
+  font-family: var(--nav-font-mobile);
+  font-size: var(--nav-size-mobile);
+  color: var(--nav-text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-link:hover,
+.mobile-link:focus-visible {
+  color: var(--gold-primary);
+  outline: none;
+}
+
+.mobile-link--active {
+  color: var(--gold-primary);
+}
+
+/* Mobile separator */
+.mobile-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+  width: 100%;
+}
+
+/* Mobile CTA */
+.mobile-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--gold-primary);
+  color: #1a1a1a;
+  font-family: var(--nav-font-desktop);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+
+.mobile-tagline {
+  margin-top: auto;
+  text-align: center;
+  font-family: var(--nav-font-serif);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.875rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* ============================================
+   DROPDOWN NAVIGATION - Desktop
+   ============================================ */
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: var(--nav-bg-scrolled);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  transform-origin: top center;
+  z-index: 101;
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Wider dropdown for evidence/featured items */
+.nav-item:has(.dropdown-tile) .dropdown-menu {
+  min-width: 320px;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.625rem 1rem;
+  font-family: var(--nav-font-desktop);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus-visible {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding-left: 1.25rem; /* Slide effect */
+}
+
+.dropdown-item--active {
+  color: var(--gold-primary);
+  background: rgba(204, 170, 0, 0.1);
+}
+
+.dropdown-toggle {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-family: var(--nav-font-desktop);
+  font-size: var(--nav-size-desktop);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--nav-text-light);
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus-visible,
+.dropdown-toggle[data-state='open'] {
+  color: var(--gold-hover);
+}
+
+.dropdown-toggle--active {
+  color: var(--gold-primary);
+}
+
+.dropdown-chevron {
+  transition: transform 0.2s ease;
+}
+
+.dropdown-toggle[data-state='open'] .dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown toggle underline (animated) */
+.dropdown-toggle-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-hover), var(--gold-primary));
+  background-size: 200% 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px var(--gold-shimmer);
+}
+
+/* Current page indicator for dropdown - ALWAYS visible with shimmer animation */
+.dropdown-toggle--active .dropdown-toggle-underline {
+  transform: scaleX(1);
+  opacity: 1;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.dropdown-toggle:hover .dropdown-toggle-underline,
+.nav-item:hover .dropdown-toggle-underline {
+  transform: scaleX(1);
+}
+
+/* ============================================
+   DROPDOWN NAVIGATION - Mobile
+   ============================================ */
+
+.mobile-dropdown-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-dropdown-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  transition: transform var(--nav-duration-hover) var(--nav-ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.mobile-dropdown-icon--open {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0 0 0 1.5rem;
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+.mobile-dropdown-list--open {
+  max-height: 800px; /* Increased to accommodate larger menus */
+  opacity: 1;
+  margin-top: 0.5rem;
+}
+
+.mobile-dropdown-link {
+  display: block;
+  padding: 0.75rem 0;
+  font-family: var(--nav-font-mobile);
+  font-size: 1rem; /* Reduced slightly for nested items */
+  color: var(--nav-text-light);
+  text-decoration: none;
+  transition: color var(--nav-duration-hover) ease;
+  min-height: var(--nav-touch-min);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mobile-dropdown-link:hover {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-dropdown-link:focus-visible {
+  color: var(--gold, var(--nav-gold));
+  outline: 2px solid var(--gold, var(--nav-gold));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.mobile-dropdown-link--active {
+  color: var(--gold, var(--nav-gold));
+}
+
+/* Mobile dropdown current page indicator */
+.mobile-dropdown-link[aria-current='page'] {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-dropdown-link[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--gold, var(--nav-gold));
+  border-radius: 2px;
+}
+
+.mobile-dropdown-item {
+  display: block;
+  padding: 0.75rem 0;
+  font-family: var(--nav-font-mobile);
+  font-size: 1rem;
+  color: var(--nav-text-light);
+  text-decoration: none;
+  transition: color var(--nav-duration-hover) ease;
+  min-height: var(--nav-touch-min);
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.mobile-dropdown-item:hover {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-dropdown-item:focus-visible {
+  color: var(--gold, var(--nav-gold));
+  outline: 2px solid var(--gold, var(--nav-gold));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.mobile-dropdown-item--active {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: var(--nav-font-mobile);
+  font-size: var(--nav-size-mobile);
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  border: none;
+  background: var(--nav-bg-transparent);
+  cursor: pointer;
+  transition: color var(--nav-duration-hover) ease;
+  min-height: var(--nav-touch-min);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-dropdown-toggle:hover {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-dropdown-toggle:focus-visible {
+  color: var(--gold, var(--nav-gold));
+  outline: 2px solid var(--gold, var(--nav-gold));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.mobile-dropdown-toggle[aria-expanded='true'] {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-dropdown-chevron {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  transition: transform var(--nav-duration-hover) var(--nav-ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-dropdown-toggle[aria-expanded='true'] .mobile-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.mobile-dropdown-menu[aria-hidden='false'] {
+  display: flex;
+}
+
+/* ============================================
+   MOBILE FAB - Floating Action Button
+   ============================================ */
+
+.mobile-fab {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #4a3728;
+  border: none;
+  color: #f5f1e8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.3s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .mobile-fab {
+    display: flex;
+  }
+
+  /* Hide the old header hamburger on mobile */
+  .mobile-toggle {
+    display: none;
+  }
+}
+
+.mobile-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-fab:focus-visible {
+  outline: var(--nav-focus-ring);
+  outline-offset: var(--nav-focus-offset);
+}
+
+/* Hide FAB when menu is open */
+.mobile--open ~ .mobile-fab {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   MOBILE CLOSE BUTTON (Inside drawer)
+   ============================================ */
+
+.mobile-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--nav-text-light-hover);
+  background: var(--nav-bg-transparent);
+  border: none;
+  cursor: pointer;
+  transition: color var(--nav-duration-hover) ease;
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.mobile-close:hover {
+  color: var(--gold, var(--nav-gold));
+}
+
+.mobile-close:focus-visible {
+  outline: 2px solid var(--gold, var(--nav-gold));
+  outline-offset: 2px;
+}
+
+/* ============================================
+   REDUCED MOTION - Updated with Dropdown
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .stripe,
+  .logo-tagline,
+  .nav-link-underline,
+  .nav-link-glow,
+  .bottom-rule,
+  .mobile-drawer,
+  .mobile-backdrop,
+  .mobile-link,
+  .mobile-cta,
+  .mobile-fab,
+  .mobile-close,
+  .cta-icon,
+  .dropdown-menu,
+  .dropdown-chevron,
+  .dropdown-icon,
+  .dropdown-item,
+  .dropdown-toggle-underline,
+  .dropdown-toggle,
+  .mobile-dropdown-chevron,
+  .mobile-dropdown-icon,
+  .mobile-dropdown-toggle,
+  .mobile-dropdown-list {
+    transition: none;
+  }
+
+  /* Ensure dropdowns are still visible with reduced motion */
+  .dropdown-menu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-dropdown-menu[aria-hidden='false'] {
+    display: flex;
+    opacity: 1;
+  }
+
+  .mobile-dropdown-list--open {
+    max-height: 800px;
+  }
+}
+
+/* ============================================
+   FEATURED TILES - Desktop Dropdown
+   ============================================ */
+
+.dropdown-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0.75rem;
+  background: transparent;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all var(--nav-duration-hover) ease;
+  min-height: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-tile:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(2px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-tile--evidence {
+  background: transparent;
+}
+
+.dropdown-tile--evidence:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-tile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.dropdown-tile-label {
+  font-family: var(--nav-font-desktop);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.dropdown-tile-tagline {
+  font-family: var(--nav-font-mobile);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+}
+
+.dropdown-tile-arrow {
+  color: var(--gold, var(--nav-gold));
+  font-size: 1.125rem;
+  opacity: 0;
+  transform: translateX(-0.5rem);
+  transition: all var(--nav-duration-hover) ease;
+  flex-shrink: 0;
+}
+
+.dropdown-tile:hover .dropdown-tile-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dropdown-tile:focus-visible {
+  outline: 2px solid var(--gold, var(--nav-gold));
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE FEATURED CARDS
+   ============================================ */
+
+.mobile-featured-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 1.5rem;
+  margin: 0.5rem 0;
+  background: transparent;
+  border-radius: 6px;
+  text-decoration: none;
+  min-height: var(--nav-touch-min);
+  transition: transform 0.1s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-featured-card--evidence {
+  background: transparent;
+}
+
+.mobile-featured-card:active {
+  transform: scale(0.98);
+}
+
+.mobile-featured-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.mobile-featured-card-label {
+  font-family: var(--nav-font-desktop);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.mobile-featured-card-tagline {
+  font-family: var(--nav-font-mobile);
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mobile-featured-card-arrow {
+  margin-left: auto;
+  color: var(--gold, var(--nav-gold));
+  font-size: 1.375rem;
+  flex-shrink: 0;
+}

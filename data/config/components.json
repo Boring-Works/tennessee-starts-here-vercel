@@ -1,0 +1,337 @@
+{
+  "_meta": {
+    "description": "Master registry of data-driven marketing components - documents data sources, props, locations, and integration patterns",
+    "updated": "2026-01-30",
+    "version": "1.0.0",
+    "maintainer": "Rocky Mount Web Team",
+    "usage": "Reference for understanding component architecture and data flow"
+  },
+  "_aiRules": {
+    "description": "Rules for AI assistants editing this file",
+    "beforeEditing": [
+      "ALWAYS update _meta.updated when making changes",
+      "ALWAYS verify changes with user before committing",
+      "ALWAYS verify that documented components match actual implementations"
+    ],
+    "autoUpdates": {
+      "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+    },
+    "prohibited": [
+      "Do NOT remove _meta or _aiRules sections",
+      "Do NOT make changes without user awareness",
+      "Do NOT document components that don't exist in the codebase",
+      "Do NOT remove component entries without verifying the component was deleted"
+    ],
+    "fileSpecific": [
+      "This is DOCUMENTATION ONLY - editing this file does NOT affect runtime behavior",
+      "Keep this file in sync with actual component implementations in /components/",
+      "When adding new components to codebase, add corresponding entry here",
+      "When modifying component props, update the props documentation here",
+      "When changing data sources, update the dataSources entries here",
+      "Verify file paths in 'path' fields match actual component locations"
+    ],
+    "syncRequirements": {
+      "componentPath": "Must match actual file in /components/",
+      "dataSources": "Must reflect actual imports in the component",
+      "props": "Must match TypeScript interface in the component",
+      "locations": "Should list all pages where component is used"
+    },
+    "whenUnsure": "Ask the user for clarification - check actual component files to verify documentation accuracy"
+  },
+  "dataFlow": {
+    "description": "All marketing components pull from centralized JSON data sources",
+    "pattern": "JSON Data → Component → Page Layout",
+    "benefits": [
+      "Single source of truth for content",
+      "Non-developer content updates via JSON",
+      "Consistent data across all pages",
+      "Easy A/B testing by swapping data"
+    ]
+  },
+  "components": {
+    "SiteStatusBanner": {
+      "path": "components/SiteStatusBanner.tsx",
+      "type": "client",
+      "description": "Live site operating status with automatic updates every 60 seconds",
+      "dataSources": [
+        {
+          "source": "lib/siteHours.ts",
+          "function": "getSiteStatus()",
+          "provides": ["isOpen", "message", "reason", "nextOpen", "specialHours"]
+        },
+        {
+          "source": "data/config/operatingSchedule.json",
+          "provides": ["hours", "closures", "seasonalWindow"]
+        }
+      ],
+      "props": {
+        "className": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional CSS classes for positioning"
+        }
+      },
+      "states": [
+        {
+          "name": "Open",
+          "indicator": "green",
+          "example": "Open until 5:00 PM"
+        },
+        {
+          "name": "Closed",
+          "indicator": "slate",
+          "example": "Closed. Open Wed at 10:00 AM"
+        },
+        {
+          "name": "Preparing (Evening Event)",
+          "indicator": "amber",
+          "example": "As we prepare for tonight's Haunting on the Mount..."
+        },
+        {
+          "name": "Special Event Active",
+          "indicator": "gold",
+          "example": "Candlelight Christmas · Open 6-9 PM"
+        }
+      ],
+      "locations": [
+        {
+          "file": "app/(main)/layout.tsx",
+          "position": "Below Navigation, sticky",
+          "scope": "All main site pages"
+        }
+      ],
+      "updateInterval": 60000,
+      "ssrSafe": true
+    },
+    "TestimonialCarousel": {
+      "path": "components/TestimonialCarousel.tsx",
+      "type": "client",
+      "description": "Auto-rotating carousel of verified visitor testimonials with source badges",
+      "dataSources": [
+        {
+          "source": "data/testimonials.json",
+          "key": "featured",
+          "provides": ["id", "quote", "attribution", "source", "sourceUrl", "rating", "tags"]
+        }
+      ],
+      "props": {
+        "testimonials": {
+          "type": "Testimonial[]",
+          "optional": true,
+          "description": "Override default testimonials from data file"
+        },
+        "interval": {
+          "type": "number",
+          "optional": true,
+          "default": 5000,
+          "description": "Auto-rotate interval in milliseconds"
+        },
+        "showSource": {
+          "type": "boolean",
+          "optional": true,
+          "default": true,
+          "description": "Show source badges (TripAdvisor, Google, etc.)"
+        }
+      },
+      "features": [
+        "Auto-rotates with configurable interval",
+        "Pauses on hover for accessibility",
+        "Navigation dots and prev/next buttons",
+        "5-star rating display",
+        "Source badges with brand colors",
+        "Smooth fade transitions",
+        "ARIA labels for screen readers"
+      ],
+      "locations": [
+        {
+          "file": "app/(main)/home/page.tsx",
+          "section": "Visitors Say It Best",
+          "interval": 6000
+        },
+        {
+          "file": "app/(main)/visit/page.tsx",
+          "section": "What Visitors Say",
+          "interval": 7000
+        }
+      ]
+    },
+    "QuickBookingCard": {
+      "path": "components/QuickBookingCard.tsx",
+      "type": "server",
+      "description": "Displays next upcoming ticketed event with booking CTA - pure Server Component",
+      "dataSources": [
+        {
+          "source": "data/events.json",
+          "key": "events",
+          "filter": "requiresTicket === true && date >= today",
+          "sort": "date ascending",
+          "limit": 1
+        },
+        {
+          "source": "lib/data/index.ts",
+          "function": "getTicketUrl(event)",
+          "provides": "FareHarbor booking URL or custom ticketUrl"
+        }
+      ],
+      "props": {
+        "className": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional CSS classes"
+        }
+      },
+      "displays": [
+        "Event title",
+        "Formatted date",
+        "Days until event",
+        "Price (from pricing object)",
+        "This Weekend badge (if within 2 days)",
+        "Book Now CTA button"
+      ],
+      "fallback": "Check back for upcoming ticketed events message",
+      "locations": [
+        {
+          "file": "app/(main)/home/page.tsx",
+          "section": "Events Calendar",
+          "gridSpan": "2 columns"
+        }
+      ]
+    },
+    "ReviewCTA": {
+      "path": "components/ReviewCTA.tsx",
+      "type": "server",
+      "description": "Encourages visitors to leave reviews on popular platforms",
+      "dataSources": [
+        {
+          "source": "data/integrations.json",
+          "key": "integrations.reviews.platforms",
+          "provides": {
+            "google": "reviewUrl",
+            "tripadvisor": "url",
+            "facebook": "reviewUrl"
+          }
+        }
+      ],
+      "props": {
+        "variant": {
+          "type": "'standalone' | 'footer'",
+          "optional": true,
+          "default": "standalone",
+          "description": "Visual variant for different contexts"
+        },
+        "className": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional CSS classes"
+        },
+        "headline": {
+          "type": "string",
+          "optional": true,
+          "default": "Share Your Experience",
+          "description": "Custom headline text"
+        },
+        "subtext": {
+          "type": "string",
+          "optional": true,
+          "default": "Enjoyed your visit? Help future visitors...",
+          "description": "Custom supporting message"
+        }
+      },
+      "platforms": [
+        {
+          "name": "Google Reviews",
+          "hoverColor": "#4285F4",
+          "configured": true
+        },
+        {
+          "name": "TripAdvisor",
+          "hoverColor": "#00A699",
+          "configured": true
+        },
+        {
+          "name": "Facebook",
+          "hoverColor": "#1877F2",
+          "configured": true
+        }
+      ],
+      "locations": [
+        {
+          "file": "components/Footer.tsx",
+          "variant": "footer",
+          "headline": "Enjoyed Your Visit?",
+          "subtext": "Help future visitors discover Rocky Mount by sharing your experience."
+        }
+      ]
+    }
+  },
+  "dataSources": {
+    "events.json": {
+      "path": "data/events.json",
+      "description": "2026 events calendar - single source of truth",
+      "usedBy": ["QuickBookingCard", "Events page", "Homepage counters"],
+      "updateFrequency": "As events are added/modified",
+      "validation": "npm run validate:data"
+    },
+    "testimonials.json": {
+      "path": "data/testimonials.json",
+      "description": "Verified visitor testimonials with ratings and sources",
+      "usedBy": ["TestimonialCarousel"],
+      "updateFrequency": "Monthly or as new reviews come in",
+      "structure": {
+        "featured": "Array of testimonials shown in carousels",
+        "all": "Complete archive of testimonials"
+      }
+    },
+    "integrations.json": {
+      "path": "data/integrations.json",
+      "description": "External service configurations and URLs",
+      "usedBy": ["ReviewCTA", "Footer social links", "Booking components"],
+      "updateFrequency": "Rarely - only when service URLs change"
+    },
+    "operatingSchedule.json": {
+      "path": "data/config/operatingSchedule.json",
+      "description": "Year-agnostic operating hours, closures, and pricing",
+      "usedBy": ["SiteStatusBanner (via lib/siteHours.ts)", "Visit page", "Footer"],
+      "updateFrequency": "Annually - update dates in January"
+    },
+    "siteInfo.json": {
+      "path": "data/siteInfo.json",
+      "description": "Core site information - address, hours, admission, contact",
+      "usedBy": ["Footer", "Visit page", "Homepage", "Contact sections"],
+      "updateFrequency": "As operational details change"
+    }
+  },
+  "cssTokens": {
+    "description": "Components use CSS custom properties from globals.css",
+    "colors": {
+      "--gold-primary": "#c9a227 - Main brand gold",
+      "--gold-hover": "#d4af37 - Interactive states",
+      "--gold-shimmer": "rgba(201,162,39,0.4) - Glows, borders",
+      "--primary": "#0d1821 - Dark navy text/backgrounds",
+      "--text-light": "Muted text color"
+    },
+    "shadows": {
+      "--shadow-sm": "Subtle elevation",
+      "--shadow-md": "Medium cards",
+      "--shadow-gold-sm": "Gold accent glow",
+      "--shadow-gold-lg": "Prominent gold glow"
+    }
+  },
+  "futureComponents": {
+    "EventCountdown": {
+      "status": "planned",
+      "description": "Countdown timer for major events",
+      "dataSource": "events.json"
+    },
+    "WeatherWidget": {
+      "status": "available",
+      "path": "components/welcome/WeatherHeader.tsx",
+      "description": "Current conditions - could be extracted for reuse"
+    },
+    "NewsletterSignup": {
+      "status": "placeholder",
+      "description": "Email signup form - waiting for provider configuration",
+      "configLocation": "data/integrations.json → newsletter"
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "_meta": {
+    "description": "Group visit information, rates, and booking details - staff can update pricing and policies",
+    "updated": "2026-01-30",
+    "usage": "import groups from '@/data/groups.json'",
+    "usedOn": ["Groups page", "Visit page", "Booking information"],
+    "staffInstructions": "This file controls group visit information. Update prices annually. Update policies as needed.",
+    "fieldGuide": {
+      "rates.price": "Price per person in whole DOLLARS",
+      "rates.minSize": "Minimum group size for this rate",
+      "types.name": "Name of the group type",
+      "types.description": "Brief description of typical groups",
+      "policies": "Array of policy statements shown to visitors"
+    },
+    "rules": [
+      "Group prices are in DOLLARS (not cents)",
+      "Keep rates in order from smallest to largest group size",
+      "All rates should have clear eligibility criteria"
+    ],
+    "templates": {
+      "newRate": {
+        "id": "rate-name",
+        "label": "Groups of X+",
+        "price": 10,
+        "minSize": 10,
+        "maxSize": null,
+        "eligibility": "All groups",
+        "notes": null
+      }
+    },
+    "whenToUpdate": {
+      "annually": ["rates.price", "season dates in policies"],
+      "asNeeded": ["policies", "booking lead times", "what's included"],
+      "rarely": ["group types", "rate structure"]
+    },
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS verify changes with user before committing"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+      },
+      "prohibited": [
+        "Do NOT remove _meta or _aiRules sections",
+        "Do NOT make changes without user awareness",
+        "Do NOT change group rates without approval"
+      ],
+      "fileSpecific": ["Prices are in DOLLARS (not cents)"],
+      "whenUnsure": "Ask the user for clarification"
+    }
+  },
+  "rates": [
+    {
+      "id": "standard-group",
+      "label": "Groups of 10+",
+      "price": 10,
+      "minSize": 10,
+      "maxSize": 24,
+      "eligibility": "All groups",
+      "notes": null
+    },
+    {
+      "id": "large-group",
+      "label": "Groups of 25+",
+      "price": 8,
+      "minSize": 25,
+      "maxSize": null,
+      "eligibility": "All groups",
+      "notes": "Contact us for groups over 50"
+    },
+    {
+      "id": "student-group",
+      "label": "Student Groups",
+      "price": 6,
+      "minSize": 10,
+      "maxSize": null,
+      "eligibility": "K-12 schools, homeschool groups",
+      "notes": "One free adult chaperone per 10 students"
+    },
+    {
+      "id": "driver-escort",
+      "label": "Driver/Escort",
+      "price": 0,
+      "minSize": null,
+      "maxSize": null,
+      "eligibility": "Motor coach driver and tour escort",
+      "notes": "Complimentary admission"
+    }
+  ],
+  "types": [
+    {
+      "id": "motor-coach",
+      "name": "Motor Coach Tours",
+      "icon": "Bus",
+      "description": "Professional tour groups traveling through East Tennessee. We accommodate bus parking and can customize tour length."
+    },
+    {
+      "id": "family-reunion",
+      "name": "Family Reunions",
+      "icon": "Users",
+      "description": "Multi-generational gatherings discovering shared heritage. Private tours available for larger groups."
+    },
+    {
+      "id": "scout-troops",
+      "name": "Scout Troops",
+      "icon": "Compass",
+      "description": "Boy Scouts, Girl Scouts, and other youth organizations. Badge-related activities available."
+    },
+    {
+      "id": "church-groups",
+      "name": "Church Groups",
+      "icon": "Church",
+      "description": "Sunday school classes, youth groups, and adult fellowship trips exploring faith and history."
+    },
+    {
+      "id": "senior-organizations",
+      "name": "Senior Organizations",
+      "icon": "Heart",
+      "description": "Retirement communities, senior centers, and AARP chapters. Accessible tour options available."
+    },
+    {
+      "id": "historical-societies",
+      "name": "Historical Societies",
+      "icon": "Book",
+      "description": "DAR, SAR, genealogy groups, and local historical societies. Extended research visits possible."
+    }
+  ],
+  "whatToKnow": [
+    {
+      "id": "booking",
+      "title": "Advance Booking",
+      "text": "Groups should book 2-4 weeks in advance. Larger groups (25+) should contact us at least one month ahead.",
+      "icon": "Calendar"
+    },
+    {
+      "id": "dress",
+      "title": "Dress Code",
+      "text": "Comfortable walking shoes recommended. The site includes outdoor walking on uneven terrain.",
+      "icon": "Shirt"
+    },
+    {
+      "id": "accessibility",
+      "title": "Accessibility",
+      "text": "The museum gallery is fully ADA accessible. Historic buildings have some stairs. Contact us to discuss specific needs.",
+      "icon": "Accessibility"
+    },
+    {
+      "id": "parking",
+      "title": "Parking",
+      "text": "Free parking including motor coach parking. Pull-through spaces available for buses.",
+      "icon": "ParkingCircle"
+    },
+    {
+      "id": "food",
+      "title": "Food & Picnic",
+      "text": "Picnic area available for groups bringing lunch. No food service on site. Restaurants nearby in Piney Flats.",
+      "icon": "UtensilsCrossed"
+    },
+    {
+      "id": "weather",
+      "title": "Weather Policy",
+      "text": "Tours run rain or shine. In severe weather, we offer modified indoor experiences or rescheduling.",
+      "icon": "CloudRain"
+    }
+  ],
+  "includes": [
+    "Guided living history tour (approximately 1 hour)",
+    "Interaction with costumed interpreters",
+    "Access to all historic buildings",
+    "Craft demonstrations (varies by day)",
+    "Museum gallery admission",
+    "Gift shop visit"
+  ],
+  "addOns": [
+    {
+      "id": "extended-tour",
+      "name": "Extended Tour",
+      "price": 200,
+      "description": "Add 30 minutes for deeper exploration",
+      "perPerson": false
+    },
+    {
+      "id": "craft-activity",
+      "name": "Hands-On Craft",
+      "price": 3,
+      "description": "Period-appropriate craft activity",
+      "perPerson": true
+    },
+    {
+      "id": "private-tour",
+      "name": "Private Tour",
+      "price": 150,
+      "description": "Exclusive tour for your group only",
+      "perPerson": false
+    }
+  ],
+  "booking": {
+    "phone": "(423) 538-7396",
+    "email": "groups@rockymountmuseum.com",
+    "formUrl": null,
+    "leadTime": "2-4 weeks recommended",
+    "depositRequired": false,
+    "cancellationPolicy": "48 hours notice for full refund"
+  },
+  "testimonials": {
+    "_note": "These are placeholders - actual testimonials should be in testimonials.json with usedOn: ['groups']",
+    "featured": ["groups-texas-family", "groups-harvest-festival"]
+  }
+}

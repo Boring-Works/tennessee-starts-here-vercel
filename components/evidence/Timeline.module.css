@@ -1,0 +1,737 @@
+/* ============================================
+   TIMELINE COMPONENT
+   Interactive chronological timeline for the
+   Evidence Transparency Engine (1790-1796)
+   ============================================ */
+
+.timelinePage {
+  /* === Color Palette (from Evidence Room) === */
+  --wood-dark: #2a1f1a;
+  --wood-medium: #3d2e24;
+  --wood-light: #4a3728;
+  --cream-dark: #f5f0e6;
+  --cream-medium: #faf7f0;
+  --cream-light: #fffef8;
+  --brass: var(--gold-primary);
+  --brass-dark: var(--gold-hover);
+  --brass-glow: var(--gold-shimmer);
+  --ink: #1a1a1a;
+  --ink-faded: #2d2926;
+  --ink-light: #4a443e;
+  --leather: #8b4513;
+  --leather-dark: #654321;
+  --transition-dignified: 0.35s ease;
+
+  /* Paper texture */
+  --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+
+  min-height: 100vh;
+  background: var(--cream-medium);
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.header {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    ),
+    linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-medium) 60%, var(--wood-light) 100%);
+  padding: 140px 1rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    180deg,
+    var(--wood-light) 0%,
+    var(--leather-dark) 50%,
+    var(--brass-dark) 100%
+  );
+  box-shadow:
+    var(--shadow-xs),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.headerContent {
+  max-width: 48rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  font-family: var(--font-serif);
+  font-size: 0.625rem;
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(180deg, var(--gold-shimmer) 0%, rgba(184, 134, 11, 0.08) 100%);
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    var(--shadow-xs);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 6vw, 2.75rem);
+  color: var(--cream-light);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+  color: var(--cream-dark);
+  opacity: 0.9;
+  line-height: 1.85;
+  max-width: 34rem;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+.dateRange {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gold-shimmer);
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--brass);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* ============================================
+   BACK NAVIGATION
+   ============================================ */
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--brass);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: all var(--transition-dignified);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.backLink:hover {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
+/* ============================================
+   YEAR SELECTOR
+   ============================================ */
+
+.yearSelector {
+  background: var(--paper-texture), var(--cream-light);
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(42, 31, 26, 0.08);
+  position: sticky;
+  top: 70px;
+  z-index: 50;
+  box-shadow: var(--shadow-xs);
+}
+
+.yearSelectorInner {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.yearButton {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--ink-light);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+  letter-spacing: 0.05em;
+}
+
+.yearButton:hover {
+  color: var(--wood-dark);
+  border-color: var(--gold-shimmer);
+  background: var(--gold-shimmer);
+}
+
+.yearButtonActive {
+  color: var(--brass-dark);
+  border-color: var(--brass);
+  background: var(--gold-shimmer);
+  font-weight: 500;
+}
+
+/* Month Selector - zoom into year */
+.monthSelector {
+  max-width: 48rem;
+  margin: 0.75rem auto 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--gold-shimmer);
+}
+
+.monthButton {
+  padding: 0.375rem 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--ink-light);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+  letter-spacing: 0.03em;
+}
+
+.monthButton:hover {
+  color: var(--wood-dark);
+  border-color: var(--gold-shimmer);
+  background: var(--gold-shimmer);
+}
+
+.monthButtonActive {
+  color: var(--brass-dark);
+  border-color: var(--brass);
+  background: var(--gold-shimmer);
+  font-weight: 500;
+}
+
+/* ============================================
+   TIMELINE CONTAINER
+   ============================================ */
+
+.timelineContainer {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  position: relative;
+  min-height: 600px;
+}
+
+/* ============================================
+   YEAR GROUP
+   ============================================ */
+
+.yearGroup {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.yearLabel {
+  position: sticky;
+  top: 140px;
+  z-index: 40;
+  background: var(--cream-medium);
+  padding: 0.5rem 0 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.yearLabelInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--wood-dark);
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.yearLabelLine {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brass), transparent);
+  min-width: 3rem;
+}
+
+/* ============================================
+   TIMELINE TRACK
+   ============================================ */
+
+.track {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.track::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--brass) 0%, var(--leather) 50%, var(--brass) 100%);
+  border-radius: 1px;
+}
+
+/* ============================================
+   EVENT CARD
+   ============================================ */
+
+.event {
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+
+.event:last-child {
+  margin-bottom: 0;
+}
+
+.eventDot {
+  position: absolute;
+  left: -2.5rem;
+  top: 0.375rem;
+  width: 12px;
+  height: 12px;
+  background: var(--cream-light);
+  border: 3px solid var(--brass);
+  border-radius: 50%;
+  transition: all var(--transition-dignified);
+  z-index: 1;
+}
+
+.event:hover .eventDot {
+  background: var(--brass);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px var(--brass-glow);
+}
+
+/* Type-specific dot colors */
+.eventTypeTreaty .eventDot {
+  border-color: var(--leather);
+  background: rgba(139, 69, 19, 0.2);
+}
+
+.eventTypeTreaty:hover .eventDot {
+  background: var(--leather);
+}
+
+.eventTypeProclamation .eventDot {
+  border-color: #8b0000;
+  background: rgba(139, 0, 0, 0.2);
+}
+
+.eventTypeProclamation:hover .eventDot {
+  background: #8b0000;
+}
+
+.eventTypeNewspaper .eventDot {
+  border-color: #4a5568;
+  background: rgba(74, 85, 104, 0.2);
+}
+
+.eventTypeNewspaper:hover .eventDot {
+  background: #4a5568;
+}
+
+.eventContent {
+  background: var(--paper-texture), var(--cream-light);
+  padding: 1.25rem 1.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(42, 31, 26, 0.08);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-dignified);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.eventContent {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.eventContent:hover {
+  border-color: var(--brass);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
+}
+
+.eventDate {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--brass-dark);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.eventTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--wood-dark);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.eventDescription {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.875rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.eventMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(42, 31, 26, 0.06);
+}
+
+.eventType {
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.625rem;
+  border-radius: 10px;
+  background: var(--gold-shimmer);
+  color: var(--brass-dark);
+}
+
+.eventTypeLabel {
+  font-weight: 500;
+}
+
+.eventLink {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--leather);
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: color var(--transition-dignified);
+}
+
+.eventContent:hover .eventLink {
+  color: var(--brass-dark);
+}
+
+.eventLinkArrow {
+  transition: transform var(--transition-dignified);
+}
+
+.eventContent:hover .eventLinkArrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   FEATURED EVENT
+   ============================================ */
+
+.eventFeatured .eventContent {
+  background: var(--paper-texture), linear-gradient(135deg, #fffef8 0%, var(--cream-light) 100%);
+  border-left: 3px solid var(--brass);
+  box-shadow: var(--shadow-sm);
+}
+
+.eventFeatured .eventDot {
+  width: 16px;
+  height: 16px;
+  left: calc(-2.5rem - 2px);
+  border-width: 4px;
+  box-shadow: 0 0 0 4px var(--brass-glow);
+}
+
+.eventFeatured:hover .eventDot {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 0 6px var(--brass-glow),
+    0 0 12px var(--gold-shimmer);
+}
+
+.eventFeatured .eventTitle {
+  font-size: 1.0625rem;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--paper-texture), var(--cream-light);
+  border: 1px solid rgba(42, 31, 26, 0.08);
+  border-radius: 2px;
+}
+
+.emptyStateText {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9375rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.clearFiltersBtn {
+  padding: 0.625rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--cream-light);
+  background: var(--brass);
+  border: 1px solid var(--brass);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.clearFiltersBtn:hover {
+  background: var(--brass-dark);
+  border-color: var(--brass-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold-sm);
+}
+
+/* ============================================
+   LEGEND
+   ============================================ */
+
+.legend {
+  background: var(--paper-texture), var(--cream-light);
+  padding: 1.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(42, 31, 26, 0.08);
+  margin-top: 2rem;
+}
+
+.legendTitle {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.legendItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.legendDotLetter {
+  border-color: var(--brass);
+  background: var(--gold-shimmer);
+}
+
+.legendDotTreaty {
+  border-color: var(--leather);
+  background: rgba(139, 69, 19, 0.2);
+}
+
+.legendDotProclamation {
+  border-color: #8b0000;
+  background: rgba(139, 0, 0, 0.2);
+}
+
+.legendDotNewspaper {
+  border-color: #4a5568;
+  background: rgba(74, 85, 104, 0.2);
+}
+
+.legendDotEvent {
+  border-color: var(--ink-light);
+  background: rgba(74, 68, 62, 0.2);
+}
+
+.legendLabel {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--ink-light);
+}
+
+/* ============================================
+   RESPONSIVE STYLES
+   ============================================ */
+
+@media (min-width: 640px) {
+  .header {
+    padding: 160px 1.5rem 4.5rem;
+  }
+
+  .yearSelector {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .yearButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .timelineContainer {
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .track {
+    padding-left: 3rem;
+  }
+
+  .track::before {
+    left: 10px;
+  }
+
+  .eventDot {
+    left: -3rem;
+    width: 14px;
+    height: 14px;
+  }
+
+  .eventFeatured .eventDot {
+    left: calc(-3rem - 2px);
+    width: 18px;
+    height: 18px;
+  }
+
+  .eventContent {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .eventTitle {
+    font-size: 1.0625rem;
+  }
+
+  .eventFeatured .eventTitle {
+    font-size: 1.125rem;
+  }
+
+  .legend {
+    padding: 1.75rem 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 180px 2rem 5rem;
+  }
+
+  .yearLabelInner {
+    font-size: 1.75rem;
+  }
+
+  .track {
+    padding-left: 4rem;
+  }
+
+  .track::before {
+    left: 12px;
+    width: 3px;
+  }
+
+  .eventDot {
+    left: -4rem;
+    width: 16px;
+    height: 16px;
+    border-width: 3px;
+  }
+
+  .eventFeatured .eventDot {
+    left: calc(-4rem - 2px);
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 200px 2rem 5.5rem;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .yearLabelInner {
+    font-size: 2rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .backLink,
+  .yearButton,
+  .eventContent,
+  .eventDot,
+  .eventLinkArrow {
+    transition: none;
+  }
+
+  .backLink:hover,
+  .eventContent:hover,
+  .event:hover .eventDot,
+  .eventContent:hover .eventLinkArrow {
+    transform: none;
+  }
+}

@@ -1,0 +1,318 @@
+/* ===========================================
+   WEATHER ATMOSPHERE EFFECTS
+   The 1775 Almanac - Digital artifact aesthetic
+   Pure CSS animations, GPU accelerated
+   =========================================== */
+
+/* ===========================================
+   SKY GRADIENT LAYER
+   =========================================== */
+
+.sky-gradient-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.sky-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--sky-top, #0A1628),
+    var(--sky-bottom, #1a2a4a)
+  );
+  transition: background 3s ease;
+  pointer-events: none;
+}
+
+/* ===========================================
+   PARTICLE CONTAINER
+   =========================================== */
+
+.weather-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ===========================================
+   DUST MOTES (Clear weather)
+   Sunlight through a barn window
+   =========================================== */
+
+.dust-particle {
+  position: absolute;
+  width: var(--dust-size, 3px);
+  height: var(--dust-size, 3px);
+  background: radial-gradient(
+    circle,
+    rgba(245, 241, 232, var(--dust-opacity, 0.08)) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: dust-float var(--dust-duration, 20s) ease-in-out infinite;
+  animation-delay: var(--dust-delay, 0s);
+}
+
+@keyframes dust-float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(8px, -10px);
+  }
+  40% {
+    transform: translate(-3px, 5px);
+  }
+  60% {
+    transform: translate(12px, -5px);
+  }
+  80% {
+    transform: translate(-6px, 8px);
+  }
+}
+
+/* ===========================================
+   FOG WISPS
+   Horizontal drifting shapes
+   =========================================== */
+
+.fog-wisp {
+  position: absolute;
+  width: var(--fog-width, 300px);
+  height: 60px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(245, 241, 232, var(--fog-opacity, 0.05)) 0%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  animation: fog-drift var(--fog-duration, 25s) linear infinite;
+  animation-delay: var(--fog-delay, 0s);
+}
+
+@keyframes fog-drift {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+/* ===========================================
+   CLOUD SHADOWS (Overcast)
+   Very slow, very subtle dark shapes
+   =========================================== */
+
+.cloud-shadow {
+  position: absolute;
+  width: var(--cloud-width, 400px);
+  height: 150px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(245, 241, 232, var(--cloud-opacity, 0.50)) 0%,
+    rgba(245, 241, 232, calc(var(--cloud-opacity, 0.50) * 0.5)) 40%,
+    transparent 80%
+  );
+  filter: blur(20px);
+  animation: cloud-drift var(--cloud-duration, 50s) linear infinite;
+  animation-delay: var(--cloud-delay, 0s);
+}
+
+@keyframes cloud-drift {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+/* ===========================================
+   RAIN DROPS
+   Angled descent, thin lines
+   =========================================== */
+
+.rain-drop {
+  position: absolute;
+  width: 1px;
+  height: var(--rain-height, 15px);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(180, 190, 200, var(--rain-opacity, 0.12)) 30%,
+    rgba(180, 190, 200, var(--rain-opacity, 0.12)) 70%,
+    transparent
+  );
+  animation: rain-fall var(--rain-duration, 1.5s) linear infinite;
+  animation-delay: var(--rain-delay, 0s);
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(10deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(30px) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+/* Heavy rain variation */
+.rain-drop--heavy {
+  height: var(--rain-height, 25px);
+}
+
+@keyframes rain-fall-heavy {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(15deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(40px) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+/* ===========================================
+   SNOW FLAKES
+   Gentle wobbling descent
+   =========================================== */
+
+.snow-flake {
+  position: absolute;
+  width: var(--snow-size, 4px);
+  height: var(--snow-size, 4px);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, var(--snow-opacity, 0.2)) 0%,
+    rgba(255, 255, 255, calc(var(--snow-opacity, 0.2) * 0.5)) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: snow-fall var(--snow-duration, 5s) ease-in-out infinite;
+  animation-delay: var(--snow-delay, 0s);
+}
+
+@keyframes snow-fall {
+  0% {
+    transform: translateY(-20px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(20vh) translateX(8px);
+  }
+  40% {
+    transform: translateY(40vh) translateX(-4px);
+  }
+  60% {
+    transform: translateY(60vh) translateX(10px);
+  }
+  80% {
+    transform: translateY(80vh) translateX(-6px);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(3px);
+    opacity: 0;
+  }
+}
+
+/* ===========================================
+   LIGHTNING FLASH (Storm)
+   Distant, subtle flicker
+   =========================================== */
+
+.lightning-flash {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  opacity: 0;
+  animation: lightning-flash var(--flash-duration, 12s) ease-in-out infinite;
+  animation-delay: var(--flash-delay, 0s);
+}
+
+@keyframes lightning-flash {
+  0%, 94%, 96%, 98%, 100% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0.6;
+  }
+  97% {
+    opacity: 0.3;
+  }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   Respect user preferences
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-atmosphere {
+    display: none;
+  }
+
+  .sky-gradient {
+    transition: none;
+  }
+
+  .dust-particle,
+  .fog-wisp,
+  .cloud-shadow,
+  .rain-drop,
+  .snow-flake,
+  .lightning-flash {
+    animation: none;
+  }
+}
+
+/* ===========================================
+   CONTENT LAYER
+   Sits above atmosphere
+   =========================================== */
+
+.almanac-content {
+  position: relative;
+  z-index: 10;
+}

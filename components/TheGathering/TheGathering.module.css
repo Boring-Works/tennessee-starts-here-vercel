@@ -1,0 +1,406 @@
+.gathering-section {
+  padding: 4rem 0;
+  background: var(--primary);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .gathering-section {
+    padding: 5rem 0;
+  }
+}
+
+.gathering-container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .gathering-container {
+    padding: 0 2rem;
+  }
+}
+
+/* Opening statement */
+.gathering-statement {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 36rem;
+  margin: 0 auto 2.5rem;
+}
+
+.gathering-statement time {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .gathering-statement {
+    margin-bottom: 3rem;
+  }
+}
+
+/* The signature event card */
+.gathering-event {
+  background: linear-gradient(
+    135deg,
+    var(--gold-shimmer) 0%,
+    transparent 30%,
+    transparent 70%,
+    var(--gold-shimmer) 100%
+  );
+  border: 1px solid var(--gold-shimmer);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .gathering-event {
+    padding: 3rem 2.5rem;
+    margin-bottom: 4rem;
+  }
+}
+
+/* Monumental date display */
+.gathering-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.gathering-date-month {
+  font-family: var(--font-serif-elegant);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gathering-date-day {
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 20vw, 10rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--accent);
+  text-shadow: 0 4px 30px var(--gold-shimmer);
+}
+
+.gathering-date-year {
+  font-family: var(--font-serif-elegant);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.2em;
+}
+
+@media (min-width: 768px) {
+  .gathering-date {
+    margin-bottom: 2rem;
+  }
+  .gathering-date-month,
+  .gathering-date-year {
+    font-size: 1.5rem;
+  }
+}
+
+/* Event details */
+.gathering-details {
+  margin-bottom: 2rem;
+}
+
+.gathering-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--gold-shimmer);
+  padding: 0.375rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.gathering-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.gathering-time {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (min-width: 768px) {
+  .gathering-badge {
+    font-size: 0.7rem;
+    padding: 0.5rem 1.25rem;
+  }
+  .gathering-time {
+    font-size: 1rem;
+  }
+}
+
+/* The ceremony hook */
+.gathering-hook {
+  max-width: 28rem;
+  margin: 0 auto 2rem;
+}
+
+.gathering-hook-text {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.25rem;
+}
+
+.gathering-hook-text strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .gathering-hook {
+    margin-bottom: 2.5rem;
+  }
+  .gathering-hook-text {
+    font-size: 1.125rem;
+  }
+}
+
+/* Enrollment progress bar */
+.gathering-progress {
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.gathering-progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.gathering-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, #e8d078 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.gathering-progress-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gathering-progress-label strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Dual CTAs */
+.gathering-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 480px) {
+  .gathering-cta-group {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+}
+
+.gathering-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gathering-cta-primary {
+  color: var(--primary);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.gathering-cta-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+}
+
+.gathering-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
+}
+
+.gathering-cta-primary:hover::before {
+  animation: buttonShimmer 0.6s ease-out;
+}
+
+.gathering-cta-secondary {
+  color: rgba(255, 255, 255, 0.9);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.gathering-cta-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.gathering-cta:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .gathering-cta {
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Supporting events - More 2026 Events */
+.gathering-more {
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gathering-more-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.gathering-more-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .gathering-more-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.gathering-event-card {
+  display: block;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.gathering-event-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--gold-shimmer);
+}
+
+.gathering-event-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.gathering-event-date {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.gathering-event-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.gathering-event-desc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Footer */
+.gathering-footer {
+  text-align: center;
+}
+
+.gathering-footer-count {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.75rem;
+}
+
+.gathering-footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.gathering-footer-cta:hover {
+  color: white;
+}
+
+.gathering-footer-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}

@@ -1,0 +1,1258 @@
+{
+  "_meta": {
+    "description": "2026 events calendar including signature events, workshops, lectures, camps, and recurring programs",
+    "updated": "2026-01-30",
+    "usage": "import { events } from '@/data/events.json'",
+    "schemaReference": "docs/DATA-STANDARDS.md",
+
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS read the full _meta section before making changes",
+        "ALWAYS check today's date and compare to event dates",
+        "ALWAYS verify the event is on Wed-Sat (open days)",
+        "ALWAYS use YYYY-MM-DD date format",
+        "ALWAYS use prices in CENTS (multiply dollars by 100)",
+        "NEVER fabricate event details - ask the user if unsure",
+        "NEVER delete events without explicit user permission",
+        "NEVER change fareHarborId without verifying with user"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)",
+        "dateFormat": "YYYY-MM-DD (e.g., 2026-01-30)",
+        "example": "When editing on January 30, 2026, set: \"updated\": \"2026-01-30\""
+      },
+      "validation": [
+        "After editing, mentally verify: Is the date on Wed-Sat?",
+        "After editing, mentally verify: Is the price in cents?",
+        "After editing, mentally verify: Is the ID unique?",
+        "After editing, mentally verify: Is the event in date order?",
+        "Suggest running: npm run validate:data"
+      ],
+      "prohibited": [
+        "Do NOT schedule events on Sunday, Monday, or Tuesday",
+        "Do NOT use dollar amounts for prices (use cents)",
+        "Do NOT duplicate event IDs",
+        "Do NOT add events outside the season (March 4 - Dec 20 for 2026)",
+        "Do NOT mark more than 10 events as featured: true",
+        "Do NOT remove the _meta, _templates, or _aiRules sections"
+      ],
+      "whenUnsure": "Ask the user for clarification rather than guessing"
+    },
+
+    "_autoDate": {
+      "instruction": "AI: Update this field whenever you edit this file",
+      "field": "_meta.updated",
+      "format": "YYYY-MM-DD"
+    },
+
+    "staffInstructions": "HOW TO ADD OR EDIT EVENTS: 1) Scroll down to find the '_templates' section and copy the template that matches your event type. 2) Fill in your event details, replacing the placeholder text. 3) Add your new event to the 'events' array in DATE ORDER (earliest first). 4) Save and commit your changes. The website will update automatically after your commit is approved.",
+
+    "fieldGuide": {
+      "id": "Unique identifier using lowercase letters and dashes. Example: 'harvest-festival-2026' or 'spring-break-camp-1'. No spaces allowed.",
+      "title": "Event name as it appears on the website. Keep it concise but descriptive.",
+      "date": "Start date in YYYY-MM-DD format. Example: '2026-05-15' for May 15, 2026. MUST be on a day Rocky Mount is open (Wed-Sat) for single-day events.",
+      "endDate": "End date for multi-day events in YYYY-MM-DD format. Set to null for single-day events.",
+      "time": "Event time as displayed to visitors. Examples: '10:00 AM', '2:00 PM', '10:00 AM - 4:00 PM'. Set to null if all-day or varies.",
+      "type": "Event classification - 'new' (first time), 'recurring' (annual), 'enhanced' (expanded existing), 'milestone' (significant date)",
+      "category": "One of: 'signature', 'festival', 'lecture', 'workshop', 'camp', 'education', 'family', 'seasonal', 'tour', 'digital'",
+      "description": "Marketing description (1-3 sentences). Make it vivid and engaging. This appears on event cards and detail pages.",
+      "speaker": "For lectures only - the presenter's name",
+      "speakerTitle": "For lectures only - the presenter's affiliation/title",
+      "fareHarborId": "The numeric ID from your FareHarbor item. Find it in the FareHarbor dashboard URL when editing an item (Dashboard > Items > click item > look at URL), or in any booking URL. Example: if the booking URL is fareharbor.com/rockymountmuseum/items/236456/, the ID is 236456. When set, the website automatically generates the correct booking URL. Leave as null for free events or if using the general booking page.",
+      "ticketUrl": "Full URL for ticket purchase. Usually leave as null - the website auto-generates from fareHarborId. Only set a custom URL if tickets are sold on a different platform (Eventbrite, external partner, etc.).",
+      "requiresTicket": "true if visitors must book/pay in advance, false if free drop-in",
+      "featured": "true to highlight on homepage and featured sections, false for regular listing",
+      "capacity": "Optional - maximum attendees. Only add for limited-capacity events.",
+      "ageRecommendation": "Optional - age restriction. Example: '13+' or 'Ages 7-12'",
+      "pricing": "Ticket prices in CENTS (multiply dollars by 100). null means not applicable for that ticket type. 0 means free for that category."
+    },
+
+    "pricingGuide": {
+      "howItWorks": "All prices are in CENTS, not dollars. This prevents decimal errors.",
+      "conversion": "Multiply dollar amount by 100. So $12.00 = 1200, $8.50 = 850, $225.00 = 22500",
+      "examples": {
+        "$12.00": 1200,
+        "$10.00": 1000,
+        "$8.00": 800,
+        "$45.00": 4500,
+        "$180.00 (camp)": 18000,
+        "Free": 0
+      },
+      "categories": {
+        "adult": "Standard adult admission (ages 13-64 typically)",
+        "senior": "Senior discount (65+ typically)",
+        "child": "Child rate (ages 5-12 typically)",
+        "underFive": "Under 5 years old - usually free (0) or null",
+        "members": "Rocky Mount members rate - often free (0)"
+      },
+      "nullVsZero": "null = that ticket type doesn't exist for this event. 0 = that ticket type exists but is free."
+    },
+
+    "fareHarborGuide": {
+      "_purpose": "How to connect events to FareHarbor online booking",
+
+      "whatIsFareHarborId": "The fareHarborId is the unique number FareHarbor assigns to each bookable item. When you add this ID to an event, the website automatically creates the correct booking link.",
+
+      "whereToFindTheId": {
+        "method1_dashboard": "Log into FareHarbor Dashboard > Items > Click on the item you want > Look at the URL in your browser. Example: dashboard.fareharbor.com/rockymountmuseum/items/562814/edit - the ID is 562814",
+        "method2_booking_url": "If you have a booking link, the ID is in the URL. Example: fareharbor.com/rockymountmuseum/items/562814/ - the ID is 562814",
+        "method3_copy_button": "In the FareHarbor Dashboard, some views show a 'Copy Link' button next to items. The ID is the number in that link."
+      },
+
+      "whenToUseFareHarborId": [
+        "Ticketed events that should have a 'Buy Tickets' button",
+        "Workshops and camps with registration",
+        "Any event where visitors book/pay through FareHarbor"
+      ],
+
+      "whenToUseTicketUrl": [
+        "Event tickets sold on Eventbrite or another platform",
+        "Partner events where booking goes to their website",
+        "Special registrations handled outside FareHarbor"
+      ],
+
+      "whenToUseNeither": [
+        "Free events with no registration (set requiresTicket: false)",
+        "Community events where visitors just show up",
+        "Digital/milestone events with no physical attendance"
+      ],
+
+      "howItWorks": "The website uses fareHarborId to automatically build the booking URL: https://fareharbor.com/rockymountmuseum/items/{fareHarborId}/. You don't need to type the full URL - just the number.",
+
+      "commonMistakes": [
+        "Putting the full URL in fareHarborId - just use the number",
+        "Forgetting to set requiresTicket: true when adding fareHarborId",
+        "Using a fareHarborId from a different FareHarbor account",
+        "Setting fareHarborId for free events (leave it null instead)"
+      ]
+    },
+
+    "rules": [
+      "Single-day events MUST be on Wednesday, Thursday, Friday, or Saturday (Rocky Mount is closed Sun-Tue)",
+      "Multi-day events can span any days, but main activities should fall on open days",
+      "Keep events sorted by date - earliest first, then by start time if same day",
+      "Prices are ALWAYS in cents - multiply dollars by 100",
+      "Event IDs must be unique across all events",
+      "Use YYYY-MM-DD format for all dates (2026-05-15, not May 15 or 5/15/26)",
+      "Season runs from March 4 through December 20 for 2026",
+      "Featured events appear on homepage - limit to 8-10 total",
+      "Lectures should also appear in lectures.json with full speaker details"
+    ],
+
+    "commonMistakes": [
+      "Scheduling events on Sunday, Monday, or Tuesday (we're closed those days!)",
+      "Entering prices in dollars instead of cents ($12 should be 1200)",
+      "Using wrong date format (use 2026-05-15, not 05/15/2026 or May 15)",
+      "Forgetting to set requiresTicket: true for paid events",
+      "Adding events out of date order (scroll to find the right spot)",
+      "Using spaces in event IDs (use-dashes-instead)",
+      "Leaving featured: true on too many events (dilutes the impact)",
+      "Copying a template but forgetting to update the ID"
+    ],
+
+    "validation": {
+      "howToCheck": "Run 'npm run validate:data' in terminal to check for errors",
+      "manualChecklist": [
+        "Is the date format correct? (YYYY-MM-DD)",
+        "Is the single-day event on Wed-Sat?",
+        "Is requiresTicket set correctly?",
+        "Are prices in cents (1200 not 12)?",
+        "Is the ID unique?",
+        "Is the event in the right date order in the list?"
+      ],
+      "afterCommit": "Website preview deploys automatically. Check the Events page to verify your changes look correct."
+    },
+
+    "quickReference": {
+      "eventTypes": ["new", "recurring", "enhanced", "milestone"],
+      "categories": [
+        "signature",
+        "festival",
+        "lecture",
+        "workshop",
+        "camp",
+        "education",
+        "family",
+        "seasonal",
+        "tour",
+        "digital"
+      ],
+      "typicalPricing": {
+        "standardEvent": {
+          "adult": 1200,
+          "senior": 1000,
+          "child": 800,
+          "underFive": 0,
+          "members": 0
+        },
+        "premiumEvent": {
+          "adult": 1500,
+          "senior": 1200,
+          "child": 1000,
+          "underFive": 0,
+          "members": 0
+        },
+        "workshop": {
+          "adult": 4000,
+          "senior": 3500,
+          "child": null,
+          "underFive": null,
+          "members": 3000
+        },
+        "camp": {
+          "adult": null,
+          "senior": null,
+          "child": 18000,
+          "underFive": null,
+          "members": 15000
+        }
+      }
+    }
+  },
+
+  "_templates": {
+    "_instructions": "Copy one of these templates, fill in your details, and paste into the 'events' array in date order.",
+    "_fareHarborNote": "For ticketed events, you only need the fareHarborId (the number from FareHarbor). The website automatically builds the booking URL. Find the ID in FareHarbor Dashboard: Items > click your item > look at the number in the URL.",
+
+    "simpleEvent": {
+      "_description": "Use for free events that don't require tickets",
+      "_fareHarborTip": "Leave fareHarborId and ticketUrl as null for free events",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": null,
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "featured": false
+    },
+
+    "ticketedEvent": {
+      "_description": "Use for standard paid events with general admission",
+      "_fareHarborTip": "Replace '000000' with your actual FareHarbor item ID. Delete the ticketUrl line - it's auto-generated from the ID.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+
+    "multiDayEvent": {
+      "_description": "Use for events spanning multiple days (festivals, camps, etc.)",
+      "_fareHarborTip": "Replace '000000' with your actual FareHarbor item ID. The booking URL is auto-generated.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": "2026-MM-DD",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+
+    "lectureEvent": {
+      "_description": "Use for lectures - remember to also add to lectures.json!",
+      "_fareHarborTip": "If the lecture has its own FareHarbor item, add the ID. Otherwise, leave fareHarborId as null - visitors will go to the general booking page.",
+      "id": "lecture-speaker-lastname",
+      "title": "Speaker Name: Lecture Title",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "2:00 PM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "Dr. First Last",
+      "speakerTitle": "Title, Institution",
+      "description": "Write 1-3 engaging sentences about the lecture topic.",
+      "fareHarborId": null,
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+
+    "campEvent": {
+      "_description": "Use for kids camps - note pricing is child-only",
+      "_fareHarborTip": "Each camp week should have its own FareHarbor item ID for proper tracking.",
+      "id": "camp-name-week-number",
+      "title": "Camp Name Week X",
+      "date": "2026-MM-DD",
+      "endDate": "2026-MM-DD",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Describe the camp experience. What activities? What ages? Lunch included?",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 18000,
+        "underFive": null,
+        "members": 15000
+      },
+      "featured": false
+    },
+
+    "limitedCapacityEvent": {
+      "_description": "Use for workshops or special events with limited spots",
+      "_fareHarborTip": "Make sure FareHarbor item has capacity limits set to match the 'capacity' field here.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 2:00 PM",
+      "type": "new",
+      "category": "workshop",
+      "description": "Describe the experience. Mention limited capacity to create urgency.",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "capacity": 10,
+      "pricing": {
+        "adult": 4000,
+        "senior": 3500,
+        "child": null,
+        "underFive": null,
+        "members": 3000
+      },
+      "featured": false
+    },
+
+    "externalTicketEvent": {
+      "_description": "Use when tickets are sold on another platform (Eventbrite, partner site, etc.)",
+      "_fareHarborTip": "Set fareHarborId to null and provide the full external URL in ticketUrl.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": null,
+      "ticketUrl": "https://www.eventbrite.com/e/your-event-tickets-123456",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    }
+  },
+
+  "_examples": {
+    "_instructions": "These are real events from our calendar showing different scenarios. Use them as reference.",
+
+    "freePublicEvent": {
+      "_explanation": "A free community event - no tickets, open to all. Note requiresTicket: false and no pricing object.",
+      "example": {
+        "id": "sullivan-co-250",
+        "title": "Sullivan County 250",
+        "date": "2026-04-17",
+        "endDate": null,
+        "time": "10:00 AM - 4:00 PM",
+        "type": "new",
+        "category": "festival",
+        "description": "Sullivan County men left these fields for Kings Mountain. Their wives and children stayed behind, undefended. Hear the stories the textbooks left out.",
+        "ticketUrl": null,
+        "requiresTicket": false,
+        "pricing": {
+          "adult": 0,
+          "senior": 0,
+          "child": 0,
+          "underFive": 0,
+          "members": 0
+        },
+        "featured": false
+      }
+    },
+
+    "standardTicketedEvent": {
+      "_explanation": "A typical paid event with tiered pricing. Note prices are in CENTS (1200 = $12.00). Members get in free.",
+      "example": {
+        "id": "harvest-fest",
+        "title": "Harvest Fest",
+        "date": "2026-10-10",
+        "endDate": "2026-10-11",
+        "time": "10:00 AM - 4:00 PM",
+        "type": "enhanced",
+        "category": "festival",
+        "description": "The smell of wood smoke and simmering apple butter. Experience the autumn harvest the way Tennesseans did it for 200 years.",
+        "fareHarborId": "562814",
+        "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562814/",
+        "requiresTicket": true,
+        "pricing": {
+          "adult": 1200,
+          "senior": 1000,
+          "child": 800,
+          "underFive": 0,
+          "members": 0
+        },
+        "featured": true
+      }
+    },
+
+    "childOnlyCamp": {
+      "_explanation": "A camp with ONLY child pricing. Adult/senior are null because they can't attend. Note the high price (18000 = $180.00 for a week).",
+      "example": {
+        "id": "summer-camp-1",
+        "title": "Summer Camp Week 1",
+        "date": "2026-06-15",
+        "endDate": "2026-06-19",
+        "time": "9:00 AM - 3:00 PM",
+        "type": "new",
+        "category": "camp",
+        "description": "Five days as a frontier kid. Fire a flintlock (blanks!). Cook over an open hearth. Ages 7-12. Lunch provided.",
+        "fareHarborId": "562807",
+        "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562807/",
+        "requiresTicket": true,
+        "pricing": {
+          "adult": null,
+          "senior": null,
+          "child": 22500,
+          "underFive": null,
+          "members": 18000
+        },
+        "featured": false
+      }
+    },
+
+    "ageRestrictedEvent": {
+      "_explanation": "An event with age restrictions. Note ageRecommendation field and underFive: null (they can't attend).",
+      "example": {
+        "id": "haunting",
+        "title": "Haunting on the Mount",
+        "date": "2026-10-15",
+        "endDate": "2026-10-24",
+        "time": "6:00 PM - 9:00 PM",
+        "type": "recurring",
+        "category": "seasonal",
+        "description": "Candlelight flickers. Shadows move. Six evenings of spooky tours. Ages 13+.",
+        "fareHarborId": "562815",
+        "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562815/",
+        "requiresTicket": true,
+        "ageRecommendation": "13+",
+        "pricing": {
+          "adult": 1500,
+          "senior": 1200,
+          "child": 1000,
+          "underFive": null,
+          "members": 0
+        },
+        "featured": true
+      }
+    }
+  },
+
+  "_fareHarborExamples": {
+    "_instructions": "These examples show the THREE ways to handle event ticketing. Choose the approach that matches your situation.",
+
+    "withFareHarborId": {
+      "_explanation": "MOST COMMON: Event booked through FareHarbor. Just add the item ID number - the website builds the booking URL automatically. You found the ID '562814' in FareHarbor Dashboard for Harvest Fest.",
+      "_bookingUrlGenerated": "https://fareharbor.com/rockymountmuseum/items/562814/",
+      "example": {
+        "id": "harvest-fest",
+        "title": "Harvest Fest",
+        "date": "2026-10-10",
+        "fareHarborId": "562814",
+        "ticketUrl": null,
+        "requiresTicket": true
+      }
+    },
+
+    "withCustomTicketUrl": {
+      "_explanation": "EXTERNAL BOOKING: Event tickets sold on another platform (Eventbrite, partner site, etc.). Set fareHarborId to null and provide the full external URL.",
+      "_whenToUse": "Partner events, co-sponsored programs, or events using a different ticketing system",
+      "example": {
+        "id": "partner-event",
+        "title": "Regional History Conference",
+        "date": "2026-09-20",
+        "fareHarborId": null,
+        "ticketUrl": "https://www.eventbrite.com/e/regional-history-conference-tickets-123456",
+        "requiresTicket": true
+      }
+    },
+
+    "freeEvent": {
+      "_explanation": "FREE EVENT: No tickets or registration needed. Both fareHarborId and ticketUrl are null. No booking button appears on the website.",
+      "_whenToUse": "Community days, free admission events, digital announcements",
+      "example": {
+        "id": "sullivan-co-250",
+        "title": "Sullivan County 250",
+        "date": "2026-04-17",
+        "fareHarborId": null,
+        "ticketUrl": null,
+        "requiresTicket": false
+      }
+    },
+
+    "lectureWithGeneralBooking": {
+      "_explanation": "GENERAL BOOKING PAGE: For events where you want visitors to go to the main booking page (not a specific item). Set fareHarborId to null but keep requiresTicket: true. The website uses the default booking URL.",
+      "_whenToUse": "Lectures that share a general admission item, events added to FareHarbor later",
+      "example": {
+        "id": "lecture-byrd",
+        "title": "James P. Byrd Guest Lecture",
+        "date": "2026-03-27",
+        "fareHarborId": null,
+        "ticketUrl": null,
+        "requiresTicket": true
+      }
+    }
+  },
+
+  "events": [
+    {
+      "id": "road-to-250",
+      "title": "Road to 250 Season Opening",
+      "date": "2026-03-04",
+      "endDate": null,
+      "time": "10:00 AM",
+      "type": "new",
+      "category": "signature",
+      "description": "The gates open on Tennessee's most historic year. Step through time to 1791, where government was born and a nation took shape. Be among the first 250 Tennesseans enrolled to have your name read aloud on July 4th—America's 250th birthday.",
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "featured": true
+    },
+    {
+      "id": "spring-break-camp-1",
+      "title": "Spring Break Camp Week 1",
+      "date": "2026-03-16",
+      "endDate": "2026-03-20",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Trade screens for sawdust and adventure. Campers dip candles, fire the forge, feed heritage animals, and learn skills frontier children mastered by age ten. Johnson City & Bristol schools week. Lunch provided.",
+      "fareHarborId": "562803",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562803/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 18000,
+        "underFive": null,
+        "members": 15000
+      },
+      "featured": false
+    },
+    {
+      "id": "spring-break-camp-2",
+      "title": "Spring Break Camp Week 2",
+      "date": "2026-03-24",
+      "endDate": "2026-03-27",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Trade screens for sawdust and adventure. Campers dip candles, fire the forge, feed heritage animals, and learn skills frontier children mastered by age ten. Sullivan County schools week. Lunch provided.",
+      "fareHarborId": "562804",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562804/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 13500,
+        "underFive": null,
+        "members": 11500
+      },
+      "featured": false
+    },
+    {
+      "id": "lecture-byrd",
+      "title": "Sacred Scripture, Sacred War: The Bible and the American Revolution",
+      "date": "2026-03-27",
+      "endDate": null,
+      "time": "2:00 PM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "Dr. James P. Byrd",
+      "speakerTitle": "Vanderbilt University Divinity School",
+      "description": "America 250 Special Program. Dr. Byrd, author of the Christianity Today Award-winning book 'Sacred Scripture, Sacred War,' offers the first comprehensive analysis of how American revolutionaries defended their patriotic convictions through scripture. Explore the role of religion during the Revolutionary War. Co-sponsored by Bristol Historical Association, King University, and Rocky Mount.",
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "lecture-patton",
+      "title": "Lisa Bennett as Mary Patton: Powder for Kings Mountain",
+      "date": "2026-04-18",
+      "endDate": null,
+      "time": "2:00 PM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "Lisa Bennett",
+      "speakerTitle": "Sycamore Shoals State Historic Park",
+      "description": "500 pounds of gunpowder. One determined woman. Without Mary Patton's powder, there would be no victory at Kings Mountain. Through first-person interpretation, Lisa Bennett brings this overlooked heroine face-to-face with you.",
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "sullivan-co-250",
+      "title": "Sullivan County 250",
+      "date": "2026-04-17",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Sullivan County men left these fields for Kings Mountain. Their wives and children stayed behind, undefended. Hear the stories the textbooks left out—the gambles, the sacrifices, the families who risked everything.",
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "pricing": {
+        "adult": 0,
+        "senior": 0,
+        "child": 0,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "woolly-days",
+      "title": "Woolly Days & Colonial Gardening",
+      "date": "2026-04-25",
+      "endDate": "2026-04-26",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "enhanced",
+      "category": "festival",
+      "description": "Hear the shears clip through fleece. Watch raw wool become thread on a spinning wheel. Dig your hands into soil where heirloom seeds take root. Two days of fiber arts, heritage gardening, and the rhythms of spring on a working 1791 homestead.",
+      "fareHarborId": "562805",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562805/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "homeschool-spring",
+      "title": "Homeschool Day - Spring",
+      "date": "2026-05-14",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "recurring",
+      "category": "education",
+      "description": "History jumps off the page when you can touch it. Your students will dip quill pens, card wool, and hear stories from interpreters who've walked in William Cobb's shoes. TN Standards-aligned activities and take-home materials included.",
+      "fareHarborId": "258228",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "lecture-batchelor",
+      "title": "All In: The Overmountain Men's Gamble",
+      "date": "2026-05-15",
+      "endDate": null,
+      "time": "2:00 PM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "Thomas Batchelor",
+      "speakerTitle": "Interpretive Ranger, David Crockett Birthplace State Park",
+      "description": "They bet everything—their farms, their families, their lives. The 1780 march to Kings Mountain wasn't patriotic fervor. It was a desperate gamble by men who knew they might never come home. Thomas Batchelor strips away the myth.",
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "early-frontier-days",
+      "title": "Early Frontier Days & Colonial Trade Fair",
+      "date": "2026-05-22",
+      "endDate": "2026-05-24",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Musket smoke drifts past canvas tents. Traders hawk pewter, powder, and handmade goods. Militia camps come alive with drill and fire. Three days of the largest Revolutionary-era gathering in the region, with OVTA. Bigger than ever for America 250.",
+      "fareHarborId": "289142",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/289142/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "lecture-women-ovta",
+      "title": "Women Who Marched: The Untold Stories of the Overmountain Victory Trail",
+      "date": "2026-05-23",
+      "endDate": null,
+      "time": "12:00 PM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "Jane Doan",
+      "speakerTitle": "Historian, Overmountain Victory Trail Association",
+      "description": "While history remembers the Overmountain Men who marched to Kings Mountain, this lecture reveals the women who made that march possible. Part of Early Frontier Days.",
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "tn-230-birthday",
+      "title": "Tennessee's 230th Birthday",
+      "date": "2026-06-01",
+      "endDate": null,
+      "time": null,
+      "type": "milestone",
+      "category": "digital",
+      "description": "230 years ago today, the 16th star joined the flag. Tennessee's journey from territory to state began on this ground. LAST DAY to enroll in First 250—have your name read aloud at Rocky Mount on July 4th.",
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "featured": false
+    },
+    {
+      "id": "lecture-doan",
+      "title": "The Story of the American Flag",
+      "date": "2026-06-13",
+      "endDate": null,
+      "time": "11:00 AM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "David Doan",
+      "speakerTitle": "President & Grand Marshal, OVTA",
+      "description": "Every star and stripe carries a story. From the Grand Union that flew at Boston to the banner that inspired Key's anthem, David Doan traces the flag's evolution. Followed by the dedication of Rocky Mount's America 250 commemorative flag.",
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "stitching-independence",
+      "title": "Stitching Independence",
+      "date": "2026-06-13",
+      "endDate": "2026-06-14",
+      "time": "10:00 AM - 5:00 PM",
+      "type": "new",
+      "category": "signature",
+      "description": "Two days of stars, stripes, and stitches. Saturday: Tennessee's 230th recognition and our America 250 flag dedication. Sunday: the Betsy Ross Sip & Sew—wine, needles, and the art of flag-making. Limited seats for Sip & Sew.",
+      "fareHarborId": "562806",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562806/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "summer-camp-1",
+      "title": "Summer Camp Week 1",
+      "date": "2026-06-15",
+      "endDate": "2026-06-19",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Five days as a frontier kid. Fire a flintlock (blanks!). Cook over an open hearth. Chase heritage chickens. Learn the skills that built Tennessee—then take them home. Ages 7-12. Lunch provided.",
+      "fareHarborId": "562807",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562807/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 22500,
+        "underFive": null,
+        "members": 18000
+      },
+      "featured": false
+    },
+    {
+      "id": "fathers-day-forge",
+      "title": "Father's Day Weekend at the Forge",
+      "date": "2026-06-20",
+      "endDate": null,
+      "time": "10:00 AM - 2:00 PM",
+      "type": "new",
+      "category": "workshop",
+      "description": "The fire roars. The hammer falls. You and your kid, shoulder to shoulder, forging something real. Create a hand-wrought keepsake together at the anvil—a Father's Day gift money can't buy. 10 pairs only. Reserve now.",
+      "fareHarborId": "562808",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562808/",
+      "requiresTicket": true,
+      "capacity": 10,
+      "pricing": {
+        "adult": 5000,
+        "senior": null,
+        "child": null,
+        "underFive": null,
+        "members": 4500
+      },
+      "featured": false
+    },
+    {
+      "id": "summer-camp-2",
+      "title": "Summer Camp Week 2",
+      "date": "2026-06-22",
+      "endDate": "2026-06-26",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Five days as a frontier kid. Fire a flintlock (blanks!). Cook over an open hearth. Chase heritage chickens. Learn the skills that built Tennessee—then take them home. Ages 7-12. Lunch provided.",
+      "fareHarborId": "562809",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562809/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 22500,
+        "underFive": null,
+        "members": 18000
+      },
+      "featured": false
+    },
+    {
+      "id": "colonial-independence-day",
+      "title": "Colonial Independence Day",
+      "date": "2026-07-04",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "signature",
+      "description": "America turns 250—and you're standing where Tennessee began. The First 250 ceremony reads each enrolled name aloud. Muskets fire. Period music plays. The flag rises. This is the day. This is the place. Don't watch history—be part of it.",
+      "fareHarborId": "562810",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562810/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "back-to-school",
+      "title": "Back to School at the Frontier",
+      "date": "2026-08-01",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "family",
+      "description": "One last summer hurrah before the books come out. Kids race hoops, toss horseshoes, and play the games frontier children played. Adults sip lemonade in the shade. A family day with no screens, no schedules—just summer fun, 1791 style.",
+      "fareHarborId": "562811",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562811/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "homeschool-late-summer",
+      "title": "Homeschool Day - Late Summer",
+      "date": "2026-08-29",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "recurring",
+      "category": "education",
+      "description": "Launch the school year with history you can hold. Your students card wool, write with quill and ink, and meet William Cobb himself. Perfect kickoff to your homeschool year. TN Standards-aligned activities and take-home materials included.",
+      "fareHarborId": "258228",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "first-families-reunion",
+      "title": "First Families of Tennessee Reunion",
+      "date": "2026-09-11",
+      "endDate": "2026-09-13",
+      "time": "Various",
+      "type": "new",
+      "category": "signature",
+      "description": "Your family built Tennessee. Now come home. The first-ever gathering of descendants from founding families—Cobbs, Shelbys, Seviers. Friday: registered descendants only. Sat-Sun: open to all. Oral histories. Genealogy help. Stories passed down 250 years.",
+      "fareHarborId": "562813",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562813/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 2500,
+        "senior": 2000,
+        "child": 1500,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "ovta-victory-day",
+      "title": "OVTA Victory Day",
+      "date": "2026-09-24",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "September 1780: Overmountain Men gathered at Sycamore Shoals and marched south to Kings Mountain. September 2026: we retrace their steps. Join OVTA as they commemorate the march that turned the Revolution. Date pending OVTA confirmation.",
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "featured": false
+    },
+    {
+      "id": "harvest-fest",
+      "title": "Harvest Fest",
+      "date": "2026-10-10",
+      "endDate": "2026-10-11",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "enhanced",
+      "category": "festival",
+      "description": "The smell of wood smoke and simmering apple butter. Cider pressing. Corn shelling. Sorghum boiling down to molasses. Experience the autumn harvest the way Tennesseans did it for 200 years—with your whole family, working alongside our interpreters.",
+      "fareHarborId": "562814",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562814/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "haunting",
+      "title": "Haunting on the Mount",
+      "date": "2026-10-15",
+      "endDate": "2026-10-24",
+      "time": "6:00 PM - 9:00 PM",
+      "type": "recurring",
+      "category": "seasonal",
+      "description": "Candlelight flickers. Shadows move. The frontier had stories they only told after dark—tales of restless spirits, unexplained sounds in the woods, and things that walked the Wilderness Road at night. Six evenings of spooky tours (Oct 15-17 & 22-24). Ages 13+.",
+      "fareHarborId": "562815",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562815/",
+      "requiresTicket": true,
+      "ageRecommendation": "13+",
+      "pricing": {
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
+        "underFive": null,
+        "members": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "frontier-christmas",
+      "title": "Frontier Christmas",
+      "date": "2026-11-04",
+      "endDate": "2026-11-21",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "recurring",
+      "category": "seasonal",
+      "description": "Cedar garlands. Dried apples. The smell of spiced cider. Before Hallmark, before Santa, there was simply the joy of gathering with family. Experience Christmas the way early Tennesseans celebrated—simple, meaningful, and warm. Wed-Sat through November.",
+      "fareHarborId": "562816",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562816/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+    {
+      "id": "candlelight-christmas",
+      "title": "Candlelight Christmas",
+      "date": "2026-12-04",
+      "endDate": "2026-12-12",
+      "time": "5:00 PM - 8:00 PM",
+      "type": "recurring",
+      "category": "seasonal",
+      "description": "A thousand candles light the grounds. Carolers sing in the cabin. Cider warms cold hands. Rocky Mount's most magical tradition returns—four evenings when the 18th century glows. Friday & Saturday, Dec 4-5 and 11-12. Sells out every year.",
+      "fareHarborId": "562817",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562817/",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": true
+    }
+  ],
+  "recurringPrograms": {
+    "blacksmithWorkshops": {
+      "id": "blacksmith",
+      "title": "Blacksmith Workshops",
+      "tagline": "Forge Your Own History",
+      "description": "Feel the heat of the forge. Hear the ring of hammer on iron. Shape red-hot metal with your own hands into a hook, nail, or blade—the same way smiths have done for centuries. You leave with something you made. All skill levels welcome.",
+      "schedule": "Select Saturdays",
+      "scheduleNote": "Check calendar for specific dates",
+      "time": "10:00 AM - 2:00 PM",
+      "duration": "4 hours",
+      "fareHarborId": "562818",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562818/",
+      "requiresTicket": true,
+      "category": "workshop",
+      "icon": "anvil",
+      "pricing": {
+        "adult": 4000,
+        "senior": 3500,
+        "child": null,
+        "underFive": null,
+        "members": 3000
+      },
+      "highlights": [
+        "Work alongside our master blacksmith",
+        "Forge your own piece to take home",
+        "18th-century techniques still used today",
+        "All materials and safety gear included"
+      ],
+      "dates": [
+        "2026-03-28",
+        "2026-04-18",
+        "2026-05-16",
+        "2026-07-18",
+        "2026-08-15",
+        "2026-09-19",
+        "2026-10-17"
+      ]
+    },
+    "hearthCooking": {
+      "id": "hearth-cooking",
+      "title": "Hearth Cooking",
+      "tagline": "Cook Like It's 1790",
+      "description": "No stove. No oven. Just fire, iron, and skill. Learn to bake bread in a Dutch oven, turn a roast on a spit, and simmer stew over coals—then eat what you've cooked. You'll leave knowing how frontier families fed themselves.",
+      "schedule": "Quarterly",
+      "scheduleNote": "Seasonal dates throughout the year",
+      "time": "10:00 AM - 2:00 PM",
+      "duration": "4 hours",
+      "fareHarborId": "562819",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562819/",
+      "requiresTicket": true,
+      "category": "workshop",
+      "icon": "flame",
+      "pricing": {
+        "adult": 3500,
+        "senior": 3000,
+        "child": null,
+        "underFive": null,
+        "members": 2500
+      },
+      "highlights": [
+        "Cook over open hearth fire",
+        "Master period recipes and techniques",
+        "Eat what you prepare",
+        "Recipe cards to recreate at home"
+      ],
+      "dates": ["2026-03-28", "2026-06-27", "2026-07-25", "2026-08-22", "2026-09-26"]
+    },
+    "twilightOnTheMount": {
+      "id": "twilight",
+      "title": "Twilight on the Mount",
+      "tagline": "A Different Kind of Visit",
+      "description": "Can't make a daytime tour? Join us Thursday evenings. A guided walk through the grounds as the summer heat breaks, with stories of the Cobb family and the government that began here. No crowds, cooler temps, and a different perspective on Tennessee's first capitol.",
+      "schedule": "Summer Thursdays",
+      "scheduleNote": "May through August",
+      "time": "7:00 PM",
+      "duration": "1.5 hours",
+      "fareHarborId": "562820",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562820/",
+      "requiresTicket": true,
+      "category": "tour",
+      "icon": "sunset",
+      "pricing": {
+        "adult": 1000,
+        "senior": 800,
+        "child": 600,
+        "underFive": 0,
+        "members": 0
+      },
+      "highlights": [
+        "Evening hours for summer schedules",
+        "Cooler temperatures, smaller groups",
+        "Guided walk through the historic grounds",
+        "Stories of Rocky Mount's role in Tennessee's founding"
+      ],
+      "dates": [
+        "2026-05-28",
+        "2026-06-11",
+        "2026-06-25",
+        "2026-07-09",
+        "2026-07-23",
+        "2026-08-06",
+        "2026-08-20"
+      ]
+    },
+    "homeschoolDays": {
+      "id": "homeschool",
+      "title": "Homeschool Days",
+      "tagline": "Curriculum Comes Alive",
+      "description": "The textbook says 'frontier life was hard.' Here, your students churn butter, card wool, and write with quill pens. They'll remember this long after they've forgotten the chapter. TN Standards-aligned, co-op friendly, take-home materials included.",
+      "schedule": "Monthly",
+      "scheduleNote": "During school year",
+      "time": "10:00 AM - 4:00 PM",
+      "duration": "Full day",
+      "fareHarborId": "258228",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
+      "requiresTicket": true,
+      "category": "education",
+      "icon": "book",
+      "pricing": {
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
+        "underFive": 0,
+        "members": 0
+      },
+      "highlights": [
+        "TN Standards aligned",
+        "Age-appropriate activities for all grades",
+        "First-person historical interpretation",
+        "Educational materials to continue at home"
+      ],
+      "dates": ["2026-04-16", "2026-05-14", "2026-09-17", "2026-10-29"]
+    },
+    "behindTheScenes": {
+      "id": "behind-the-scenes",
+      "title": "Behind the Scenes",
+      "tagline": "The VIP Experience",
+      "description": "Hold a 230-year-old powder horn in your hands. Walk the collections vault where artifacts not on display await. Feed our heritage animals their morning grain. Coffee and pastries with curators who know every story. 10 guests only. Our most exclusive experience.",
+      "schedule": "Last Saturday monthly",
+      "scheduleNote": "Limited to 10 guests",
+      "time": "9:00 AM - 11:00 AM",
+      "duration": "2 hours",
+      "fareHarborId": "658959",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/658959/",
+      "requiresTicket": true,
+      "category": "tour",
+      "icon": "key",
+      "capacity": 10,
+      "pricing": {
+        "adult": 4500,
+        "senior": 4000,
+        "child": null,
+        "underFive": null,
+        "members": 3500
+      },
+      "highlights": [
+        "Handle real 18th-century artifacts",
+        "Private access to collections vault",
+        "Feed heritage breed animals",
+        "Coffee & pastries with curators"
+      ],
+      "dates": [
+        "2026-03-28",
+        "2026-04-25",
+        "2026-05-30",
+        "2026-06-27",
+        "2026-07-25",
+        "2026-08-29",
+        "2026-09-26",
+        "2026-10-31",
+        "2026-11-28"
+      ]
+    }
+  },
+  "first250": {
+    "enrollmentStart": "2026-03-04",
+    "enrollmentEnd": "2026-06-01",
+    "ceremonyDate": "2026-07-04",
+    "url": "https://rockymountmuseum.com/first250"
+  }
+}

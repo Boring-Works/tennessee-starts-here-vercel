@@ -1,0 +1,83 @@
+/* ===========================================
+   ALMANAC STANDALONE LAYOUT
+   Floating home button for app-like experience
+   =========================================== */
+
+.almanac-home-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 60; /* Above content, below modals (z-70) */
+
+  /* Size */
+  width: 36px;
+  height: 36px;
+
+  /* Wax seal styling */
+  background: radial-gradient(circle at 35% 35%, #8b3a42, #722f37 50%, #5a2329);
+  border: 2px solid var(--gold-shimmer);
+  border-radius: 50%;
+
+  /* Center content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Interaction */
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  /* Shadow for depth */
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.almanac-home-button:hover {
+  border-color: var(--gold-shimmer);
+  transform: scale(1.05);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.almanac-home-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.home-button-text {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(74, 31, 36, 0.9);
+  text-shadow:
+    0.5px 0.5px 0 rgba(255, 255, 255, 0.1),
+    -0.5px -0.5px 0 rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* Larger on desktop */
+@media (min-width: 640px) {
+  .almanac-home-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .home-button-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .almanac-home-button {
+    transition: none;
+  }
+
+  .almanac-home-button:hover {
+    transform: none;
+  }
+}

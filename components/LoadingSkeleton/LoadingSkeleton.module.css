@@ -1,0 +1,88 @@
+/* Loading skeleton animations for vintage design aesthetic */
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* Base skeleton styles */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gold-shimmer) 25%,
+    var(--gold-shimmer) 50%,
+    var(--gold-shimmer) 75%
+  );
+  animation: shimmer 2s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+/* Dark variant for dark backgrounds */
+.skeletonDark {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  animation: shimmer 2s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+/* Common skeleton shapes */
+.skeletonText {
+  composes: skeleton;
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonTextDark {
+  composes: skeletonDark;
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonHeading {
+  composes: skeleton;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.skeletonHeadingDark {
+  composes: skeletonDark;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.skeletonCard {
+  composes: skeleton;
+  border-radius: 4px;
+}
+
+.skeletonCardDark {
+  composes: skeletonDark;
+  border-radius: 4px;
+}
+
+.skeletonCircle {
+  composes: skeleton;
+  border-radius: 50%;
+}
+
+.skeletonCircleDark {
+  composes: skeletonDark;
+  border-radius: 50%;
+}
+
+/* Loading container */
+.loadingContainer {
+  width: 100%;
+  min-height: 100vh;
+}

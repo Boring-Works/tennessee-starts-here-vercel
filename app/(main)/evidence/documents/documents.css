@@ -1,0 +1,556 @@
+/* Standard Archive Interface - Document Archive */
+
+.documentsPage {
+  min-height: 100vh;
+  background: var(--midnight, #1a1a2e);
+}
+
+.documentsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 1.5rem 4rem;
+}
+
+/* Header */
+.documentsHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.documentsTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin-bottom: 0.5rem;
+}
+
+.documentsSubtitle {
+  font-size: 1rem;
+  color: rgba(232, 224, 208, 0.6);
+}
+
+/* Search - Full Width Above Layout */
+.documentsSearch {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Main Layout: Sidebar + Content */
+.documentsLayout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Sidebar takes fixed width on desktop */
+.documentsLayout > aside {
+  flex-shrink: 0;
+  width: 240px;
+  position: sticky;
+  top: 9rem; /* Header (80px) + Evidence Nav (~60px) + spacing */
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 168, 83, 0.3) transparent;
+}
+
+.documentsLayout > aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+.documentsLayout > aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.documentsLayout > aside::-webkit-scrollbar-thumb {
+  background: rgba(212, 168, 83, 0.3);
+  border-radius: 3px;
+}
+
+.documentsLayout > aside::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 168, 83, 0.5);
+}
+
+/* Content takes remaining space */
+.documentsContent {
+  flex: 1;
+  min-width: 0;
+}
+
+/* View Toggle Bar */
+.documentsViewToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+}
+
+.documentsResultCount {
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.6);
+}
+
+.documentsViewButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.documentsViewButton {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: rgba(232, 224, 208, 0.6);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.documentsViewButton:hover {
+  color: var(--almanac-parchment, #e8e0d0);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.documentsViewButton.active {
+  color: var(--gold-leaf, var(--gold-primary));
+  background: rgba(212, 168, 83, 0.1);
+  border-color: var(--gold-leaf, var(--gold-primary));
+}
+
+/* Empty State */
+.documentsEmpty {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.documentsEmptyText {
+  font-size: 1rem;
+  color: rgba(232, 224, 208, 0.6);
+  margin-bottom: 1rem;
+}
+
+.documentsEmptyButton {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--gold-leaf, var(--gold-primary));
+  background: transparent;
+  border: 1px solid rgba(212, 168, 83, 0.3);
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.documentsEmptyButton:hover {
+  background: rgba(212, 168, 83, 0.1);
+  border-color: var(--gold-leaf, var(--gold-primary));
+}
+
+/* List View */
+.documentsListView {
+  /* Container */
+}
+
+.documentsCollection {
+  margin-bottom: 2.5rem;
+}
+
+.documentsCollectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin-bottom: 0.5rem;
+}
+
+.documentsCollectionCount {
+  padding: 0.125rem 0.5rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(212, 168, 83, 0.15);
+  border-radius: 0.125rem;
+}
+
+.documentsCollectionDesc {
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.5);
+  margin-bottom: 1rem;
+  max-width: 600px;
+}
+
+.documentsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.documentsItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.documentsItem:last-child {
+  border-bottom: none;
+}
+
+.documentsLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.documentsLink:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.documentsItemTitle {
+  font-size: 0.9375rem;
+  color: var(--almanac-parchment, #e8e0d0);
+}
+
+.documentsItemMeta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.documentsItemDate {
+  font-size: 0.8125rem;
+  color: rgba(232, 224, 208, 0.5);
+}
+
+.documentsItemType {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  text-transform: capitalize;
+  color: rgba(232, 224, 208, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.125rem;
+}
+
+.documentsItemPassages {
+  font-size: 0.75rem;
+  color: var(--gold-leaf, var(--gold-primary));
+}
+
+/* ============================================
+   TABLE VIEW - Sortable Archive Table
+   ============================================ */
+
+.documentsTableWrapper {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+}
+
+.documentsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.documentsTable thead {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.documentsTable th {
+  padding: 0;
+  text-align: left;
+  font-weight: 600;
+  color: rgba(232, 224, 208, 0.8);
+}
+
+.tableSortButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(232, 224, 208, 0.7);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+}
+
+.tableSortButton:hover {
+  color: var(--gold-leaf, #d4a853);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sortIndicator {
+  font-size: 0.875rem;
+}
+
+.sortIndicatorInactive {
+  opacity: 0.3;
+}
+
+.sortIndicatorActive {
+  color: var(--gold-leaf, #d4a853);
+}
+
+.documentsTable tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.15s;
+}
+
+.documentsTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.documentsTable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.documentsTable td {
+  padding: 0.875rem 1rem;
+  vertical-align: top;
+}
+
+.tableColDate {
+  white-space: nowrap;
+  color: rgba(232, 224, 208, 0.6);
+  font-variant-numeric: tabular-nums;
+  width: 110px;
+}
+
+.tableColTitle {
+  min-width: 200px;
+}
+
+.tableDocLink {
+  color: var(--almanac-parchment, #e8e0d0);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.tableDocLink:hover {
+  color: var(--gold-leaf, #d4a853);
+}
+
+.tableColCollection {
+  color: rgba(232, 224, 208, 0.6);
+  font-size: 0.8125rem;
+  max-width: 180px;
+}
+
+.tableColType {
+  color: rgba(232, 224, 208, 0.5);
+  font-size: 0.8125rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Hide columns on mobile */
+.tableColHideMobile {
+  /* Visible by default */
+}
+
+/* Grid View */
+.documentsGridView {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.documentsGridCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  transition: all 0.15s;
+}
+
+.documentsGridCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.documentsGridCollection {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(232, 224, 208, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.documentsGridTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin: 0 0 auto;
+}
+
+.documentsGridDate {
+  font-size: 0.8125rem;
+  color: rgba(232, 224, 208, 0.6);
+  margin-top: 1rem;
+}
+
+.documentsGridType {
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  color: rgba(232, 224, 208, 0.5);
+}
+
+/* Back Link */
+.documentsBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  transition: all 0.15s;
+}
+
+.documentsBackLink:hover {
+  color: var(--almanac-parchment, #e8e0d0);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   RESPONSIVE - Mobile First
+   ============================================ */
+
+/* Mobile: Stack layout, filter above content */
+@media (max-width: 768px) {
+  .documentsContainer {
+    padding: 7rem 1rem 3rem;
+  }
+
+  .documentsTitle {
+    font-size: 2rem;
+  }
+
+  .documentsLayout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .documentsLayout > aside {
+    width: 100%;
+    position: static;
+  }
+
+  .documentsLink {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .documentsItemMeta {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .documentsViewToggle {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .documentsResultCount {
+    text-align: center;
+  }
+
+  .documentsViewButtons {
+    justify-content: center;
+  }
+
+  .documentsGridView {
+    grid-template-columns: 1fr;
+  }
+
+  /* Table: Hide Collection and Type columns on mobile */
+  .tableColHideMobile {
+    display: none;
+  }
+
+  .documentsTable td,
+  .documentsTable th {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .tableColDate {
+    width: 90px;
+    font-size: 0.8125rem;
+  }
+
+  .tableColTitle {
+    min-width: 150px;
+  }
+}
+
+/* Tablet: Narrower sidebar */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .documentsLayout > aside {
+    width: 200px;
+  }
+}
+
+/* Desktop: Full sidebar */
+@media (min-width: 1025px) {
+  .documentsLayout > aside {
+    width: 260px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .documentsViewButton,
+  .documentsEmptyButton,
+  .documentsLink,
+  .documentsGridCard,
+  .documentsBackLink {
+    transition: none;
+  }
+}
+
+/* Focus states */
+.documentsViewButton:focus-visible,
+.documentsEmptyButton:focus-visible,
+.documentsLink:focus-visible,
+.documentsGridCard:focus-visible,
+.documentsBackLink:focus-visible,
+.tableSortButton:focus-visible,
+.tableDocLink:focus-visible {
+  outline: 2px solid var(--gold-leaf, var(--gold-primary));
+  outline-offset: 2px;
+}

@@ -1,0 +1,118 @@
+/* Our Story Page Styles */
+
+.story-header {
+  padding: var(--space-8xl) var(--layout-page-padding-mobile) var(--space-4xl);
+  background: linear-gradient(to bottom, rgba(10, 22, 40, 1) 0%, rgba(10, 22, 40, 0.95) 100%);
+  text-align: center;
+}
+
+.story-header-content {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.story-eyebrow {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold, var(--gold-primary));
+  margin-bottom: var(--space-lg);
+}
+
+.story-headline {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: white;
+  margin: 0 0 var(--space-lg);
+}
+
+.story-subhead {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .story-header {
+    padding: 10rem var(--layout-page-padding-tablet) var(--space-5xl);
+  }
+}
+
+/* ============================================
+   GOVERNING THE TERRITORY SECTION
+   ============================================ */
+
+.story-governing {
+  background: var(--cream);
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+.story-governing-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.story-governing-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.story-governing-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0 0 var(--space-md);
+}
+
+.story-governing-intro {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.story-governing-map {
+  margin: var(--space-2xl) 0;
+  display: flex;
+  justify-content: center;
+}
+
+.story-governing-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.story-governing-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--foreground);
+  margin: 0 0 1.25rem;
+}
+
+.story-governing-content p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .story-governing {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+/* ============================================
+   REDUCED MOTION - Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable transitions for users who prefer reduced motion */
+  /* Note: No transitions currently exist in this file.
+     This block serves as a placeholder for future additions. */
+}

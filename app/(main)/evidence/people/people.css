@@ -1,0 +1,434 @@
+/* ============================================
+   PEOPLE LISTING PAGE
+   Evidence Room - All Historical Figures
+   Dark scholarly aesthetic with gold accents
+   ============================================ */
+
+/* === Color Palette === */
+.peoplePage {
+  --midnight: #0f1419;
+  --midnight-light: #1a2028;
+  --midnight-lighter: #242d38;
+  --gold-leaf: var(--gold-primary);
+  --gold-leaf-dark: #b8960b;
+  --gold-leaf-glow: var(--gold-shimmer);
+  --cream: #f5f0e6;
+  --cream-muted: rgba(245, 240, 230, 0.85);
+  --cream-faded: rgba(245, 240, 230, 0.6);
+
+  /* Typography */
+  --serif: Georgia, 'Times New Roman', serif;
+  --line-height: 1.7;
+  --max-width: 900px;
+
+  /* Spacing */
+  --section-gap: 3rem;
+  --content-padding: 1.5rem;
+}
+
+/* === Base Layout === */
+.peoplePage {
+  background: var(--midnight);
+  min-height: 100vh;
+  color: var(--cream);
+}
+
+.peopleContainer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+}
+
+.peopleContent {
+  padding: 10rem 0 4rem;
+}
+
+/* === Header === */
+.peopleHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--gold-shimmer);
+}
+
+.peopleTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.peopleSubtitle {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  color: var(--cream-muted);
+  font-style: italic;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+/* === Introduction === */
+.peopleIntro {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: var(--line-height);
+  color: var(--cream-faded);
+  text-align: center;
+  max-width: 38rem;
+  margin: 0 auto var(--section-gap);
+}
+
+/* === Section Styles === */
+.peopleSection {
+  margin-bottom: var(--section-gap);
+}
+
+.peopleSectionTitle {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-leaf);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.peopleSectionTitle::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gold-shimmer);
+}
+
+.peopleSectionCount {
+  background: var(--gold-leaf-glow);
+  color: var(--gold-leaf);
+  padding: 0.25rem 0.625rem;
+  border-radius: 2px;
+  font-size: 0.6875rem;
+  order: 1;
+}
+
+.peopleSectionIntro {
+  font-family: var(--serif);
+  font-size: 0.9375rem;
+  color: var(--cream-faded);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.peopleSectionNote {
+  color: var(--gold-leaf-dark);
+  font-style: italic;
+}
+
+/* === People Grid === */
+.peopleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* === Person Card === */
+.personCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem;
+  background: var(--midnight-light);
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.personCard:hover {
+  border-color: var(--gold-leaf);
+  background: var(--midnight-lighter);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Featured Card (full bio) */
+.personCardFeatured {
+  border-color: var(--gold-shimmer);
+  background: linear-gradient(135deg, var(--midnight-light) 0%, var(--gold-shimmer) 100%);
+}
+
+.personCardFeatured:hover {
+  border-color: var(--gold-leaf);
+  background: linear-gradient(135deg, var(--midnight-lighter) 0%, var(--gold-shimmer) 100%);
+}
+
+.personCardBadge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-leaf);
+  background: var(--gold-leaf-glow);
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+}
+
+/* Names */
+.personCardNames {
+  margin-bottom: 0.5rem;
+}
+
+.personCardCherokeeName {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.personCardEnglishName {
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.9375rem;
+  color: var(--cream-muted);
+  font-style: italic;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.personCardPrimaryName {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--cream);
+  line-height: 1.3;
+}
+
+/* Role & Town */
+.personCardRole {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-leaf-dark);
+  margin-bottom: 0.25rem;
+}
+
+.personCardTown {
+  font-family: var(--serif);
+  font-size: 0.8125rem;
+  color: var(--cream-faded);
+  font-style: italic;
+}
+
+/* Arrow */
+.personCardArrow {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+  color: var(--gold-leaf);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.25s ease;
+}
+
+.personCard:hover .personCardArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* === Treaty Link === */
+.peopleTreatyLink {
+  margin-top: 2rem;
+  margin-bottom: var(--section-gap);
+}
+
+.peopleTreatyLinkButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--gold-leaf-glow);
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.peopleTreatyLinkButton:hover {
+  background: var(--gold-shimmer);
+  border-color: var(--gold-leaf);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--gold-shimmer);
+}
+
+.peopleTreatyIcon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.peopleTreatyText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.peopleTreatyText strong {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--gold-leaf);
+  font-weight: 500;
+}
+
+.peopleTreatyText span {
+  font-family: var(--serif);
+  font-size: 0.8125rem;
+  color: var(--cream-muted);
+  font-style: italic;
+}
+
+.peopleTreatyArrow {
+  font-size: 1.25rem;
+  color: var(--gold-leaf);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.peopleTreatyLinkButton:hover .peopleTreatyArrow {
+  transform: translateX(4px);
+}
+
+/* === Back Link === */
+.peopleBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--cream-faded);
+  text-decoration: none;
+  margin-top: var(--section-gap);
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-shimmer);
+  transition: color 0.25s ease;
+}
+
+.peopleBackLink:hover {
+  color: var(--gold-leaf);
+}
+
+/* === Responsive === */
+@media (max-width: 640px) {
+  .peopleContent {
+    padding: 6rem 0 3rem;
+  }
+
+  .peopleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .peopleTreatyLinkButton {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .peopleTreatyArrow {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .peopleGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .peopleGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* === Focus Styles === */
+.personCard:focus-visible,
+.peopleTreatyLinkButton:focus-visible,
+.peopleBackLink:focus-visible {
+  outline: 2px solid var(--gold-leaf);
+  outline-offset: 2px;
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  .personCard,
+  .personCardArrow,
+  .peopleTreatyLinkButton,
+  .peopleTreatyArrow,
+  .peopleBackLink {
+    transition: none;
+  }
+
+  .personCard:hover,
+  .peopleTreatyLinkButton:hover {
+    transform: none;
+  }
+}
+
+/* === Print Styles === */
+@media print {
+  .peoplePage {
+    background: white;
+    color: black;
+  }
+
+  .peopleBackLink,
+  .peopleTreatyLink,
+  .personCardArrow {
+    display: none;
+  }
+
+  .personCard {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    page-break-inside: avoid;
+  }
+
+  .peopleTitle,
+  .personCardCherokeeName,
+  .personCardPrimaryName {
+    color: black;
+  }
+
+  .peopleSubtitle,
+  .personCardEnglishName {
+    color: #333;
+  }
+
+  .peopleSectionTitle,
+  .personCardRole {
+    color: #666;
+  }
+
+  .peopleGrid {
+    display: block;
+  }
+
+  .personCard {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+}

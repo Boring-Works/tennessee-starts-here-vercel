@@ -1,0 +1,482 @@
+.blount-section {
+  position: relative;
+  padding: 4rem 1.5rem;
+  background: linear-gradient(180deg, #0d1a2d 0%, #0a1628 50%, #0d1a2d 100%);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .blount-section {
+    padding: 5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blount-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* The parchment document card */
+.blount-document {
+  position: relative;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  text-align: center;
+
+  /* Aged parchment background */
+  background:
+    /* Paper grain texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.03'/%3E%3C/svg%3E"),
+    /* Parchment color gradient */
+    linear-gradient(135deg, #f5f0e6 0%, #e8dcc8 25%, #f2ead8 50%, #e5d9c3 75%, #f0e6d4 100%);
+  background-blend-mode: overlay, normal;
+
+  /* Subtle shadow for depth */
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 8px 40px rgba(0, 0, 0, 0.2),
+    inset 0 0 80px rgba(139, 69, 19, 0.05);
+
+  /* Entrance animation */
+  animation: documentReveal 0.8s ease-out both;
+}
+
+@keyframes documentReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95) rotateX(5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .blount-document {
+    padding: 3.5rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blount-document {
+    padding: 4rem 4rem;
+  }
+}
+
+/* Paper fold lines */
+.blount-fold {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blount-fold--horizontal {
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 69, 19, 0.08) 20%,
+    rgba(139, 69, 19, 0.12) 50%,
+    rgba(139, 69, 19, 0.08) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.blount-fold--vertical {
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(139, 69, 19, 0.06) 30%,
+    rgba(139, 69, 19, 0.1) 50%,
+    rgba(139, 69, 19, 0.06) 70%,
+    transparent 100%
+  );
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Burn/age edge effects */
+.blount-edge {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.blount-edge--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(
+    180deg,
+    rgba(101, 67, 33, 0.15) 0%,
+    rgba(139, 69, 19, 0.05) 40%,
+    transparent 100%
+  );
+}
+
+.blount-edge--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(
+    0deg,
+    rgba(101, 67, 33, 0.18) 0%,
+    rgba(139, 69, 19, 0.06) 50%,
+    transparent 100%
+  );
+}
+
+.blount-edge--left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  background: linear-gradient(
+    90deg,
+    rgba(101, 67, 33, 0.12) 0%,
+    rgba(139, 69, 19, 0.04) 60%,
+    transparent 100%
+  );
+}
+
+.blount-edge--right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  background: linear-gradient(
+    270deg,
+    rgba(101, 67, 33, 0.12) 0%,
+    rgba(139, 69, 19, 0.04) 60%,
+    transparent 100%
+  );
+}
+
+/* Quill-drawn decorative rules with flourishes */
+.blount-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+  max-width: 22rem;
+  position: relative;
+  z-index: 5;
+}
+
+.blount-rule-top {
+  margin-bottom: 1.5rem;
+}
+
+.blount-rule-bottom {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.blount-rule-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 69, 19, 0.3) 15%,
+    rgba(139, 69, 19, 0.5) 50%,
+    rgba(139, 69, 19, 0.3) 85%,
+    transparent 100%
+  );
+}
+
+/* Flourish ornaments */
+.blount-flourish {
+  color: rgba(139, 69, 19, 0.6);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.blount-flourish--left {
+  transform: scaleX(-1);
+}
+
+.blount-flourish--center {
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.blount-flourish--right {
+  /* default orientation */
+}
+
+@media (min-width: 768px) {
+  .blount-rule {
+    max-width: 26rem;
+    gap: 0.75rem;
+  }
+  .blount-rule-top {
+    margin-bottom: 2rem;
+  }
+  .blount-rule-bottom {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .blount-flourish {
+    font-size: 1.25rem;
+  }
+  .blount-flourish--center {
+    font-size: 0.75rem;
+  }
+}
+
+/* Document header */
+.blount-header {
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+.blount-recipient {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.blount-dateline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif-elegant);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(10, 22, 40, 0.7);
+}
+
+.blount-dateline-sep {
+  opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+  .blount-header {
+    margin-bottom: 2rem;
+  }
+  .blount-recipient {
+    font-size: 0.7rem;
+  }
+  .blount-dateline {
+    font-size: 0.9rem;
+  }
+}
+
+/* The quote with drop cap */
+.blount-blockquote {
+  position: relative;
+  margin-bottom: 1.5rem;
+  z-index: 5;
+}
+
+.blount-text {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--primary);
+}
+
+.blount-text--dropcap {
+  text-align: left;
+  padding-left: 0;
+}
+
+/* Drop cap styling */
+.blount-dropcap {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.8;
+  color: var(--burgundy);
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+  text-shadow: 2px 2px 0 rgba(139, 69, 19, 0.1);
+}
+
+.blount-text-body {
+  /* Flows around the drop cap */
+}
+
+@media (min-width: 768px) {
+  .blount-blockquote {
+    margin-bottom: 2rem;
+  }
+  .blount-text {
+    line-height: 1.7;
+  }
+  .blount-dropcap {
+    font-size: 5rem;
+    margin-right: 0.75rem;
+  }
+}
+
+/* Context line */
+.blount-context {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(10, 22, 40, 0.75);
+  margin-bottom: 2rem;
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 5;
+}
+
+@media (min-width: 768px) {
+  .blount-context {
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Attribution with wax seal */
+.blount-attribution {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+/* Wax seal */
+.blount-seal {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #9b3b3b 0%, var(--burgundy) 40%, #5a1f24 100%);
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.2),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    2px 3px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  transform: rotate(-5deg);
+
+  /* Wax texture */
+  position: relative;
+  overflow: hidden;
+}
+
+.blount-seal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='wax'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.15' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23wax)' opacity='0.1'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.blount-seal-inner {
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+  .blount-seal {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.75rem;
+  }
+  .blount-seal-inner {
+    font-size: 0.8rem;
+  }
+}
+
+.blount-author {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+/* Signature with ink bleed effect */
+.blount-author.signature-text {
+  font-family: var(--font-script);
+  font-size: 2.25rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: #1a1a2e;
+  text-shadow:
+    0 0 1px rgba(26, 26, 46, 0.3),
+    0 0 2px rgba(26, 26, 46, 0.2),
+    1px 1px 0 rgba(26, 26, 46, 0.1);
+  filter: blur(0.2px);
+}
+
+.blount-title {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: rgba(10, 22, 40, 0.6);
+}
+
+@media (min-width: 768px) {
+  .blount-author {
+    font-size: 0.9rem;
+  }
+  .blount-author.signature-text {
+    font-size: 2.5rem;
+  }
+  .blount-title {
+    font-size: 0.75rem;
+  }
+}
+
+/* Subtle CTA */
+.blount-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--secondary);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.blount-cta:hover {
+  color: var(--burgundy);
+  gap: 0.75rem;
+}
+
+.blount-cta:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 4px;
+}

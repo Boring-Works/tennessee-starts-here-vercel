@@ -1,0 +1,147 @@
+.collectionsPage {
+  min-height: 100vh;
+  background: var(--midnight, #1a1a2e);
+}
+
+.collectionsContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10rem 1.5rem 4rem;
+}
+
+.collectionsContent {
+  /* Layout */
+}
+
+/* Header */
+.collectionsHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.collectionsTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin-bottom: 0.5rem;
+}
+
+.collectionsSubtitle {
+  font-size: 1.125rem;
+  color: rgba(232, 224, 208, 0.7);
+}
+
+/* Introduction */
+.collectionsIntro {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(232, 224, 208, 0.6);
+}
+
+/* Grid */
+.collectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Card */
+.collectionCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.collectionCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 168, 83, 0.4);
+  transform: translateY(-2px);
+}
+
+.collectionCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.collectionCardBadge {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold-leaf, var(--gold-primary));
+  background: rgba(212, 168, 83, 0.15);
+  border-radius: 0.125rem;
+}
+
+.collectionCardCount {
+  font-size: 0.8125rem;
+  color: rgba(232, 224, 208, 0.5);
+}
+
+.collectionCardTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: var(--gold-leaf, var(--gold-primary));
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.collectionCardDescription {
+  flex: 1;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(232, 224, 208, 0.7);
+  margin-bottom: 1.25rem;
+}
+
+.collectionCardLink {
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.5);
+  transition: color 0.15s;
+}
+
+.collectionCard:hover .collectionCardLink {
+  color: var(--gold-leaf, var(--gold-primary));
+}
+
+/* Back Link */
+.collectionsBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: rgba(232, 224, 208, 0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  transition: all 0.15s;
+}
+
+.collectionsBackLink:hover {
+  color: var(--almanac-parchment, #e8e0d0);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .collectionsTitle {
+    font-size: 2rem;
+  }
+
+  .collectionsGrid {
+    grid-template-columns: 1fr;
+  }
+}

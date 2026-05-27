@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "description": "Booking system configuration and reporting setup for Rocky Mount State Historic Site",
+    "version": "1.0.0",
+    "lastUpdated": "2025-01-30",
+    "staffInstructions": "This file configures how bookings are tracked, reported, and integrated with FareHarbor. Staff can reference this file to understand booking URLs, webhook events, and notification settings. Developers should update environment variables in Vercel for sensitive data like API keys and webhook URLs.",
+    "sections": {
+      "fareHarbor": "Core FareHarbor integration settings including account shortname and embed URLs",
+      "webhooks": "Webhook endpoints and event handlers for real-time booking updates",
+      "notifications": "Staff notification settings for important booking events",
+      "reporting": "Analytics and reporting configuration",
+      "capacityAlerts": "Automated alerts when events approach capacity",
+      "_urlPatterns": "Reference documentation for constructing FareHarbor URLs"
+    },
+    "relatedFiles": {
+      "components.json": "UI component configurations including booking buttons",
+      "operatingSchedule.json": "Hours of operation that affect booking availability",
+      "events.json": "Event catalog with FareHarbor item IDs"
+    }
+  },
+  "_aiRules": {
+    "description": "Rules for AI assistants editing this file",
+    "severity": "HIGH - This file controls PRODUCTION booking systems and revenue",
+    "beforeEditing": [
+      "ALWAYS update _meta.lastUpdated when making changes",
+      "ALWAYS read _meta.staffInstructions first",
+      "ALWAYS verify changes with user before committing",
+      "ALWAYS confirm with user before modifying any URL or endpoint",
+      "ALWAYS double-check that changes won't break production booking flow"
+    ],
+    "autoUpdates": {
+      "onEdit": "Update _meta.lastUpdated to today's date (YYYY-MM-DD)"
+    },
+    "prohibited": [
+      "Do NOT remove _meta or _aiRules sections",
+      "Do NOT make changes without user awareness",
+      "Do NOT modify webhook URLs without explicit user verification - these are PRODUCTION systems",
+      "Do NOT change API keys or secrets without user confirmation",
+      "Do NOT modify fareHarbor.shortname without verifying the account exists",
+      "Do NOT disable webhooks or notifications without explicit approval",
+      "Do NOT change analytics.measurementId without verifying the GA4 property"
+    ],
+    "fileSpecific": [
+      "Webhook endpoints connect to LIVE production systems - changes affect real bookings",
+      "API keys and secrets should ONLY be in Vercel environment variables, not this file",
+      "The fareHarbor.shortname must match the actual FareHarbor account",
+      "Changes to notification settings may affect staff operations",
+      "Changes to capacity thresholds affect when staff receive alerts"
+    ],
+    "sensitiveFields": {
+      "webhooks.endpoint": "Production webhook - verify before changing",
+      "fareHarbor.shortname": "Account identifier - must match FareHarbor dashboard",
+      "fareHarbor.dashboardUrl": "Links to live booking dashboard",
+      "notifications.slackChannel": "Staff communication channel",
+      "notifications.emailRecipients": "Staff notification list"
+    },
+    "whenUnsure": "STOP and ask the user - incorrect changes can break production booking flow and lose revenue"
+  },
+  "fareHarbor": {
+    "_description": "FareHarbor account settings and embed configuration",
+    "shortname": "rockymountmuseum",
+    "dashboardUrl": "https://fareharbor.com/dashboard/rockymountmuseum/",
+    "defaultBookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/",
+    "embedScript": "https://fareharbor.com/embeds/script/calendar/rockymountmuseum/?fallback=simple",
+    "lightframeEnabled": true,
+    "_lightframeNote": "Lightframe opens bookings in an overlay instead of navigating away from the site. Requires the FareHarbor embed script to be loaded on the page."
+  },
+  "webhooks": {
+    "_description": "Webhook configuration for receiving real-time booking notifications from FareHarbor",
+    "_setupInstructions": "To enable webhooks: 1) Deploy the webhook endpoint, 2) Configure the webhook URL in FareHarbor dashboard under Settings > Webhooks, 3) Add the webhook secret to Vercel environment variables as FAREHARBOR_WEBHOOK_SECRET",
+    "endpoint": "/api/fareharbor-webhook",
+    "events": ["booking.created", "booking.updated", "booking.cancelled", "booking.rebooked"],
+    "actions": {
+      "onBookingCreated": ["trackGA4Purchase", "revalidateEventsPage", "logBooking"],
+      "onBookingUpdated": ["logBookingUpdate"],
+      "onBookingCancelled": ["trackGA4Refund", "logCancellation", "notifyStaff"],
+      "onBookingRebooked": ["logRebook", "revalidateEventsPage"]
+    },
+    "_actionDescriptions": {
+      "trackGA4Purchase": "Send purchase event to Google Analytics 4 for revenue tracking",
+      "trackGA4Refund": "Send refund event to GA4 to adjust revenue data",
+      "revalidateEventsPage": "Trigger Next.js revalidation to update availability display",
+      "logBooking": "Record booking details to database for reporting",
+      "logCancellation": "Record cancellation with reason for analysis",
+      "notifyStaff": "Send notification to staff via configured channels"
+    }
+  },
+  "notifications": {
+    "_description": "Staff notification settings for important booking events",
+    "_staffNote": "DEVELOPER: Add Slack webhook URL in Vercel as SLACK_WEBHOOK_URL to enable Slack notifications. Add NOTIFICATION_EMAIL for email alerts.",
+    "slackEnabled": false,
+    "slackChannel": "#bookings",
+    "emailEnabled": false,
+    "emailRecipients": [],
+    "notifyOn": ["highValueBooking", "cancellation", "capacityWarning", "dailySummary"],
+    "_notificationTypes": {
+      "highValueBooking": "Bookings over $100 or groups of 10+",
+      "cancellation": "All cancellations with reason if provided",
+      "capacityWarning": "When an event reaches capacity warning threshold",
+      "dailySummary": "End-of-day summary of all bookings (sent at 6 PM)"
+    },
+    "thresholds": {
+      "highValueAmount": 100,
+      "largeGroupSize": 10
+    }
+  },
+  "reporting": {
+    "_description": "Analytics and reporting configuration for booking data",
+    "trackingEnabled": true,
+    "metrics": [
+      "dailyBookings",
+      "revenue",
+      "popularItems",
+      "peakTimes",
+      "cancellationRate",
+      "leadTime",
+      "groupSize"
+    ],
+    "_metricDescriptions": {
+      "dailyBookings": "Number of bookings per day",
+      "revenue": "Total and average revenue by period",
+      "popularItems": "Most booked events/tours ranked by volume",
+      "peakTimes": "Busiest days and times for bookings",
+      "cancellationRate": "Percentage of bookings that are cancelled",
+      "leadTime": "Average days between booking and event date",
+      "groupSize": "Average and distribution of group sizes"
+    },
+    "dashboardUrl": null,
+    "_dashboardNote": "Set to the URL of your analytics dashboard once configured (e.g., Vercel Analytics, custom dashboard)",
+    "exportFormats": ["csv", "json"],
+    "retentionDays": 365
+  },
+  "capacityAlerts": {
+    "_description": "Automated alerts when events approach capacity limits",
+    "enabled": false,
+    "warnAtPercent": 80,
+    "notifyAtPercent": 95,
+    "_alertLevels": {
+      "warning": "Staff notified that event is filling up - consider promoting alternatives",
+      "critical": "Event nearly full - prepare for waitlist or additional availability"
+    }
+  },
+  "analytics": {
+    "_description": "Google Analytics 4 integration for booking tracking",
+    "ga4Enabled": true,
+    "measurementId": null,
+    "_measurementIdNote": "Set in Vercel as NEXT_PUBLIC_GA4_MEASUREMENT_ID",
+    "trackEvents": {
+      "beginCheckout": true,
+      "purchase": true,
+      "refund": true,
+      "viewItem": true
+    },
+    "ecommerceEnabled": true,
+    "_ecommerceNote": "Enables GA4 ecommerce tracking for revenue reporting in Analytics dashboard"
+  },
+  "_urlPatterns": {
+    "_description": "Reference documentation for constructing FareHarbor booking URLs. Use these patterns when building dynamic booking links.",
+    "generalBooking": "https://fareharbor.com/embeds/book/{shortname}/",
+    "specificItem": "https://fareharbor.com/embeds/book/{shortname}/items/{itemId}/",
+    "calendar": "https://fareharbor.com/embeds/book/{shortname}/items/{itemId}/calendar/",
+    "availability": "https://fareharbor.com/embeds/book/{shortname}/items/{itemId}/availability/{date}/",
+    "_parameters": {
+      "shortname": "The FareHarbor account shortname (rockymountmuseum)",
+      "itemId": "The numeric ID of the bookable item from FareHarbor",
+      "date": "Date in YYYY-MM-DD format for availability lookup"
+    },
+    "_examples": {
+      "generalBooking": "https://fareharbor.com/embeds/book/rockymountmuseum/",
+      "specificItem": "https://fareharbor.com/embeds/book/rockymountmuseum/items/123456/",
+      "calendar": "https://fareharbor.com/embeds/book/rockymountmuseum/items/123456/calendar/",
+      "availability": "https://fareharbor.com/embeds/book/rockymountmuseum/items/123456/availability/2025-07-04/"
+    }
+  },
+  "_developerNotes": {
+    "envVariables": {
+      "FAREHARBOR_API_KEY": "API key for FareHarbor API access (optional for basic embeds)",
+      "FAREHARBOR_WEBHOOK_SECRET": "Secret for validating webhook signatures",
+      "SLACK_WEBHOOK_URL": "Slack incoming webhook URL for notifications",
+      "NOTIFICATION_EMAIL": "Email address for booking notifications",
+      "NEXT_PUBLIC_GA4_MEASUREMENT_ID": "Google Analytics 4 measurement ID"
+    },
+    "implementation": {
+      "webhookHandler": "Create at /app/api/fareharbor-webhook/route.ts",
+      "bookingComponents": "Use lightframe script for overlay booking experience",
+      "analytics": "Use gtag() calls for GA4 event tracking"
+    }
+  }
+}

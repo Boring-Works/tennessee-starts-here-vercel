@@ -1,0 +1,392 @@
+{
+  "_meta": {
+    "description": "External integrations and configurations - drop-in ready templates",
+    "updated": "2026-01-30",
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS verify changes with user before committing",
+        "CHECK the _accessLevel field on any section before editing"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+      },
+      "prohibited": [
+        "Do NOT remove _meta or _aiRules sections",
+        "Do NOT make changes without user awareness",
+        "NEVER expose API keys, secrets, or credentials in this file",
+        "NEVER edit fields marked as DEVELOPER_ONLY without explicit user request",
+        "NEVER modify envVar, apiEndpoint, or webhook fields without developer approval"
+      ],
+      "fileSpecific": [
+        "External service URLs (review links, FareHarbor, Z2Systems) require verification before changing",
+        "When adding new integrations, include _accessLevel and _staffNote fields",
+        "Respect the editingPermissions matrix - STAFF_EDITABLE vs DEVELOPER_ONLY",
+        "For review platform URLs, only update the 'url' or 'reviewUrl' fields, not 'placeId' or 'pageId'",
+        "Environment variables are secrets stored in Vercel - reference by name only, never include values"
+      ],
+      "securityRules": [
+        "API keys and webhook secrets must ONLY be referenced by environment variable name",
+        "Never suggest hardcoding credentials even in examples",
+        "Flag any section containing 'secret', 'key', 'token', or 'password' for developer review"
+      ],
+      "whenUnsure": "Ask the user for clarification, especially for DEVELOPER_ONLY sections"
+    },
+    "instructions": "Set 'configured' to true and add credentials/URLs when ready",
+    "envTemplate": ".env.example contains all required environment variables",
+
+    "staffInstructions": "This file configures external services like review platforms, booking systems, and analytics. MOST sections require a developer to change. Look for 'STAFF EDITABLE' labels to find what you CAN safely update yourself.",
+
+    "editingPermissions": {
+      "STAFF_EDITABLE": [
+        "Review platform URLs (if they change)",
+        "Social media handles and URLs",
+        "TripAdvisor/Google/Facebook review links",
+        "Z2Systems membership and donation URLs"
+      ],
+      "DEVELOPER_ONLY": [
+        "API keys and secrets (NEVER edit these)",
+        "Webhook endpoints and configurations",
+        "Analytics tracking IDs",
+        "Newsletter provider settings",
+        "Environment variable names",
+        "Any field starting with 'api', 'endpoint', 'key', or 'secret'"
+      ]
+    },
+
+    "howToUpdateReviewURLs": [
+      "1. Find the 'reviews' section under 'integrations'",
+      "2. Locate the platform you need to update (google, tripadvisor, facebook)",
+      "3. Change ONLY the 'url' or 'reviewUrl' field",
+      "4. Do NOT change 'enabled', 'configured', 'placeId', or 'pageId' without asking a developer",
+      "5. Test the new URL in your browser before saving"
+    ],
+
+    "warningSymbols": {
+      "envVar": "DEVELOPER ONLY - This references a secret stored in Vercel, not in this file",
+      "apiEndpoint": "DEVELOPER ONLY - API routes require code changes",
+      "webhook": "DEVELOPER ONLY - Webhooks involve server configuration",
+      "configured": "DEVELOPER ONLY - Changing this can break features"
+    }
+  },
+  "integrations": {
+    "newsletter": {
+      "_accessLevel": "DEVELOPER ONLY",
+      "_staffNote": "Email newsletter signup is not yet active. Contact developer when ready to set up.",
+      "name": "Email Newsletter Signup",
+      "location": "components/Footer.tsx",
+      "status": "placeholder",
+      "configured": false,
+      "provider": null,
+      "providerOptions": ["mailchimp", "convertkit", "buttondown", "custom"],
+      "config": {
+        "apiEndpoint": "/api/newsletter/subscribe",
+        "listId": null,
+        "audienceId": null,
+        "doubleOptIn": true,
+        "successRedirect": null,
+        "tags": ["website-signup", "prospect"]
+      },
+      "requiredEnvVars": ["NEWSLETTER_API_KEY", "NEWSLETTER_LIST_ID"],
+      "notes": "Form currently commented out. Mailchimp free tier supports 500 contacts.",
+      "priority": "high",
+      "documentation": {
+        "mailchimp": "https://mailchimp.com/developer/marketing/api/",
+        "convertkit": "https://developers.convertkit.com/",
+        "buttondown": "https://buttondown.email/api"
+      }
+    },
+    "reviews": {
+      "_accessLevel": "PARTIALLY STAFF EDITABLE",
+      "_staffNote": "You CAN update the review URLs if they change. Do NOT change 'enabled', 'configured', 'placeId', or 'pageId' fields.",
+      "name": "Review Platform Links",
+      "location": "docs/EMAIL-TEMPLATES.md, data/testimonials.json",
+      "status": "partial",
+      "configured": false,
+      "platforms": {
+        "google": {
+          "_staffEditable": ["reviewUrl"],
+          "_developerOnly": ["placeId", "enabled", "configured"],
+          "enabled": true,
+          "placeId": null,
+          "reviewUrl": "https://share.google/pH3cU63TP2bLc9SMV",
+          "configured": true,
+          "notes": "Rocky Mount Google Business review link - STAFF: Update 'reviewUrl' if Google provides a new share link"
+        },
+        "tripadvisor": {
+          "_staffEditable": ["url"],
+          "_developerOnly": ["managementPortal", "enabled", "configured"],
+          "enabled": true,
+          "url": "https://www.tripadvisor.com/Attraction_Review-g55272-d1866305-Reviews-Rocky_Mount_State_Historic_Site_Museum-Piney_Flats_Tennessee.html",
+          "managementPortal": null,
+          "configured": false,
+          "notes": "STAFF: Update 'url' if TripAdvisor page URL changes. Need TripAdvisor management portal access for responding to reviews."
+        },
+        "facebook": {
+          "_staffEditable": ["reviewUrl"],
+          "_developerOnly": ["pageId", "enabled", "configured"],
+          "enabled": true,
+          "pageId": "rockymountmuseum",
+          "reviewUrl": "https://www.facebook.com/rockymountmuseum/reviews",
+          "configured": true,
+          "notes": "STAFF: Update 'reviewUrl' only if Facebook page URL changes"
+        },
+        "yelp": {
+          "_staffEditable": ["url"],
+          "_developerOnly": ["businessId", "enabled", "configured"],
+          "enabled": false,
+          "businessId": null,
+          "url": null,
+          "configured": false,
+          "notes": "Yelp not currently in use. Contact developer to enable."
+        }
+      },
+      "priority": "medium"
+    },
+    "fareHarbor": {
+      "_accessLevel": "DEVELOPER ONLY",
+      "_staffNote": "FareHarbor booking is managed through the FareHarbor dashboard, not this file. Contact developer for any changes here.",
+      "name": "FareHarbor Booking",
+      "location": "components/booking/",
+      "status": "active",
+      "configured": true,
+      "shortname": "rockymountmuseum",
+      "config": {
+        "scriptUrl": "https://fareharbor.com/embeds/script/calendar/rockymountmuseum/?fallback=simple",
+        "scriptStrategy": "lazyOnload",
+        "lightframeModal": true,
+        "defaultBookingUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/"
+      },
+      "webhooks": {
+        "enabled": true,
+        "endpoint": "/api/fareharbor-webhook",
+        "signatureVerification": true,
+        "envVars": ["FAREHARBOR_WEBHOOK_SECRET", "FAREHARBOR_WEBHOOK_SECRET_ZAPIER"]
+      },
+      "notes": "Fully configured - items managed in FareHarbor dashboard",
+      "priority": "complete"
+    },
+    "analytics": {
+      "_accessLevel": "DEVELOPER ONLY",
+      "_staffNote": "Analytics tracking is fully automated. Do not modify any values in this section.",
+      "name": "Analytics Suite",
+      "location": "components/Analytics.tsx, lib/analytics.ts",
+      "status": "active",
+      "services": {
+        "vercel": {
+          "name": "Vercel Analytics",
+          "location": "app/layout.tsx",
+          "configured": true,
+          "notes": "Verify enabled in Vercel project settings"
+        },
+        "ga4Client": {
+          "name": "Google Analytics 4 (Client)",
+          "configured": true,
+          "envVar": "NEXT_PUBLIC_GA_ID",
+          "events": ["page_view", "begin_checkout"]
+        },
+        "ga4Server": {
+          "name": "Google Analytics 4 (Server)",
+          "location": "lib/analytics-server.ts",
+          "configured": false,
+          "envVars": ["NEXT_PUBLIC_GA_ID", "GA4_API_SECRET"],
+          "events": ["purchase", "refund"],
+          "notes": "Needs GA4_API_SECRET for webhook purchase tracking"
+        },
+        "facebookPixel": {
+          "name": "Facebook Pixel",
+          "configured": true,
+          "envVar": "NEXT_PUBLIC_FB_PIXEL_ID",
+          "events": ["PageView", "InitiateCheckout"]
+        }
+      },
+      "priority": "medium"
+    },
+    "reviewStation": {
+      "_accessLevel": "DEVELOPER ONLY",
+      "_staffNote": "The iPad review station is fully set up. Contact developer if you need to change the password or setup.",
+      "name": "On-Site Review iPad Station",
+      "location": "public/review-station.html",
+      "status": "ready",
+      "configured": true,
+      "authEndpoint": "/api/review-station/verify",
+      "storage": "localStorage",
+      "requiredEnvVars": ["REVIEW_STATION_PASSWORD"],
+      "notes": "Standalone HTML form for iPad. Password verified via API (not hardcoded). Data exports to CSV.",
+      "priority": "complete"
+    },
+    "z2systems": {
+      "_accessLevel": "PARTIALLY STAFF EDITABLE",
+      "_staffNote": "You CAN update the membership and donation URLs if Z2Systems provides new links. Do NOT change 'domain' or 'orgId'.",
+      "name": "Z2Systems Membership/Donations",
+      "location": "Footer.tsx, membership page, support page",
+      "status": "active",
+      "configured": true,
+      "config": {
+        "_developerOnly": true,
+        "domain": "rockymountmuseum.z2systems.com",
+        "orgId": "rockymountmuseum"
+      },
+      "urls": {
+        "_staffEditable": true,
+        "_instructions": "Update these URLs if Z2Systems provides new form links",
+        "membership": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+        "donation": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/donation.jsp"
+      },
+      "notes": "Currently hardcoded - could be moved to this config",
+      "priority": "complete"
+    },
+    "weather": {
+      "_accessLevel": "DEVELOPER ONLY",
+      "_staffNote": "Weather services for the Almanac page. Fully automated - no changes needed.",
+      "name": "Weather Data Services (Almanac)",
+      "location": "app/api/*, lib/almanac/*",
+      "status": "active",
+      "configured": true,
+      "services": {
+        "aqicn": {
+          "name": "Air Quality (AQICN)",
+          "endpoint": "/api/air-quality",
+          "envVar": "AQICN_API_KEY",
+          "free": true,
+          "caching": "300s"
+        },
+        "rainviewer": {
+          "name": "Precipitation Radar (RainViewer)",
+          "endpoint": "/api/precipitation-radar",
+          "apiKey": null,
+          "free": true,
+          "caching": "300s"
+        },
+        "usgs": {
+          "name": "Stream Levels (USGS)",
+          "endpoint": "/api/stream-levels",
+          "apiKey": null,
+          "free": true
+        },
+        "nws": {
+          "name": "Weather Alerts (NWS)",
+          "endpoint": "/api/nws-alerts",
+          "apiKey": null,
+          "free": true
+        }
+      },
+      "notes": "All free/public APIs - excellent weather infrastructure",
+      "priority": "complete"
+    },
+    "maps": {
+      "_accessLevel": "PARTIALLY STAFF EDITABLE",
+      "_staffNote": "You CAN update the directions URL if the address changes. Do NOT change other settings.",
+      "name": "Map & Location Services",
+      "location": "Footer.tsx, PlanYourVisit.tsx",
+      "status": "active",
+      "configured": true,
+      "provider": "google-maps-links",
+      "config": {
+        "directionsUrl": "https://maps.google.com/?q=200+Hyder+Hill+Road+Piney+Flats+TN",
+        "embedApiKey": null,
+        "useEmbed": false
+      },
+      "notes": "Using direct Google Maps links (no API key needed). STAFF: Update directionsUrl only if site address changes.",
+      "priority": "complete"
+    },
+    "calendar": {
+      "_accessLevel": "DEVELOPER ONLY",
+      "_staffNote": "Calendar export feature is ready but not yet connected to event pages. Contact developer to enable.",
+      "name": "Event Calendar Export",
+      "location": "lib/calendar/generateICS.ts",
+      "status": "ready",
+      "configured": false,
+      "features": {
+        "icsDownload": true,
+        "googleCalendarAdd": false,
+        "appleCalendarAdd": false
+      },
+      "notes": "ICS generation code exists - needs to be wired to event pages",
+      "priority": "low"
+    }
+  },
+  "social": {
+    "_accessLevel": "STAFF EDITABLE",
+    "_staffNote": "You CAN update social media handles and URLs when accounts change. These appear in the website footer.",
+    "_instructions": "To update: Change both 'handle' AND 'url' together. Set 'configured' to true when complete, false if account doesn't exist.",
+    "name": "Social Media Links",
+    "location": "data/siteInfo.json",
+    "status": "partial",
+    "platforms": {
+      "facebook": {
+        "handle": "rockymountmuseum",
+        "url": "https://facebook.com/rockymountmuseum",
+        "configured": true
+      },
+      "instagram": {
+        "handle": "rockymounttn",
+        "url": "https://instagram.com/rockymounttn",
+        "configured": true
+      },
+      "tiktok": {
+        "handle": "rockymounttn",
+        "url": "https://tiktok.com/@rockymounttn",
+        "configured": true
+      },
+      "twitter": {
+        "handle": null,
+        "url": null,
+        "configured": false,
+        "notes": "Referenced in metadata but handle not set - update when account is created"
+      },
+      "youtube": {
+        "handle": null,
+        "url": null,
+        "configured": false,
+        "notes": "Update when YouTube channel is created"
+      }
+    }
+  },
+  "futureIntegrations": {
+    "_accessLevel": "DEVELOPER ONLY",
+    "_staffNote": "These are planned features for the future. Contact developer if you want to prioritize any of these.",
+    "socialAutoPost": {
+      "name": "Social Media Auto-Posting",
+      "status": "planned",
+      "notes": "Auto-share new events to Facebook/Instagram via Meta Graph API",
+      "priority": "future"
+    },
+    "crmSync": {
+      "name": "CRM Integration",
+      "status": "future",
+      "notes": "Sync newsletter signups to Salesforce/HubSpot",
+      "priority": "future"
+    },
+    "smsNotifications": {
+      "name": "SMS Event Reminders",
+      "status": "future",
+      "notes": "Twilio integration for event reminders",
+      "priority": "future"
+    }
+  },
+  "environmentVariables": {
+    "_accessLevel": "DEVELOPER ONLY",
+    "_staffNote": "Environment variables are secrets stored in Vercel, NOT in this file. Never share or edit these values. Contact developer for any changes.",
+    "_instructions": "Add these to Vercel project settings. Template in .env.example",
+    "configured": [
+      { "name": "NEXT_PUBLIC_GA_ID", "service": "Google Analytics 4", "status": "active" },
+      { "name": "NEXT_PUBLIC_FB_PIXEL_ID", "service": "Facebook Pixel", "status": "active" },
+      { "name": "AQICN_API_KEY", "service": "Air Quality API", "status": "active" }
+    ],
+    "ready": [
+      { "name": "GA4_API_SECRET", "service": "GA4 Server-Side Events", "status": "needs-value" },
+      {
+        "name": "FAREHARBOR_WEBHOOK_SECRET",
+        "service": "FareHarbor Webhooks",
+        "status": "needs-value"
+      }
+    ],
+    "future": [
+      { "name": "NEWSLETTER_API_KEY", "service": "Email newsletter provider", "status": "pending" },
+      { "name": "NEWSLETTER_LIST_ID", "service": "Email newsletter list ID", "status": "pending" }
+    ]
+  }
+}

@@ -1,0 +1,621 @@
+/* ============================================
+   EVIDENCE TRAILS COMPONENT
+   Narrative navigation through documents
+   ============================================ */
+
+.trailsSection {
+  /* === Color Palette (from Evidence Room) === */
+  --wood-dark: #2a1f1a;
+  --wood-medium: #3d2e24;
+  --wood-light: #4a3728;
+  --cream-dark: #f5f0e6;
+  --cream-medium: #faf7f0;
+  --cream-light: #fffef8;
+  --brass: var(--gold-primary);
+  --brass-dark: var(--gold-hover);
+  --brass-glow: var(--gold-shimmer);
+  --ink: #1a1a1a;
+  --ink-faded: #2d2926;
+  --ink-light: #4a443e;
+  --leather: #8b4513;
+  --leather-dark: #654321;
+  --transition-dignified: 0.35s var(--nav-ease-spring);
+
+  /* Document type colors */
+  --type-letter: var(--brass);
+  --type-treaty: #8b4513;
+  --type-proclamation: #8b0000;
+  --type-newspaper: #4a5568;
+  --type-inventory: #2d5a27;
+  --type-legal: #483d8b;
+
+  /* Paper texture */
+  --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+
+  background: var(--paper-texture), var(--cream-medium);
+  padding: 4rem 1rem;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.trailsHeader {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+}
+
+.badge {
+  font-family: var(--font-serif);
+  font-size: 0.625rem;
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  padding: 0.375rem 1rem;
+  background: linear-gradient(180deg, var(--gold-shimmer) 0%, rgba(184, 134, 11, 0.08) 100%);
+  border: 1px solid var(--gold-shimmer);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: var(--wood-dark);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9375rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ============================================
+   TRAIL TABS (Desktop)
+   ============================================ */
+
+.trailTabs {
+  display: none;
+  justify-content: center;
+  gap: 0.25rem;
+  max-width: 56rem;
+  margin: 0 auto 2rem;
+  padding: 0.25rem;
+  background: var(--paper-texture), var(--cream-light);
+  border: 1px solid rgba(42, 31, 26, 0.1);
+  border-radius: 4px;
+}
+
+.trailTab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--ink-light);
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+}
+
+.trailTab:hover {
+  color: var(--wood-dark);
+  background: var(--gold-shimmer);
+}
+
+.trailTabActive {
+  color: var(--brass-dark);
+  background: var(--gold-shimmer);
+  font-weight: 500;
+  box-shadow: var(--shadow-xs);
+}
+
+.tabIcon {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.tabTitle {
+  white-space: nowrap;
+}
+
+/* ============================================
+   TRAIL CONTENT
+   ============================================ */
+
+.trailContent {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--paper-texture), var(--cream-light);
+  border: 1px solid rgba(42, 31, 26, 0.08);
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.trailIntro {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gold-shimmer);
+}
+
+.trailTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--wood-dark);
+  font-weight: 400;
+  margin-bottom: 0.375rem;
+}
+
+.trailIcon {
+  font-size: 1.75rem;
+  opacity: 0.8;
+}
+
+.trailSubtitle {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.trailDescription {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9375rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* ============================================
+   DOCUMENT PATH
+   ============================================ */
+
+.documentPath {
+  position: relative;
+  padding-left: 3rem;
+}
+
+/* Vertical connecting line */
+.pathLine {
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--brass) 0%, var(--leather) 50%, var(--brass) 100%);
+  border-radius: 1px;
+}
+
+/* ============================================
+   DOCUMENT CARD
+   ============================================ */
+
+.documentCard {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.documentCard:last-child {
+  margin-bottom: 0;
+}
+
+/* Path node (numbered circle) */
+.pathNode {
+  position: absolute;
+  left: -3rem;
+  top: 0.25rem;
+  width: 32px;
+  height: 32px;
+  background: var(--cream-light);
+  border: 3px solid var(--brass);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-dignified);
+  z-index: 1;
+}
+
+.nodeNumber {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--brass-dark);
+}
+
+/* Type-specific node colors */
+.typeLetter .pathNode,
+.typeLetter.pathNode {
+  border-color: var(--type-letter);
+}
+
+.typeLetter .nodeNumber {
+  color: var(--type-letter);
+}
+
+.typeTreaty .pathNode,
+.typeTreaty.pathNode {
+  border-color: var(--type-treaty);
+}
+
+.typeTreaty .nodeNumber {
+  color: var(--type-treaty);
+}
+
+.typeProclamation .pathNode,
+.typeProclamation.pathNode {
+  border-color: var(--type-proclamation);
+}
+
+.typeProclamation .nodeNumber {
+  color: var(--type-proclamation);
+}
+
+.typeNewspaper .pathNode,
+.typeNewspaper.pathNode {
+  border-color: var(--type-newspaper);
+}
+
+.typeNewspaper .nodeNumber {
+  color: var(--type-newspaper);
+}
+
+.typeInventory .pathNode,
+.typeInventory.pathNode {
+  border-color: var(--type-inventory);
+}
+
+.typeInventory .nodeNumber {
+  color: var(--type-inventory);
+}
+
+.typeLegal .pathNode,
+.typeLegal.pathNode {
+  border-color: var(--type-legal);
+}
+
+.typeLegal .nodeNumber {
+  color: var(--type-legal);
+}
+
+/* Document link card */
+.documentLink {
+  display: block;
+  padding: 1.25rem;
+  background: var(--cream-medium);
+  border: 1px solid rgba(42, 31, 26, 0.06);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+}
+
+.documentLink:hover {
+  border-color: var(--brass);
+  box-shadow: var(--shadow-xs);
+  transform: translateX(4px);
+}
+
+.documentCard:hover .pathNode {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px var(--brass-glow);
+}
+
+.documentDate {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.375rem;
+}
+
+.documentTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--wood-dark);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.documentExcerpt {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.875rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.documentArrow {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--leather);
+  transition: color var(--transition-dignified);
+}
+
+.documentLink:hover .documentArrow {
+  color: var(--brass-dark);
+}
+
+/* ============================================
+   TRAIL CTA
+   ============================================ */
+
+.trailCTA {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gold-shimmer);
+  text-align: center;
+}
+
+.startButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  color: var(--cream-light);
+  background: linear-gradient(180deg, var(--wood-medium) 0%, var(--wood-dark) 100%);
+  border: 1px solid var(--wood-dark);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+  box-shadow:
+    var(--shadow-xs),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.startButton:hover {
+  background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-medium) 100%);
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.startIcon {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.ctaNote {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--ink-light);
+}
+
+/* ============================================
+   TRAIL CARDS (Mobile-first grid)
+   ============================================ */
+
+.trailCards {
+  margin-top: 2.5rem;
+}
+
+.cardsHeading {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.trailCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  background: var(--paper-texture), var(--cream-light);
+  border: 1px solid rgba(42, 31, 26, 0.08);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+}
+
+.trailCard:hover {
+  border-color: var(--gold-shimmer);
+  box-shadow: var(--shadow-xs);
+}
+
+.trailCardActive {
+  border-color: var(--brass);
+  background: var(--paper-texture), #fffef8;
+  box-shadow: var(--shadow-xs);
+}
+
+.cardIcon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--wood-dark);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.cardSubtitle {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.75rem;
+  color: var(--ink-light);
+  line-height: 1.4;
+}
+
+.cardCount {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.625rem;
+  color: var(--brass-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   RESPONSIVE - TABLET
+   ============================================ */
+
+@media (min-width: 640px) {
+  .trailsSection {
+    padding: 5rem 1.5rem;
+  }
+
+  .trailContent {
+    padding: 2.5rem;
+  }
+
+  .documentPath {
+    padding-left: 4rem;
+  }
+
+  .pathLine {
+    left: 1.25rem;
+  }
+
+  .pathNode {
+    left: -4rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - DESKTOP
+   ============================================ */
+
+@media (min-width: 768px) {
+  .trailTabs {
+    display: flex;
+  }
+
+  .trailCards {
+    display: none;
+  }
+
+  .trailsSection {
+    padding: 5rem 2rem;
+  }
+
+  .trailContent {
+    padding: 3rem;
+  }
+
+  .trailTitle {
+    font-size: 1.75rem;
+  }
+
+  .documentPath {
+    padding-left: 5rem;
+  }
+
+  .pathLine {
+    left: 1.5rem;
+    width: 3px;
+  }
+
+  .pathNode {
+    left: -5rem;
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .nodeNumber {
+    font-size: 0.875rem;
+  }
+
+  .documentLink {
+    padding: 1.5rem;
+  }
+
+  .documentTitle {
+    font-size: 1.0625rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - LARGE DESKTOP
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .trailTab {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .tabIcon {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .trailTab,
+  .documentLink,
+  .pathNode,
+  .startButton,
+  .trailCard,
+  .documentArrow {
+    transition: none;
+  }
+
+  .documentLink:hover,
+  .startButton:hover,
+  .documentCard:hover .pathNode {
+    transform: none;
+  }
+}
+
+/* Focus states for accessibility */
+.trailTab:focus-visible,
+.documentLink:focus-visible,
+.startButton:focus-visible,
+.trailCard:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}

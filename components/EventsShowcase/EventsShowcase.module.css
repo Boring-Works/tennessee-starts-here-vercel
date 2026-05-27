@@ -1,0 +1,474 @@
+.showcase-section {
+  padding: 5rem 0;
+  background: var(--primary);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .showcase-section {
+    padding: 6rem 0;
+  }
+}
+
+/* Star/constellation pattern background */
+.showcase-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, var(--gold-shimmer) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 25% 60%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(1px 1px at 40% 15%, var(--gold-shimmer) 1px, transparent 1px),
+    radial-gradient(2px 2px at 55% 45%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(1px 1px at 70% 80%, var(--gold-shimmer) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 85% 25%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(1px 1px at 15% 75%, var(--gold-shimmer) 1px, transparent 1px),
+    radial-gradient(1px 1px at 60% 10%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 90% 70%, var(--gold-shimmer) 1px, transparent 1px),
+    radial-gradient(1px 1px at 35% 90%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(2px 2px at 5% 50%, var(--gold-shimmer) 1px, transparent 1px),
+    radial-gradient(1px 1px at 75% 35%, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.showcase-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.showcase-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.showcase-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.showcase-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 5vw, 2.75rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.showcase-intro {
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 36rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid with divider */
+.showcase-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .showcase-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .showcase-grid {
+    grid-template-columns: 1.2fr auto 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .showcase-featured {
+    grid-row: span 1;
+  }
+}
+
+/* Ornamental divider between featured and categories */
+.showcase-divider {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .showcase-divider--vertical {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .showcase-divider--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    align-self: stretch;
+  }
+
+  .showcase-divider-line {
+    flex: 1;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      var(--gold-shimmer) 20%,
+      var(--gold-shimmer) 80%,
+      transparent 100%
+    );
+  }
+
+  .showcase-divider-ornament {
+    font-size: 0.6rem;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+}
+
+/* Featured Event Card with ribbon and calendar */
+.showcase-featured {
+  position: relative;
+  background: var(--gold-shimmer);
+  border: 1px solid var(--gold-shimmer);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.showcase-featured:hover {
+  background: var(--gold-shimmer);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--shadow-gold-lg);
+}
+
+/* Ribbon badge - wraps around corner */
+.showcase-ribbon {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.showcase-ribbon-text {
+  position: absolute;
+  top: 18px;
+  right: -32px;
+  width: 130px;
+  padding: 0.375rem 0;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--primary);
+  background: var(--accent);
+  transform: rotate(45deg);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Calendar-style date element */
+.showcase-calendar {
+  position: relative;
+  width: 80px;
+  background: white;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.showcase-calendar-month {
+  display: block;
+  padding: 0.375rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--burgundy);
+}
+
+.showcase-calendar-day {
+  display: block;
+  padding: 0.5rem 0 0.25rem;
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary);
+}
+
+.showcase-calendar-year {
+  display: block;
+  padding-bottom: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(10, 22, 40, 0.5);
+}
+
+/* Torn paper edge effect */
+.showcase-calendar-tear {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background:
+    linear-gradient(135deg, white 33.33%, transparent 33.33%),
+    linear-gradient(225deg, white 33.33%, transparent 33.33%);
+  background-size: 8px 100%;
+}
+
+.showcase-featured-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-title {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.showcase-desc {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.showcase-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.showcase-link:hover {
+  color: white;
+  gap: 0.75rem;
+}
+
+/* Category Cards with icons and hover glow */
+.showcase-category {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.showcase-category:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--shadow-gold-sm);
+}
+
+/* Category icons */
+.showcase-category-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.showcase-category-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-category:hover .showcase-category-icon {
+  opacity: 1;
+}
+
+.showcase-category-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.showcase-category-count {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.showcase-category-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.showcase-category-desc {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.showcase-speakers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.showcase-speaker {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.showcase-more {
+  font-size: 0.7rem;
+  color: var(--accent);
+  padding: 0.25rem 0;
+}
+
+.showcase-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.showcase-list li {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0.3rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.showcase-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.4rem;
+  top: 0.55rem;
+  opacity: 0.8;
+}
+
+/* Footer with animated stats */
+.showcase-footer {
+  text-align: center;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.showcase-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.showcase-stat {
+  text-align: center;
+}
+
+.showcase-stat-value {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.showcase-stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.25rem;
+}
+
+.showcase-stat-divider {
+  color: var(--gold-shimmer);
+  font-size: 0.6rem;
+}
+
+.showcase-cta {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.showcase-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.showcase-cta:hover::before {
+  transform: translateX(100%);
+}
+
+.showcase-cta:hover {
+  background: white;
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}

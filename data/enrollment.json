@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "description": "First 250 enrollment tracking - controls enrollment counter displays and availability status across the website",
+    "updated": "2026-01-30",
+    "usage": "import enrollment from '@/data/enrollment.json'",
+
+    "staffInstructions": {
+      "whenToEdit": [
+        "When new visitors enroll in the First 250 program",
+        "When correcting enrollment count after verification",
+        "When adjusting total available spots (rare)"
+      ],
+      "whenNotToEdit": [
+        "Program details or descriptions (edit first-250 page content instead)",
+        "Ticket pricing (edit siteInfo.json instead)",
+        "Event information (edit events.json instead)"
+      ],
+      "howToEdit": "On GitHub: Navigate to data/enrollment.json > Click pencil icon > Update currentEnrolled number > Click 'Commit changes'",
+      "importantNotes": [
+        "currentEnrolled should never exceed totalSpots",
+        "When program fills up (currentEnrolled = totalSpots), website shows 'SOLD OUT' messaging",
+        "Double-check enrollment numbers before updating - this displays publicly"
+      ]
+    },
+
+    "fieldGuide": {
+      "currentEnrolled": {
+        "type": "number",
+        "description": "Number of visitors currently enrolled in the First 250 program",
+        "displayLocation": "First 250 page, homepage counter, enrollment CTAs",
+        "range": "0 to totalSpots",
+        "example": 147
+      },
+      "totalSpots": {
+        "type": "number",
+        "description": "Maximum number of spots available in the First 250 program",
+        "displayLocation": "Enrollment counters, availability messaging",
+        "note": "Should only change if program capacity is officially modified",
+        "default": 250
+      },
+      "note": {
+        "type": "string",
+        "description": "Internal reminder for editors (not displayed on website)",
+        "deprecated": "Use _meta.staffInstructions instead for guidance"
+      }
+    },
+
+    "rules": {
+      "validation": {
+        "currentEnrolled": "Must be >= 0 and <= totalSpots",
+        "totalSpots": "Must be a positive integer, typically 250"
+      },
+      "display": {
+        "spotsRemaining": "Calculated as totalSpots - currentEnrolled",
+        "soldOut": "Shows when currentEnrolled >= totalSpots",
+        "urgency": "May show urgency messaging when spotsRemaining < 50"
+      }
+    },
+
+    "commonMistakes": [
+      "Setting currentEnrolled higher than totalSpots (causes negative 'spots remaining')",
+      "Forgetting to update after enrollment event",
+      "Using approximate numbers instead of verified count",
+      "Updating without checking against actual enrollment records"
+    ]
+  },
+
+  "_aiRules": {
+    "description": "Rules for AI assistants editing this file",
+    "beforeEditing": [
+      "ALWAYS update _meta.updated when making changes",
+      "ALWAYS read _meta.staffInstructions first",
+      "ALWAYS verify changes with user before committing",
+      "ALWAYS confirm enrollment numbers come from official source"
+    ],
+    "autoUpdates": {
+      "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+    },
+    "prohibited": [
+      "Do NOT remove _meta or _aiRules sections",
+      "Do NOT make changes without user awareness",
+      "Do NOT set currentEnrolled > totalSpots",
+      "Do NOT guess enrollment numbers - must be from verified source"
+    ],
+    "fileSpecific": [
+      "This is a simple counter file - only two numbers matter: currentEnrolled and totalSpots",
+      "Enrollment drives urgency messaging - inaccurate numbers affect visitor decisions",
+      "When program is sold out, website behavior changes automatically",
+      "Ask user to confirm enrollment numbers before updating"
+    ],
+    "validation": {
+      "currentEnrolled": "Must be integer >= 0 and <= totalSpots",
+      "totalSpots": "Must be positive integer, default 250"
+    },
+    "whenUnsure": "Ask the user for the verified enrollment count from official records"
+  },
+
+  "currentEnrolled": 147,
+  "totalSpots": 250,
+  "note": "Update this file when enrollment changes. All pages pull from here."
+}

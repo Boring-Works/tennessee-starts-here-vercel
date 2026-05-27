@@ -1,0 +1,145 @@
+{
+  "_meta": {
+    "description": "Template for recurring annual events - copy and update dates each year",
+    "instructions": "1. Copy events from this file to events.json, 2. Update year in dates (e.g., 2026 → 2027), 3. Verify dates fall on open days (Wed-Sat), 4. Add any new one-off events",
+    "usage": "Annual copy-paste template, saves 15+ minutes each year",
+    "lastUpdated": "2026-01-30",
+    "version": "1.0.0"
+  },
+  "instructions": {
+    "step1": "For each event below, update the year in the date field",
+    "step2": "Example: '2026-07-04' becomes '2027-07-04'",
+    "step3": "Verify the resulting date is a Wed, Thu, Fri, or Sat",
+    "step4": "Check the event doesn't fall during closures (Thanksgiving week, Dec 21-Jan 5)",
+    "step5": "Copy to events.json and add any new 2027-specific events"
+  },
+  "recurringEvents": [
+    {
+      "id": "colonial-independence-day",
+      "title": "Colonial Independence Day",
+      "dateTemplate": "2026-07-04",
+      "dateFor2027": "2027-07-04",
+      "day": "Saturday",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "signature",
+      "category": "festival",
+      "description": "America's 250th birthday celebration at Rocky Mount. Experience colonial-era festivities, musket demonstrations, period music, and family activities. Special food and crafts.",
+      "featured": true,
+      "requiresTicket": true,
+      "recurring": "annual",
+      "notes": "July 4 is always the same calendar date; verify it falls on open day (Wed-Sat)"
+    },
+    {
+      "id": "first-families-reunion",
+      "title": "First Families Reunion",
+      "dateTemplate": "2026-08-15",
+      "dateFor2027": "2027-08-15",
+      "day": "Saturday",
+      "time": "10:00 AM - 5:00 PM",
+      "type": "recurring",
+      "category": "festival",
+      "description": "Annual homecoming for descendant families of Rocky Mount's founding families. Genealogy workshops, family stories, period-appropriate meals, and networking.",
+      "featured": true,
+      "requiresTicket": false,
+      "recurring": "annual",
+      "notes": "Typically mid-August; adjust date if August 15 doesn't fall on Wed-Sat"
+    },
+    {
+      "id": "founders-day-celebration",
+      "title": "Founder's Day Celebration",
+      "dateTemplate": "2026-09-20",
+      "dateFor2027": "2027-09-20",
+      "day": "Sunday",
+      "time": "2:00 PM - 5:00 PM",
+      "type": "recurring",
+      "category": "festival",
+      "description": "Commemorating William Cobb's founding of Rocky Mount. Historical reenactments, period crafts, colonial cooking demonstrations, and educational presentations.",
+      "featured": false,
+      "requiresTicket": false,
+      "recurring": "annual",
+      "notes": "CHECK: September 20, 2027 is a Monday - may need adjustment to nearest Saturday"
+    },
+    {
+      "id": "harvest-festival",
+      "title": "Autumn Harvest Festival",
+      "dateTemplate": "2026-10-03",
+      "dateFor2027": "2027-10-03",
+      "day": "Saturday",
+      "time": "10:00 AM - 5:00 PM",
+      "type": "recurring",
+      "category": "seasonal",
+      "description": "Celebrating autumn and harvest traditions. Corn maze, apple cider pressing, period games, harvest crafts, and seasonal food demonstrations.",
+      "featured": true,
+      "requiresTicket": false,
+      "recurring": "annual",
+      "notes": "Early October, adjust to nearest Saturday if needed"
+    },
+    {
+      "id": "heritage-skills-series",
+      "title": "Heritage Skills Series: Blacksmithing",
+      "dateTemplate": "2026-04-11",
+      "dateFor2027": "2027-04-11",
+      "day": "Saturday",
+      "time": "1:00 PM - 3:00 PM",
+      "type": "recurring",
+      "category": "educational",
+      "description": "Learn traditional blacksmithing techniques from costumed interpreters. Hands-on demonstrations of frontier craftsmanship and tools.",
+      "speaker": "Master Blacksmith (TBD)",
+      "featured": false,
+      "requiresTicket": false,
+      "recurring": "monthly",
+      "notes": "Recurring monthly on Saturdays during season; this is April example. May need dates adjusted."
+    },
+    {
+      "id": "heritage-skills-weaving",
+      "title": "Heritage Skills Series: Weaving & Textiles",
+      "dateTemplate": "2026-05-09",
+      "dateFor2027": "2027-05-09",
+      "day": "Saturday",
+      "time": "1:00 PM - 3:00 PM",
+      "type": "recurring",
+      "category": "educational",
+      "description": "Discover 18th-century textile arts. Watch weavers at traditional looms and learn about colonial clothing and household fabrics.",
+      "featured": false,
+      "requiresTicket": false,
+      "recurring": "monthly",
+      "notes": "May date may vary; adjust to Saturday within first two weeks"
+    },
+    {
+      "id": "heritage-skills-cooking",
+      "title": "Heritage Skills Series: Frontier Cooking",
+      "dateTemplate": "2026-06-06",
+      "dateFor2027": "2027-06-06",
+      "day": "Saturday",
+      "time": "11:00 AM - 1:00 PM",
+      "type": "recurring",
+      "category": "educational",
+      "description": "Experience authentic frontier cooking. Learn about colonial recipes, food preservation, and hearth cooking techniques. Sample period-appropriate food.",
+      "featured": false,
+      "requiresTicket": false,
+      "recurring": "monthly",
+      "notes": "June date; adjust to Saturday if needed"
+    }
+  ],
+  "onetimeEvents2026": [
+    {
+      "id": "tn230-celebration",
+      "title": "Tennessee 230 Years Celebration",
+      "date": "2026-06-01",
+      "description": "Special celebration of Tennessee's 230th statehood anniversary (1796-2026).",
+      "note": "One-time event for 2026 only; do not include in recurring template"
+    }
+  ],
+  "summaryFor2027": {
+    "totalRecurringEvents": 7,
+    "estimatedNewEvents": 8,
+    "estimatedTotalForYear": 15,
+    "note": "Add project-specific new events after filling in recurring templates"
+  },
+  "helperTable": {
+    "description": "Quick reference for manually checking if dates fall on open days",
+    "openDays": ["Wednesday", "Thursday", "Friday", "Saturday"],
+    "closedDays": ["Sunday", "Monday", "Tuesday"],
+    "process": "1. Look up date on calendar, 2. Check what day of week it is, 3. Verify it's in openDays list, 4. If not, adjust to nearest open day"
+  }
+}

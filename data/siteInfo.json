@@ -1,0 +1,397 @@
+{
+  "_meta": {
+    "description": "Site-wide information - hours, prices, locations, contact details, historical figures, and America 250 program details",
+    "updated": "2026-01-30",
+    "usage": "import siteInfo from '@/data/siteInfo.json'",
+    "staffInstructions": "This file contains all the basic information about Rocky Mount that appears throughout the website. Edit this file when admission prices change, contact info updates, or hours text needs adjustment. Always save a backup before editing. Changes go live automatically after saving.",
+    "fieldGuide": {
+      "site": "Basic site identity - name, tagline, historical dates. RARELY needs editing.",
+      "location": "Physical address, GPS coordinates, driving directions. Update only if address changes.",
+      "contact": "Phone, email, website, social media handles. Update when contact info changes.",
+      "hours": "Display text for hours shown on website. NOTE: This is DISPLAY ONLY - the actual open/closed logic comes from operatingSchedule.json",
+      "admission": "Current ticket prices by category. UPDATE ANNUALLY or when prices change.",
+      "admissionIncludes": "List of what's included with admission. Update if tour offerings change.",
+      "whatToExpect": "Tour details and accessibility info. Update if tour format changes.",
+      "sisterSites": "Nearby historic sites for cross-promotion. Rarely needs updates.",
+      "nearbyAttractions": "Local attractions for visitors. Update as needed.",
+      "first250": "America 250 founding program details. This is a one-time 2026 program.",
+      "america250": "2026 commemoration details and Rocky Mount's historical role.",
+      "historicalFigures": "Key people in Rocky Mount history. Content rarely changes."
+    },
+    "whenToUpdate": {
+      "annually": [
+        "admission prices (January, if changing)",
+        "hours.season text (if dates change)",
+        "hours.seasonNote (special notes for the year)"
+      ],
+      "asNeeded": [
+        "contact.phone or contact.email (when info changes)",
+        "contact.social handles (when accounts change)",
+        "hours.formatted text (if hours change)",
+        "whatToExpect.features (if tour offerings change)"
+      ],
+      "rarely": [
+        "site information (name, tagline)",
+        "location data (address, coordinates)",
+        "historicalFigures (historical content)"
+      ]
+    },
+    "rules": [
+      "Prices must be numbers, not text (12 not '$12')",
+      "Phone numbers use format: (XXX) XXX-XXXX",
+      "Dates use ISO format: YYYY-MM-DD",
+      "Social handles are just the username, no @ symbol",
+      "Always test the site after making changes"
+    ],
+    "commonMistakes": [
+      "WRONG: 'price': '$12' - Don't include dollar sign, use number only",
+      "WRONG: 'phone': '423-538-7396' - Use parentheses: '(423) 538-7396'",
+      "WRONG: 'facebook': '@rockymountmuseum' - No @ symbol needed",
+      "WRONG: Editing hours.regular days to change when we're open - Those are DISPLAY ONLY, actual logic is in operatingSchedule.json",
+      "WRONG: Forgetting the comma after a value - Every line except the last in a section needs a comma"
+    ],
+    "_priceUpdateChecklist": {
+      "description": "Follow these steps when updating admission prices",
+      "steps": [
+        "1. Update admission.adults.price (number only, no $)",
+        "2. Update admission.seniors.price",
+        "3. Update admission.children.price",
+        "4. Update _meta.updated to today's date (YYYY-MM-DD)",
+        "5. ALSO UPDATE: data/config/operatingSchedule.json pricing tiers",
+        "6. Save file and verify site builds correctly"
+      ],
+      "example": "To change adult price from $12 to $15: change '\"price\": 12' to '\"price\": 15'"
+    },
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS verify price changes with user before committing",
+        "NEVER change contact phone/email without explicit permission",
+        "NEVER modify location coordinates",
+        "NEVER fabricate historical figure information"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date",
+        "format": "YYYY-MM-DD"
+      },
+      "priceRules": [
+        "Prices in this file are in DOLLARS (not cents)",
+        "Always confirm price changes with user",
+        "If updating prices, also update operatingSchedule.json"
+      ],
+      "prohibited": [
+        "Do NOT change site.name or site.shortName",
+        "Do NOT modify address without verification",
+        "Do NOT remove historicalFigures entries",
+        "Do NOT change hours.formatted without updating operatingSchedule.json"
+      ],
+      "crossFileSync": {
+        "prices": "Must match data/config/operatingSchedule.json pricingSchedule",
+        "hours": "Display text only - actual logic in lib/siteHours.ts"
+      },
+      "whenUnsure": "Ask the user rather than making assumptions about site operations"
+    }
+  },
+  "site": {
+    "name": "Rocky Mount State Historic Site",
+    "tagline": "Tennessee Starts Here",
+    "established": "1775",
+    "established_note": "Farm established per Century Farms certification; William Cobb settled the property c. 1770",
+    "territorialCapital": {
+      "start": 1790,
+      "end": 1792,
+      "description": "First seat of government for the Southwest Territory"
+    }
+  },
+  "location": {
+    "address": {
+      "street": "200 Hyder Hill Road",
+      "city": "Piney Flats",
+      "state": "Tennessee",
+      "zip": "37686",
+      "county": "Sullivan County"
+    },
+    "coordinates": {
+      "lat": 36.4081,
+      "lng": -82.3247
+    },
+    "directions": "Located off US-11E between Johnson City and Bristol. From I-26, take Exit 13 and follow signs to Rocky Mount.",
+    "drivingDistances": [
+      {
+        "city": "Johnson City, TN",
+        "miles": 18,
+        "time": "25 min",
+        "route": "US-23 North"
+      },
+      {
+        "city": "Bristol, TN/VA",
+        "miles": 28,
+        "time": "40 min",
+        "route": "US-11E South"
+      },
+      {
+        "city": "Kingsport, TN",
+        "miles": 40,
+        "time": "50 min",
+        "route": "I-26 East"
+      },
+      {
+        "city": "Knoxville, TN",
+        "miles": 95,
+        "time": "1 hr 45 min",
+        "route": "I-40 East to I-81 North"
+      },
+      {
+        "city": "Asheville, NC",
+        "miles": 110,
+        "time": "2 hr 15 min",
+        "route": "I-26 North"
+      }
+    ]
+  },
+  "contact": {
+    "phone": "(423) 538-7396",
+    "email": "rockymountmuseum@gmail.com",
+    "website": "https://rockymountmuseum.com",
+    "social": {
+      "facebook": "rockymountmuseum",
+      "instagram": "rockymounttn",
+      "tiktok": "rockymounttn"
+    }
+  },
+  "hours": {
+    "_note": "These are DISPLAY values only. The actual open/closed logic is calculated from data/config/operatingSchedule.json",
+    "regular": {
+      "wednesday": "10:00 AM - 5:00 PM",
+      "thursday": "10:00 AM - 5:00 PM",
+      "friday": "10:00 AM - 5:00 PM",
+      "saturday": "10:00 AM - 5:00 PM",
+      "sunday": "Closed",
+      "monday": "Closed",
+      "tuesday": "Closed"
+    },
+    "formatted": {
+      "days": "Wednesday - Saturday",
+      "time": "10am - 5pm",
+      "short": "Wed-Sat 10am-5pm"
+    },
+    "season": "March 4 through mid-December",
+    "seasonNote": "Season opens March 4, 2026 for America 250 commemoration",
+    "tourSchedule": "Hourly",
+    "lastTour": "4:00 PM",
+    "tourNote": "Tours depart every hour. Last tour at 4pm.",
+    "note": "Hours may vary for special events."
+  },
+  "admissionIncludes": [
+    "Guided living history tour",
+    "Museum gallery access",
+    "Historic site grounds",
+    "Heritage trail",
+    "Free parking"
+  ],
+  "admission": {
+    "_note": "Prices are numbers only (no dollar signs). These should match the tiers in operatingSchedule.json",
+    "adults": {
+      "price": 12,
+      "label": "Adults"
+    },
+    "seniors": {
+      "price": 10,
+      "label": "Seniors (65+)"
+    },
+    "children": {
+      "price": 8,
+      "label": "Children (6-17)"
+    },
+    "childrenFree": {
+      "price": 0,
+      "label": "Children under 6"
+    },
+    "groups": {
+      "note": "Groups of 10 or more, please call for rates"
+    },
+    "note": "Includes guided living history tour"
+  },
+  "whatToExpect": {
+    "tourDuration": "Approximately 1 hour",
+    "features": [
+      "Guided living history tour with costumed interpreters",
+      "Walk through the historic Cobb House",
+      "Visit the detached kitchen, weaving cabin, and grounds",
+      "Learn about daily life in 1790s frontier Tennessee",
+      "See craft demonstrations (varies by day)"
+    ],
+    "accessibility": {
+      "summary": "Multiple tour options available for different accessibility needs",
+      "museumGallery": {
+        "name": "Museum Gallery Tour",
+        "description": "Indoor exhibit tour with artifacts and displays",
+        "adaCompliant": true,
+        "features": [
+          "Fully ADA compliant",
+          "No stairs or inclines",
+          "Climate controlled",
+          "Wheelchair accessible"
+        ]
+      },
+      "historicSiteTour": {
+        "name": "Historic Site Tour",
+        "description": "Outdoor living history tour of the grounds and buildings",
+        "adaCompliant": false,
+        "features": [
+          "Outdoor walking tour",
+          "Includes stairs and inclines",
+          "Uneven terrain at some outbuildings",
+          "Main house accessible via ramp"
+        ],
+        "note": "Please call ahead to discuss specific accessibility needs"
+      }
+    },
+    "recommendations": [
+      "Wear comfortable walking shoes",
+      "Tours are outdoors—dress for weather",
+      "Photography welcome",
+      "Gift shop on site"
+    ]
+  },
+  "sisterSites": [
+    {
+      "name": "Tipton-Haynes State Historic Site",
+      "city": "Johnson City",
+      "miles": 11,
+      "time": "15 min",
+      "description": "45-acre site with eleven restored buildings, limestone cave, and nature trails",
+      "website": "https://www.tipton-haynes.org"
+    },
+    {
+      "name": "Sycamore Shoals State Historic Park",
+      "city": "Elizabethton",
+      "miles": 13,
+      "time": "15 min",
+      "description": "Site of the 1775 Treaty and reconstructed Fort Watauga",
+      "website": "https://tnstateparks.com/parks/sycamore-shoals"
+    },
+    {
+      "name": "Carter Mansion",
+      "city": "Elizabethton",
+      "miles": 13,
+      "time": "15 min",
+      "description": "Tennessee's oldest frame house (circa 1780), National Historic Landmark",
+      "website": "https://tnstateparks.com/parks/sycamore-shoals"
+    },
+    {
+      "name": "Chester Inn State Historic Site",
+      "city": "Jonesborough",
+      "miles": 16,
+      "time": "20 min",
+      "description": "Oldest wood-frame building in Tennessee's oldest town, hosted three U.S. Presidents",
+      "website": "https://www.heritageall.org/chester-inn"
+    },
+    {
+      "name": "Warriors' Path State Park",
+      "city": "Kingsport",
+      "miles": 26,
+      "time": "32 min",
+      "description": "970-acre park on Fort Patrick Henry Lake, named for the Great Indian Warpath",
+      "website": "https://tnstateparks.com/parks/warriors-path"
+    },
+    {
+      "name": "Holston Heritage Museum",
+      "city": "Bluff City",
+      "miles": 8,
+      "time": "10 min",
+      "description": "Showcasing the historical and cultural heritage of the Holston River Valley region",
+      "website": "https://holstonheritagemuseum.com"
+    }
+  ],
+  "nearbyAttractions": [
+    {
+      "name": "Bristol Motor Speedway",
+      "distance": "15 minutes",
+      "description": "NASCAR's most famous short track"
+    },
+    {
+      "name": "Downtown Jonesborough",
+      "distance": "20 minutes",
+      "description": "Tennessee's oldest town, home of the National Storytelling Festival"
+    },
+    {
+      "name": "Downtown Bristol",
+      "distance": "40 minutes",
+      "description": "Birthplace of Country Music, straddling the TN/VA state line"
+    }
+  ],
+  "first250": {
+    "program": "First 250",
+    "description": "Join 250 Tennesseans as founding participants in Rocky Mount's America 250 commemoration.",
+    "enrollmentStart": "2026-03-04",
+    "enrollmentEnd": "2026-06-01",
+    "goal": 250,
+    "ceremony": "2026-07-04",
+    "benefits": [
+      "Name read aloud at July 4, 2026 ceremony",
+      "Email updates on America 250 programming",
+      "Recognition as a founding participant"
+    ],
+    "tiers": [
+      {
+        "name": "First 250",
+        "price": 0,
+        "benefits": ["Name read July 4", "Email updates"]
+      },
+      {
+        "name": "Founding Patron",
+        "price": 50,
+        "benefits": ["All above", "Commemorative certificate", "Priority seating July 4"]
+      },
+      {
+        "name": "Founding Benefactor",
+        "price": 250,
+        "benefits": ["All above", "Special dinner invitation", "Permanent recognition"]
+      }
+    ]
+  },
+  "america250": {
+    "year": 2026,
+    "significance": "America's Semiquincentennial (250th anniversary of independence)",
+    "tn230": {
+      "date": "2026-06-01",
+      "significance": "Tennessee's 230th birthday (statehood June 1, 1796)"
+    },
+    "rockymountRole": "Rocky Mount served as the first seat of government for the Southwest Territory from 1790-1792, laying groundwork for Tennessee statehood."
+  },
+  "historicalFigures": [
+    {
+      "id": "williamBlount",
+      "name": "William Blount",
+      "title": "Governor of the Southwest Territory",
+      "years": "1790–1796",
+      "hook": "Signed the U.S. Constitution. Appointed by George Washington. Made Rocky Mount his headquarters.",
+      "highlight": "Constitution Signer",
+      "details": [
+        "Appointed by President George Washington as territorial governor",
+        "One of the signers of the U.S. Constitution",
+        "Lived at Rocky Mount with the Cobb family during his tenure",
+        "Made Rocky Mount the first capital of the Southwest Territory",
+        "Established foundational laws and land policies for the frontier region"
+      ]
+    },
+    {
+      "id": "williamCobb",
+      "name": "William Cobb",
+      "title": "Original Settler",
+      "years": "c. 1770",
+      "hook": "Staked his claim on this land six years before the Declaration of Independence was signed.",
+      "highlight": "Pioneer",
+      "details": [
+        "Established the homestead c. 1770 (current structures built 1826-1828 main house, 1829-1830 dining room by grandson Michael Massengill per dendrochronology)",
+        "Brought his family from North Carolina to establish the estate",
+        "He and his sons responded to John Sevier's call for volunteers in September 1780",
+        "Supplied the Overmountain Men with gunpowder, horses, blankets, and food for the Battle of King's Mountain",
+        "In 1796, transferred Rocky Mount to his son-in-law Hal Massengill (husband of daughter Penelope)"
+      ]
+    }
+  ]
+}

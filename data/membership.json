@@ -1,0 +1,279 @@
+{
+  "_meta": {
+    "description": "Membership tiers, benefits, and FAQs - staff can update prices, benefits, and FAQ content",
+    "updated": "2026-01-30",
+    "usage": "import membership from '@/data/membership.json'",
+    "usedOn": ["Membership page", "Support page", "Footer CTAs"],
+    "staffInstructions": "This file controls membership offerings on the website. Update prices annually in January. Update FAQs as policies change.",
+    "fieldGuide": {
+      "id": "Unique identifier for the tier (lowercase, no spaces)",
+      "name": "Display name of the tier",
+      "tagline": "Short emotional hook (10 words max)",
+      "price": "Annual price in whole DOLLARS (not cents for membership)",
+      "badge": "Emoji or icon for the tier",
+      "benefits": "Array of benefit strings - be specific about what's included",
+      "cta": "Button text for this tier",
+      "href": "Link to signup - usually the NeonCRM URL",
+      "featured": "Set true for one tier to highlight it"
+    },
+    "rules": [
+      "Membership prices are in DOLLARS (unlike events which use cents)",
+      "Keep benefits lists to 5-8 items for readability",
+      "Only one tier should have featured: true",
+      "Update NeonCRM URLs if the system changes"
+    ],
+    "commonMistakes": [
+      "Mixing up dollars vs cents (membership uses dollars)",
+      "Making benefit lists too long (hard to compare)",
+      "Forgetting to update the comparison table when changing benefits"
+    ],
+    "templates": {
+      "newTier": {
+        "id": "tier-name",
+        "name": "Tier Name",
+        "tagline": "Short emotional hook",
+        "price": 100,
+        "badge": "🏛️",
+        "benefits": ["Benefit 1", "Benefit 2", "Benefit 3"],
+        "cta": "Join Now",
+        "href": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+        "featured": false
+      }
+    },
+    "whenToUpdate": {
+      "annually": ["prices", "tier names if rebranding"],
+      "asNeeded": ["benefits", "FAQs", "taglines"],
+      "rarely": ["NeonCRM URLs", "tier structure"]
+    },
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS verify changes with user before committing"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+      },
+      "prohibited": [
+        "Do NOT remove _meta or _aiRules sections",
+        "Do NOT make changes without user awareness",
+        "Do NOT change tier prices without explicit approval",
+        "Do NOT modify NeonCRM URLs without verification"
+      ],
+      "fileSpecific": ["Prices are in DOLLARS (not cents)"],
+      "whenUnsure": "Ask the user for clarification"
+    }
+  },
+  "tiers": [
+    {
+      "id": "governors-circle",
+      "name": "Governor's Circle",
+      "tagline": "Lead the preservation of Tennessee's founding story",
+      "price": 2500,
+      "badge": "👑",
+      "benefits": [
+        "All Patriot Pass benefits",
+        "Name on permanent donor wall",
+        "Private tour for up to 10 guests",
+        "Exclusive Governor's Circle events",
+        "Behind-the-scenes collection access",
+        "Personal curator consultations",
+        "Recognition in annual report"
+      ],
+      "cta": "Join the Circle",
+      "href": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+      "featured": false,
+      "tier": "leadership"
+    },
+    {
+      "id": "patriot-pass",
+      "name": "Patriot Pass",
+      "tagline": "Champion the commemorative year",
+      "price": 200,
+      "badge": "🎖️",
+      "benefits": [
+        "All Frontier Family benefits",
+        "Early access to special events",
+        "20% gift shop discount",
+        "Free guest passes (4 annually)",
+        "Invitation to donor appreciation events",
+        "Name recognition at events"
+      ],
+      "cta": "Become a Patriot",
+      "href": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+      "featured": false,
+      "tier": "supporter"
+    },
+    {
+      "id": "frontier-family",
+      "name": "Frontier Family",
+      "tagline": "Perfect for families exploring history together",
+      "price": 100,
+      "badge": "🏠",
+      "benefits": [
+        "Unlimited free admission for household",
+        "Member Passport with stamps",
+        "15% gift shop discount",
+        "Early event registration",
+        "Quarterly newsletter",
+        "Reciprocal admission at partner sites"
+      ],
+      "cta": "Join as Family",
+      "href": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+      "featured": true,
+      "tier": "family"
+    },
+    {
+      "id": "explorers-pass",
+      "name": "Explorer's Pass",
+      "tagline": "Discover Tennessee's founding story",
+      "price": 75,
+      "badge": "🧭",
+      "benefits": [
+        "Unlimited free admission for two adults",
+        "Member Passport",
+        "10% gift shop discount",
+        "Event newsletter",
+        "Early event registration"
+      ],
+      "cta": "Start Exploring",
+      "href": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+      "featured": false,
+      "tier": "dual"
+    },
+    {
+      "id": "settlers-pass",
+      "name": "Settler's Pass",
+      "tagline": "Your journey into history begins here",
+      "price": 50,
+      "badge": "⚒️",
+      "benefits": [
+        "Unlimited free admission for one adult",
+        "Member Passport",
+        "10% gift shop discount",
+        "Event newsletter"
+      ],
+      "cta": "Get Started",
+      "href": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+      "featured": false,
+      "tier": "individual"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-benefits",
+      "question": "What benefits do I receive as a member?",
+      "answer": "All members receive unlimited free admission, gift shop discounts, early event registration, and our quarterly newsletter. Higher tiers include additional benefits like guest passes, reciprocal admission at partner sites, and exclusive events."
+    },
+    {
+      "id": "faq-passport",
+      "question": "What is the Member Passport?",
+      "answer": "The Member Passport is a collectible booklet where you can collect stamps at each visit and during special events. It's a fun way to track your history journey and makes a great keepsake."
+    },
+    {
+      "id": "faq-upgrade",
+      "question": "Can I upgrade my membership?",
+      "answer": "Yes! You can upgrade at any time by paying the difference between your current tier and the new tier. Contact us or visit during your next trip."
+    },
+    {
+      "id": "faq-tax",
+      "question": "Is my membership tax-deductible?",
+      "answer": "Yes, your membership is tax-deductible to the extent allowed by law. The portion representing the fair market value of benefits received is not deductible. You'll receive a tax acknowledgment letter."
+    },
+    {
+      "id": "faq-usage",
+      "question": "How do I use my membership?",
+      "answer": "Simply present your membership card at the admissions desk. If you don't have your card, we can look you up by name or email. Your membership is valid for one year from the date of purchase."
+    },
+    {
+      "id": "faq-renewal",
+      "question": "How do I renew my membership?",
+      "answer": "We'll send you a renewal reminder about 30 days before your membership expires. You can renew online, by phone, or in person. Renew early to avoid any gaps in your benefits."
+    },
+    {
+      "id": "faq-tiers",
+      "question": "What's the difference between membership tiers?",
+      "answer": "Each tier builds on the one below it. Individual and dual memberships are great for solo visitors or couples. Frontier Family covers your whole household. Patriot Pass and Governor's Circle offer additional perks and recognition for those who want to support our mission more deeply."
+    }
+  ],
+  "comparisonFeatures": [
+    {
+      "feature": "Free Admission",
+      "settlers": "1 adult",
+      "explorers": "2 adults",
+      "frontier": "Household",
+      "patriot": "Household",
+      "governors": "Household"
+    },
+    {
+      "feature": "Gift Shop Discount",
+      "settlers": "10%",
+      "explorers": "10%",
+      "frontier": "15%",
+      "patriot": "20%",
+      "governors": "20%"
+    },
+    {
+      "feature": "Member Passport",
+      "settlers": true,
+      "explorers": true,
+      "frontier": true,
+      "patriot": true,
+      "governors": true
+    },
+    {
+      "feature": "Early Event Registration",
+      "settlers": false,
+      "explorers": true,
+      "frontier": true,
+      "patriot": true,
+      "governors": true
+    },
+    {
+      "feature": "Quarterly Newsletter",
+      "settlers": true,
+      "explorers": true,
+      "frontier": true,
+      "patriot": true,
+      "governors": true
+    },
+    {
+      "feature": "Reciprocal Admission",
+      "settlers": false,
+      "explorers": false,
+      "frontier": true,
+      "patriot": true,
+      "governors": true
+    },
+    {
+      "feature": "Free Guest Passes",
+      "settlers": false,
+      "explorers": false,
+      "frontier": false,
+      "patriot": "4/year",
+      "governors": "Unlimited"
+    },
+    {
+      "feature": "Donor Recognition",
+      "settlers": false,
+      "explorers": false,
+      "frontier": false,
+      "patriot": true,
+      "governors": "Permanent"
+    },
+    {
+      "feature": "Private Tours",
+      "settlers": false,
+      "explorers": false,
+      "frontier": false,
+      "patriot": false,
+      "governors": true
+    }
+  ],
+  "urls": {
+    "join": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp",
+    "renew": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipRenew.jsp",
+    "donate": "https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/donation.jsp"
+  }
+}

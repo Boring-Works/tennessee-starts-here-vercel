@@ -1,0 +1,285 @@
+{
+  "_meta": {
+    "description": "Visitor experience moments, tour types, and highlights displayed on the website",
+    "updated": "2026-01-30",
+    "usage": "import experiences from '@/data/experiences.json'",
+
+    "staffInstructions": {
+      "whenToEdit": [
+        "Adding a new visitor experience highlight",
+        "Updating tour descriptions or durations",
+        "Changing what's included in a visit",
+        "Adding seasonal or temporary tour options"
+      ],
+      "whenNotToEdit": [
+        "Changing ticket prices (edit siteInfo.json instead)",
+        "Adding events (edit events.json instead)",
+        "Updating hours (edit siteInfo.json instead)"
+      ],
+      "howToEdit": "On GitHub: Navigate to data/experiences.json > Click pencil icon > Make changes > Click 'Commit changes'",
+      "writingTips": [
+        "Use active, engaging verbs (Walk, Meet, Touch, Discover)",
+        "Keep descriptions under 150 characters",
+        "Focus on what the visitor DOES, not what we have",
+        "Avoid jargon - write for first-time visitors"
+      ]
+    },
+
+    "fieldGuide": {
+      "experienceMoments": {
+        "description": "The 'What You'll Experience' section - key moments that make a visit special",
+        "displayLocation": "Homepage and Visit page",
+        "maxItems": 4,
+        "fields": {
+          "numeral": "Roman numeral (I, II, III, IV) - keeps the heritage aesthetic",
+          "title": "Short action phrase (3-5 words) starting with a verb",
+          "description": "One sentence explaining what this experience means to the visitor",
+          "icon": "Icon name (footprints, users, hammer, scroll, building, theater)",
+          "category": "Grouping for filtering - immersion, interpretation, hands-on, or education"
+        }
+      },
+      "tourTypes": {
+        "description": "Different tour options available to visitors",
+        "displayLocation": "Visit page",
+        "fields": {
+          "id": "Unique identifier (lowercase-with-dashes, e.g., museum-gallery)",
+          "name": "Display name for the tour",
+          "duration": "Time range (e.g., '45-60 minutes')",
+          "description": "One sentence about what happens on this tour",
+          "accessibility": "Honest assessment of physical accessibility",
+          "included": "true if included with admission, false if extra",
+          "requiresTicket": "true if needs separate reservation"
+        }
+      },
+      "visitIncludes": {
+        "description": "What's included with standard admission",
+        "displayLocation": "Visit page 'What's Included' section",
+        "fields": {
+          "icon": "Icon name matching the feature",
+          "title": "Short feature name (2-4 words)",
+          "description": "Brief explanation of this feature"
+        }
+      },
+      "highlights": {
+        "description": "Bullet-point highlights for quick scanning",
+        "displayLocation": "Various marketing sections",
+        "format": "Simple strings - keep each under 40 characters"
+      }
+    },
+
+    "rules": {
+      "experienceMoments": {
+        "keepToFour": "Exactly 4 moments works best visually with Roman numerals I-IV",
+        "verbFirst": "Titles should start with action verbs (Stand, Meet, Touch, Discover)",
+        "visitorFocused": "Write from the visitor's perspective, not the museum's"
+      },
+      "tourTypes": {
+        "honestDurations": "Use ranges to set realistic expectations",
+        "accessibilityTransparency": "Be honest about physical requirements - helps visitors plan",
+        "includedMatters": "Mark 'included: true' for anything covered by general admission"
+      },
+      "iconNames": {
+        "available": [
+          "footprints",
+          "users",
+          "hammer",
+          "scroll",
+          "building",
+          "theater",
+          "home",
+          "flag"
+        ],
+        "note": "Icons must match Lucide icon library - ask developer to add new icons"
+      }
+    },
+
+    "templates": {
+      "newExperienceMoment": {
+        "description": "Copy this to add a new visitor experience highlight",
+        "example": {
+          "numeral": "V",
+          "title": "Verb the Subject",
+          "description": "One sentence describing what the visitor will do or feel during this experience.",
+          "icon": "users",
+          "category": "interpretation"
+        }
+      },
+      "newTourType": {
+        "description": "Copy this to add a new tour option",
+        "example": {
+          "id": "your-tour-name",
+          "name": "Your Tour Name",
+          "duration": "XX-XX minutes",
+          "description": "Brief description of what happens on this tour",
+          "accessibility": "Description of physical requirements",
+          "included": false,
+          "requiresTicket": true
+        }
+      },
+      "newVisitInclude": {
+        "description": "Copy this to add a new 'included with admission' feature",
+        "example": {
+          "icon": "building",
+          "title": "Feature Name",
+          "description": "Brief description of this included feature"
+        }
+      },
+      "newHighlight": {
+        "description": "Copy this format for bullet-point highlights",
+        "example": "Your highlight text here"
+      }
+    },
+
+    "categories": {
+      "experienceCategories": {
+        "immersion": "Physical/spatial experiences (walking grounds, being in historic spaces)",
+        "interpretation": "Human interaction (meeting interpreters, hearing stories)",
+        "hands-on": "Tactile activities (crafts, demonstrations, participation)",
+        "education": "Learning-focused (documents, exhibits, context)"
+      }
+    },
+
+    "writingGuidelines": {
+      "goodExamples": [
+        "Stand on Historic Ground - active, physical, memorable",
+        "Meet the Settlers - personal, engaging, promises interaction",
+        "Touch the Past - sensory, tangible, unique"
+      ],
+      "avoidExamples": [
+        "Learn About History - too generic, passive",
+        "See Our Collection - museum-focused, not visitor-focused",
+        "Rocky Mount Has Buildings - not experiential"
+      ],
+      "toneTips": [
+        "Warm but not overly casual",
+        "Confident but not boastful",
+        "Inviting but not pushy",
+        "Historical but accessible"
+      ]
+    }
+  },
+
+  "_aiRules": {
+    "description": "Rules for AI assistants editing this file",
+    "beforeEditing": [
+      "ALWAYS update _meta.updated when making changes",
+      "ALWAYS read _meta.staffInstructions first",
+      "ALWAYS verify changes with user before committing",
+      "ALWAYS follow _meta.writingGuidelines for tone and style"
+    ],
+    "autoUpdates": {
+      "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+    },
+    "prohibited": [
+      "Do NOT remove _meta or _aiRules sections",
+      "Do NOT make changes without user awareness",
+      "Do NOT use icons not listed in _meta.rules.iconNames.available",
+      "Do NOT exceed 4 experienceMoments (visual design constraint)",
+      "Do NOT use passive or museum-centric language"
+    ],
+    "fileSpecific": [
+      "experienceMoments: Exactly 4 items with Roman numerals I-IV, verb-first titles",
+      "tourTypes: Use honest duration ranges and accurate accessibility info",
+      "visitIncludes: Only features covered by standard admission",
+      "highlights: Keep each under 40 characters for quick scanning",
+      "Use templates in _meta.templates when adding new items",
+      "Follow category definitions in _meta.categories"
+    ],
+    "validation": {
+      "experienceMoments": "Must have exactly 4 items with unique Roman numerals I-IV",
+      "tourTypes.id": "Lowercase with dashes (e.g., museum-gallery)",
+      "icons": "Must be from: footprints, users, hammer, scroll, building, theater, home, flag",
+      "categories": "Must be: immersion, interpretation, hands-on, or education"
+    },
+    "writingRules": [
+      "Titles start with action verbs (Stand, Meet, Touch, Discover)",
+      "Write from visitor perspective, not museum perspective",
+      "Descriptions under 150 characters",
+      "Avoid jargon - write for first-time visitors"
+    ],
+    "whenUnsure": "Ask the user for clarification, especially about accessibility claims or tour availability"
+  },
+
+  "experienceMoments": [
+    {
+      "numeral": "I",
+      "title": "Stand on Historic Ground",
+      "description": "Walk the same grounds where Governor Blount governed the Southwest Territory and shaped the future state of Tennessee.",
+      "icon": "footprints",
+      "category": "immersion"
+    },
+    {
+      "numeral": "II",
+      "title": "Meet the Settlers",
+      "description": "Costumed interpreters bring the Cobb family and their world to life through first-person storytelling.",
+      "icon": "users",
+      "category": "interpretation"
+    },
+    {
+      "numeral": "III",
+      "title": "Touch the Past",
+      "description": "Experience authentic 18th-century crafts, from blacksmithing to hearth cooking, using period tools and techniques.",
+      "icon": "hammer",
+      "category": "hands-on"
+    },
+    {
+      "numeral": "IV",
+      "title": "Discover the Evidence",
+      "description": "Examine original documents, letters, and artifacts from the territorial period in our museum galleries.",
+      "icon": "scroll",
+      "category": "education"
+    }
+  ],
+  "tourTypes": [
+    {
+      "id": "museum-gallery",
+      "name": "Museum Gallery Tour",
+      "duration": "30-45 minutes",
+      "description": "Self-guided exploration of exhibits and artifacts",
+      "accessibility": "Fully wheelchair accessible",
+      "included": true
+    },
+    {
+      "id": "historic-site",
+      "name": "Historic Site Tour",
+      "duration": "45-60 minutes",
+      "description": "Guided tour of original log structures with costumed interpreters",
+      "accessibility": "Gravel paths, some stairs",
+      "included": true
+    },
+    {
+      "id": "twilight",
+      "name": "Twilight Tour",
+      "duration": "90 minutes",
+      "description": "Evening candlelit tour with enhanced storytelling",
+      "accessibility": "Limited accessibility after dark",
+      "included": false,
+      "requiresTicket": true
+    }
+  ],
+  "visitIncludes": [
+    {
+      "icon": "theater",
+      "title": "Guided Tour",
+      "description": "Expert-led tour of historic buildings with costumed interpreters"
+    },
+    {
+      "icon": "building",
+      "title": "Historic Buildings",
+      "description": "Access to all original 18th-century log structures on site"
+    },
+    {
+      "icon": "scroll",
+      "title": "Museum & Gift Shop",
+      "description": "Exhibits, artifacts, and curated heritage items"
+    }
+  ],
+  "highlights": [
+    "Historic 1820s log buildings on 1770s homestead site",
+    "Costumed historical interpreters",
+    "Hands-on craft demonstrations",
+    "Museum with territorial-era artifacts",
+    "Gift shop with heritage products",
+    "Scenic Blue Ridge Mountain views"
+  ]
+}

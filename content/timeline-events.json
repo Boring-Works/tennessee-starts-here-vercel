@@ -1,0 +1,398 @@
+[
+  {
+    "id": "sw-territory-created",
+    "date": "1790-05-26",
+    "title": "Southwest Territory Created",
+    "description": "Congress passes the Southwest Ordinance, establishing the Territory South of the River Ohio under federal governance.",
+    "documentId": "southwest-territory-act-1790",
+    "type": "proclamation",
+    "featured": true
+  },
+  {
+    "id": "williamson-recommends-blount",
+    "date": "1790-05-28",
+    "title": "Williamson Recommends Blount to Washington",
+    "description": "Hugh Williamson writes to President Washington endorsing William Blount as the ideal candidate to govern the new territory.",
+    "documentId": "williamson-to-washington-1790-05",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-nominated",
+    "date": "1790-06-07",
+    "title": "Washington Nominates Blount as Governor",
+    "description": "President Washington formally nominates William Blount to serve as Governor of the Southwest Territory.",
+    "documentId": "washington-to-senate-1790-06",
+    "type": "proclamation",
+    "featured": false
+  },
+  {
+    "id": "blount-confirmed",
+    "date": "1790-06-08",
+    "title": "Senate Confirms Blount",
+    "description": "The United States Senate confirms William Blount's appointment as territorial governor.",
+    "documentId": null,
+    "type": "event",
+    "featured": false
+  },
+  {
+    "id": "washington-asks-where",
+    "date": "1790-08-13",
+    "title": "\"Where Ought the Governor to Reside?\"",
+    "description": "Washington writes to Secretary Knox asking the crucial question about where to establish the territorial capital.",
+    "documentId": "washington-to-knox-1790-08",
+    "type": "letter",
+    "featured": true
+  },
+  {
+    "id": "knox-recommends-holston",
+    "date": "1790-08-17",
+    "title": "Knox Recommends the Holston Settlements",
+    "description": "Secretary of War Henry Knox advises Washington that the governor should reside among the Holston settlements.",
+    "documentId": "knox-to-washington-1790-08",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-arrives",
+    "date": "1790-10-11",
+    "title": "Blount Arrives at Rocky Mount",
+    "description": "Governor Blount arrives at William Cobb's home, establishing Rocky Mount as the seat of territorial government.",
+    "documentId": "blount-arrival-1790",
+    "type": "event",
+    "featured": true
+  },
+  {
+    "id": "glass-windows-letter",
+    "date": "1790-10-20",
+    "title": "\"Glass Windows\" Letter Written",
+    "description": "Blount writes his first letter from Rocky Mount, describing the house with its notable glass windows - a status symbol on the frontier.",
+    "documentId": "blount-arrival-1790",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-nov",
+    "date": "1790-11-08",
+    "title": "Blount Reports on Cherokee Relations",
+    "description": "Governor Blount writes to Secretary Knox about his initial meetings with Cherokee leaders and the state of frontier affairs.",
+    "documentId": "blount-to-knox-1790-11",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-dec",
+    "date": "1790-12-14",
+    "title": "Frontier Security Report",
+    "description": "Blount details the military situation along the frontier and requests additional resources for territorial defense.",
+    "documentId": "blount-to-knox-1790-12",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-jan",
+    "date": "1791-01-12",
+    "title": "Treaty Preparations Begin",
+    "description": "Blount outlines plans for negotiating a comprehensive treaty with the Cherokee Nation.",
+    "documentId": "blount-to-knox-1791-01",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-mar",
+    "date": "1791-03-20",
+    "title": "Treaty Conference Planned",
+    "description": "Blount reports progress on arranging a major treaty conference at White's Fort.",
+    "documentId": "blount-to-knox-1791-03",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "knox-instructions",
+    "date": "1791-04-22",
+    "title": "Knox Sends Treaty Instructions",
+    "description": "Secretary Knox provides detailed instructions for the upcoming treaty negotiations with the Cherokee Nation.",
+    "documentId": "knox-to-blount-1791-04",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-jun",
+    "date": "1791-06-15",
+    "title": "Final Treaty Preparations",
+    "description": "Blount confirms that Cherokee leaders are assembling and the treaty conference will proceed as planned.",
+    "documentId": "blount-to-knox-1791-06",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "treaty-holston",
+    "date": "1791-07-02",
+    "title": "Treaty of Holston Signed",
+    "description": "Forty-two Cherokee chiefs sign the Treaty of Holston at White's Fort, establishing peace and boundaries.",
+    "documentId": "treaty-holston-1791",
+    "type": "treaty",
+    "featured": true
+  },
+  {
+    "id": "blount-to-knox-jul",
+    "date": "1791-07-15",
+    "title": "Treaty Results Reported",
+    "description": "Blount sends a detailed account of the treaty negotiations and the terms agreed upon with Cherokee leaders.",
+    "documentId": "blount-to-knox-1791-07",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "jefferson-approves",
+    "date": "1791-08-31",
+    "title": "Jefferson Acknowledges Treaty",
+    "description": "Secretary of State Thomas Jefferson writes to Blount regarding the federal government's receipt of the treaty terms.",
+    "documentId": "jefferson-to-blount-1791-08",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-sep",
+    "date": "1791-09-10",
+    "title": "Post-Treaty Report",
+    "description": "Blount provides updates on implementing the treaty terms and maintaining relations with Cherokee leaders.",
+    "documentId": "blount-to-knox-1791-09",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "gazette-first",
+    "date": "1791-11-05",
+    "title": "Knoxville Gazette First Issue",
+    "description": "George Roulstone publishes the first issue of the Knoxville Gazette, Tennessee's first newspaper.",
+    "documentId": "knoxville-gazette-1791-11-05",
+    "type": "newspaper",
+    "featured": true
+  },
+  {
+    "id": "washington-proclamation",
+    "date": "1791-11-11",
+    "title": "Washington Proclaims Treaty as Law",
+    "description": "President Washington issues a proclamation making the Treaty of Holston binding federal law, countersigned by Jefferson.",
+    "documentId": "washington-proclamation-1791",
+    "type": "proclamation",
+    "featured": true
+  },
+  {
+    "id": "gazette-nov-12",
+    "date": "1791-11-12",
+    "title": "Gazette Reports Territory News",
+    "description": "The second issue of the Knoxville Gazette covers territorial developments and frontier conditions. (Note: Biweekly schedule suggests Nov 19; Nov 12 date requires archival verification)",
+    "documentId": "knoxville-gazette-1791-11-12",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "blount-to-knox-nov-91",
+    "date": "1791-11-20",
+    "title": "Capital Transition Update",
+    "description": "Blount reports on preparations for relocating territorial operations to the new capital at Knoxville.",
+    "documentId": "blount-to-knox-1791-11",
+    "type": "letter",
+    "featured": false
+  },
+  {
+    "id": "gazette-dec",
+    "date": "1791-12-03",
+    "title": "Gazette Covers Treaty News",
+    "description": "The Knoxville Gazette publishes news about the ratified Treaty of Holston and its implications.",
+    "documentId": "knoxville-gazette-1791-12-03",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "cherokee-delegation-arrives",
+    "date": "1791-12-29",
+    "title": "Cherokee Delegation Arrives in Philadelphia",
+    "description": "Five Cherokee chiefs arrive in Philadelphia by ship to protest Treaty of Holston terms directly to President Washington.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "event",
+    "featured": true
+  },
+  {
+    "id": "cherokee-meet-washington",
+    "date": "1792-01-04",
+    "title": "Cherokee Chiefs Meet President Washington",
+    "description": "Bloody Fellow leads Cherokee delegation in meeting with President Washington, who directs them to Secretary of War Henry Knox.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "event",
+    "featured": false
+  },
+  {
+    "id": "cherokee-delegation-speeches",
+    "date": "1792-01-05",
+    "title": "Cherokee Delegation Presents Demands",
+    "description": "Led by Bloody Fellow, Cherokee chiefs present formal objections to Treaty of Holston, demanding increased annuity and settler removal.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "speech",
+    "featured": true
+  },
+  {
+    "id": "gazette-jan",
+    "date": "1792-01-07",
+    "title": "New Year Gazette Edition",
+    "description": "The Gazette reports on territorial affairs as the government begins its second full year of operation.",
+    "documentId": "knoxville-gazette-1792-01-07",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "capital-moves",
+    "date": "1792-02-01",
+    "title": "Capital Moves to Knoxville",
+    "description": "The territorial government officially relocates from Rocky Mount to Knoxville, ending the Rocky Mount capital period.",
+    "documentId": null,
+    "type": "event",
+    "featured": true
+  },
+  {
+    "id": "treaty-additional",
+    "date": "1792-02-17",
+    "title": "Additional Treaty Article Signed",
+    "description": "An additional article to the Treaty of Holston increases the annual payment to the Cherokee Nation to $1,500. Cherokee delegation's successful negotiation.",
+    "documentId": "treaty-holston-additional-1792",
+    "type": "treaty",
+    "featured": false
+  },
+  {
+    "id": "cherokee-delegation-departs",
+    "date": "1792-02-18",
+    "title": "Cherokee Delegation Departs Philadelphia",
+    "description": "Cherokee chiefs depart Philadelphia with increased annuity secured, demonstrating Cherokee diplomatic power.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "event",
+    "featured": false
+  },
+  {
+    "id": "gazette-feb",
+    "date": "1792-02-25",
+    "title": "Gazette From New Capital",
+    "description": "The Knoxville Gazette publishes from the new territorial capital, covering government transitions.",
+    "documentId": "knoxville-gazette-1792-02-25",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-apr",
+    "date": "1792-04-14",
+    "title": "Spring Gazette Edition",
+    "description": "The Gazette reports on agricultural developments and frontier news as spring arrives.",
+    "documentId": "knoxville-gazette-1792-04-14",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-jul",
+    "date": "1792-07-07",
+    "title": "Treaty Anniversary Coverage",
+    "description": "The Gazette marks one year since the Treaty of Holston signing with territorial updates.",
+    "documentId": "knoxville-gazette-1792-07-07",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-oct",
+    "date": "1792-10-06",
+    "title": "Fall Gazette Edition",
+    "description": "The newspaper covers harvest season developments and frontier military matters.",
+    "documentId": "knoxville-gazette-1792-10-06",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "little-turkey-peace",
+    "date": "1792-10-09",
+    "title": "Little Turkey Warns of Lower Towns War",
+    "description": "Cherokee principal chief Little Turkey sends urgent message distinguishing peace faction from war faction, warns of Spanish influence among Lower Towns.",
+    "documentId": "little-turkey-peace-efforts-1792",
+    "type": "letter",
+    "featured": true
+  },
+  {
+    "id": "gazette-mar-93",
+    "date": "1793-03-16",
+    "title": "Gazette Spring Report",
+    "description": "The Knoxville Gazette provides updates on territorial governance and Cherokee relations.",
+    "documentId": "knoxville-gazette-1793-03-16",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-aug-93",
+    "date": "1793-08-24",
+    "title": "Mid-Year Territory News",
+    "description": "The Gazette reports on the growing population and development of the Southwest Territory.",
+    "documentId": "knoxville-gazette-1793-08-24",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-jun-94",
+    "date": "1794-06-07",
+    "title": "Gazette Summer Edition",
+    "description": "Coverage of territorial development as the region continues to grow and stabilize.",
+    "documentId": "knoxville-gazette-1794-06-07",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-feb-95",
+    "date": "1795-02-14",
+    "title": "Gazette Winter Report",
+    "description": "The newspaper covers ongoing territorial affairs and preparations for potential statehood.",
+    "documentId": "knoxville-gazette-1795-02-14",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "gazette-jan-96",
+    "date": "1796-01-17",
+    "title": "Statehood Momentum Builds",
+    "description": "The Gazette reports on the growing movement toward Tennessee statehood.",
+    "documentId": "knoxville-gazette-1796-01-17",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "statehood",
+    "date": "1796-06-01",
+    "title": "Tennessee Becomes 16th State",
+    "description": "Tennessee is admitted to the Union as the sixteenth state, completing the journey from territory to statehood.",
+    "documentId": null,
+    "type": "event",
+    "featured": true
+  },
+  {
+    "id": "gazette-statehood",
+    "date": "1796-06-06",
+    "title": "Gazette Celebrates Statehood",
+    "description": "The Knoxville Gazette reports on Tennessee's admission to the Union and the new state government.",
+    "documentId": "knoxville-gazette-1796-06-06",
+    "type": "newspaper",
+    "featured": false
+  },
+  {
+    "id": "bradley-map",
+    "date": "1796-07-01",
+    "title": "Bradley Map Published",
+    "description": "Abraham Bradley publishes an important early map of Tennessee, documenting the new state's geography.",
+    "documentId": "bradley-map-1796",
+    "type": "event",
+    "featured": false
+  },
+  {
+    "id": "john-watts-boundary-speech",
+    "date": "1796-12-22",
+    "title": "John Watts Demands Treaty Enforcement",
+    "description": "Cherokee leader John Watts addresses President Washington, demanding formal boundary survey with Cherokee oversight and accountability for treaty violations.",
+    "documentId": "john-watts-boundary-speech-1796",
+    "type": "speech",
+    "featured": true
+  }
+]

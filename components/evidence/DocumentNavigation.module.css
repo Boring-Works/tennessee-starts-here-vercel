@@ -1,0 +1,113 @@
+.documentNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--gold-shimmer);
+  background: linear-gradient(to bottom, rgba(250, 247, 240, 0.5), rgba(250, 247, 240, 0.8));
+  flex-wrap: wrap;
+}
+
+.documentNavPrev,
+.documentNavNext {
+  flex: 1;
+}
+
+.documentNavNext {
+  text-align: right;
+}
+
+.documentNavLink {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: #3d3229;
+  transition: color 0.2s ease;
+}
+
+.documentNavLink:hover {
+  color: var(--gold-primary);
+}
+
+.documentNavArrow {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--gold-primary);
+}
+
+.documentNavDirection {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8b7355;
+}
+
+.documentNavTitle {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  max-width: min(100%, 200px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.documentNavPosition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.documentNavCount {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875rem;
+  color: var(--gold-primary);
+}
+
+.documentNavCollection {
+  font-size: 0.75rem;
+  color: #8b7355;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.documentNavEmpty {
+  display: block;
+  width: 100px;
+}
+
+/* Mobile responsive: stack navigation vertically on small screens */
+@media (max-width: 640px) {
+  .documentNav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .documentNavPrev,
+  .documentNavNext {
+    width: 100%;
+    text-align: center;
+  }
+
+  .documentNavPosition {
+    order: -1;
+  }
+
+  .documentNavTitle {
+    max-width: 100%;
+  }
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .documentNavLink {
+    transition: none;
+  }
+}

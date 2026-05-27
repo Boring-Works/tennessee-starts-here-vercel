@@ -1,0 +1,302 @@
+{
+  "_meta": {
+    "description": "Historical timeline data for Rocky Mount - key dates and events in site history",
+    "updated": "2026-01-30",
+    "usage": "import { timeline } from '@/data/timeline.json'"
+  },
+  "_aiRules": {
+    "description": "Rules for AI assistants editing this file",
+    "beforeEditing": [
+      "ALWAYS update _meta.updated when making changes",
+      "ALWAYS read _meta.staffInstructions first",
+      "ALWAYS verify changes with user before committing",
+      "ALWAYS verify historical claims against documented sources before adding"
+    ],
+    "autoUpdates": {
+      "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+    },
+    "prohibited": [
+      "Do NOT remove _meta or _aiRules sections",
+      "Do NOT make changes without user awareness",
+      "Do NOT add historical events without scholarly sources",
+      "Do NOT modify established dates without documented evidence",
+      "Do NOT add speculative or unverified historical information"
+    ],
+    "fileSpecific": [
+      "Historical accuracy is paramount - all dates and facts must be verified",
+      "Cite sources in commit messages when adding new historical events",
+      "Consult with site historians for pre-1800 additions",
+      "Keep heroTimeline to exactly 3 items - discuss with team before adding",
+      "Maintain chronological order in extendedTimeline",
+      "Only 2-3 events should have highlight: true",
+      "Use four-digit year as string format: '1790' not 1790"
+    ],
+    "sourceCitation": {
+      "requirement": "All new historical claims must reference a documented source",
+      "preferredSources": [
+        "Site historians",
+        "Tennessee State Archives",
+        "Published historical research"
+      ],
+      "commitFormat": "Source: [source name/reference] in commit message"
+    },
+    "whenUnsure": "Ask the user for clarification - historical accuracy is critical",
+
+    "staffInstructions": {
+      "whenToEdit": [
+        "Adding a new historical event with documented sources",
+        "Correcting historical dates or facts based on new research",
+        "Adding commemoration milestones (anniversaries, dedications)",
+        "Expanding the extended timeline with more detail"
+      ],
+      "whenNotToEdit": [
+        "Adding events without historical documentation",
+        "Changing established dates without scholarly sources",
+        "Adding speculative or unverified information"
+      ],
+      "howToEdit": "On GitHub: Navigate to data/timeline.json > Click pencil icon > Make changes > Click 'Commit changes'",
+      "historicalStandards": [
+        "All dates must be historically verified",
+        "Descriptions should be factual, not promotional",
+        "Note sources in commit message when adding new events",
+        "Consult with site historians for pre-1800 additions"
+      ]
+    },
+
+    "fieldGuide": {
+      "heroTimeline": {
+        "description": "The main 3-point timeline shown on homepage - most important moments only",
+        "displayLocation": "Homepage hero section",
+        "maxItems": 3,
+        "purpose": "Quick visual story of Rocky Mount's significance",
+        "fields": {
+          "year": "Four-digit year as string (e.g., '1790')",
+          "title": "One-word or very short title (Settlement, Revolution, Capital)",
+          "text": "One short sentence - punchy, memorable",
+          "icon": "Icon name (home, flag, building)",
+          "period": "Era category (frontier, revolution, territorial)",
+          "highlight": "Set to true for the most important moment (usually 1790)"
+        }
+      },
+      "extendedTimeline": {
+        "description": "Comprehensive timeline with more detail for education/discovery pages",
+        "displayLocation": "Our Story page, Evidence Room",
+        "fields": {
+          "year": "Four-digit year as string",
+          "title": "Short event title (2-5 words)",
+          "description": "One sentence with more context",
+          "category": "Event type for filtering and styling",
+          "highlight": "Set to true for especially significant events"
+        }
+      },
+      "contrastStatements": {
+        "description": "Rhetorical device used in storytelling sections",
+        "displayLocation": "Homepage narrative section",
+        "purpose": "Creates dramatic emphasis through contrast",
+        "fields": {
+          "text": "The statement to display",
+          "strike": "true if this statement should appear crossed out",
+          "finale": "true for the final, emphasized statement"
+        },
+        "note": "Do not edit unless redesigning the narrative structure"
+      },
+      "keyDates": {
+        "description": "Quick-reference lookup for important dates used programmatically",
+        "purpose": "Allows code to reference dates without hardcoding",
+        "note": "Staff rarely need to edit - these are structural"
+      }
+    },
+
+    "rules": {
+      "dateFormat": "Always use four-digit year as a string: '1790' not 1790 or '90",
+      "chronologicalOrder": "Keep extendedTimeline in chronological order",
+      "duplicateYears": "Multiple events in same year are allowed - add them consecutively",
+      "titleLength": "Keep titles under 30 characters",
+      "descriptionLength": "Keep descriptions under 100 characters",
+      "highlightSparingly": "Only 2-3 events should have highlight: true"
+    },
+
+    "templates": {
+      "newHeroTimelineEvent": {
+        "description": "For major moments only - heroTimeline should stay at 3 items",
+        "example": {
+          "year": "1776",
+          "title": "Independence",
+          "text": "A short, punchy statement.",
+          "icon": "flag",
+          "period": "revolution"
+        },
+        "note": "Rarely add to heroTimeline - discuss with team first"
+      },
+      "newExtendedTimelineEvent": {
+        "description": "Copy this to add a new event to the detailed timeline",
+        "example": {
+          "year": "1791",
+          "title": "Event Title Here",
+          "description": "One sentence describing what happened and why it matters",
+          "category": "government"
+        }
+      },
+      "newHighlightedEvent": {
+        "description": "For especially significant events that should stand out",
+        "example": {
+          "year": "1790",
+          "title": "Major Event",
+          "description": "Description of this significant moment",
+          "category": "government",
+          "highlight": true
+        }
+      }
+    },
+
+    "categories": {
+      "settlement": "Early settlement and homesteading (1770s)",
+      "revolution": "Revolutionary War period activities",
+      "government": "Territorial government and political events",
+      "diplomacy": "Treaties and relations with Native nations",
+      "preservation": "Modern preservation and recognition",
+      "commemoration": "Anniversaries and celebrations"
+    },
+
+    "periods": {
+      "frontier": "Pre-Revolutionary settlement era (1770-1780)",
+      "revolution": "Revolutionary War period (1780-1783)",
+      "territorial": "Southwest Territory era (1790-1796)"
+    },
+
+    "writingGuidelines": {
+      "heroTimeline": {
+        "tone": "Punchy, dramatic, memorable",
+        "examples": [
+          "The Cobbs settled this ground.",
+          "They armed the Revolution.",
+          "Governor Blount made it the seat of government."
+        ]
+      },
+      "extendedTimeline": {
+        "tone": "Factual, informative, accessible",
+        "examples": [
+          "William Cobb establishes homestead on Sinking Creek",
+          "Governor William Blount establishes capital at Rocky Mount",
+          "Tennessee becomes 16th state of the Union"
+        ]
+      },
+      "tips": [
+        "Use active voice (Blount establishes... not The capital was established...)",
+        "Include specific names when known",
+        "Connect local events to larger historical context",
+        "Keep language accessible to general audiences"
+      ]
+    },
+
+    "historicalNotes": {
+      "keyFigures": {
+        "williamCobb": "Original settler who built the cabin, patriarch of the Cobb family",
+        "williamBlount": "First and only governor of the Southwest Territory (1790-1796)",
+        "overrmountainMen": "Frontier militia who fought at Kings Mountain"
+      },
+      "keyEvents": {
+        "southwestTerritory": "Created by Congress in 1790 from land ceded by North Carolina",
+        "treatyOfHolston": "1791 treaty negotiated at White's Fort (Knoxville), following preliminary talks at Rocky Mount (Dec 1790)",
+        "kingsmountain": "1780 battle where Overmountain Men defeated British forces"
+      }
+    }
+  },
+
+  "heroTimeline": [
+    {
+      "year": "1770",
+      "title": "Settlement",
+      "text": "The Cobbs settled this ground.",
+      "icon": "home",
+      "period": "frontier"
+    },
+    {
+      "year": "1780",
+      "title": "Revolution",
+      "text": "They armed the Revolution.",
+      "icon": "flag",
+      "period": "revolution"
+    },
+    {
+      "year": "1790",
+      "title": "Capital",
+      "text": "Governor Blount made it the seat of government for the Southwest Territory.",
+      "icon": "building",
+      "period": "territorial",
+      "highlight": true
+    }
+  ],
+  "extendedTimeline": [
+    {
+      "year": "1770",
+      "title": "Cobb Family Settles",
+      "description": "William Cobb establishes homestead on Sinking Creek",
+      "category": "settlement"
+    },
+    {
+      "year": "1780",
+      "title": "Overmountain Men Muster",
+      "description": "Frontier militia gathers for Kings Mountain campaign",
+      "category": "revolution"
+    },
+    {
+      "year": "1790",
+      "title": "Southwest Territory Created",
+      "description": "Congress establishes territory from North Carolina cession",
+      "category": "government"
+    },
+    {
+      "year": "1790",
+      "title": "Blount Arrives",
+      "description": "Governor William Blount establishes capital at Rocky Mount",
+      "category": "government",
+      "highlight": true
+    },
+    {
+      "year": "1791",
+      "title": "Treaty of Holston",
+      "description": "Treaty signed at White's Fort (Knoxville), following preliminary talks at Rocky Mount",
+      "category": "diplomacy"
+    },
+    {
+      "year": "1792",
+      "title": "Capital Moves",
+      "description": "Territorial government relocates to Knoxville",
+      "category": "government"
+    },
+    {
+      "year": "1796",
+      "title": "Tennessee Statehood",
+      "description": "Tennessee becomes 16th state of the Union",
+      "category": "government"
+    },
+    {
+      "year": "1959",
+      "title": "State Historic Site",
+      "description": "Rocky Mount designated Tennessee State Historic Site",
+      "category": "preservation"
+    },
+    {
+      "year": "2026",
+      "title": "America 250",
+      "description": "Nation's 250th anniversary celebration",
+      "category": "commemoration",
+      "highlight": true
+    }
+  ],
+  "contrastStatements": [
+    { "text": "This is not where they gathered.", "strike": true },
+    { "text": "This is not where they farmed.", "strike": true },
+    { "text": "This is where they governed.", "strike": false, "finale": true }
+  ],
+  "keyDates": {
+    "settlement": "1770",
+    "revolution": "1780",
+    "capitalStart": "1790",
+    "capitalEnd": "1792",
+    "statehood": "1796",
+    "preservation": "1959",
+    "america250": "2026"
+  }
+}

@@ -1,0 +1,1224 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+:root {
+  /* Core Brand Colors (Style Guide Aligned) */
+  --primary: #0a1628; /* Updated to match Style Guide #0a1628 */
+  --primary-dark: #050d18;
+  --secondary: #8b4513;
+  --accent: #c9a227; /* Updated to match Style Guide #c9a227 */
+  --burgundy: #722f37;
+  --background: #faf8f5;
+  --foreground: #1a1a1a;
+  --text-light: #525252;
+  --cream: #f8f5f0;
+  --cream-dark: #f0ebe3;
+
+  /* Accessible text colors for dark backgrounds - WCAG 2.1 AA compliant */
+  --text-on-dark: rgba(255, 255, 255, 0.87); /* ~11:1 contrast on primary */
+  --text-on-dark-muted: rgba(
+    255,
+    255,
+    255,
+    0.75
+  ); /* Increased from 0.7 to 0.75 for ~9:1 contrast */
+  --text-on-dark-subtle: rgba(255, 255, 255, 0.7); /* Increased from 0.6 to 0.7 for ~8:1 contrast */
+  /* Almanac colors */
+  --midnight: #0d1821;
+  --gold-leaf: #c5a059;
+  --almanac-parchment: #f4ecd8;
+  --almanac-success: #4a7c59;
+  --almanac-warning: #d4a84b;
+  --almanac-danger: #8b3a3a;
+  /* Card Border System */
+  --border-card: 1px solid rgba(10, 22, 40, 0.1);
+  --border-card-hover: 1px solid var(--accent);
+  --border-card-featured: 2px solid var(--accent);
+
+  /* ============================================
+     SHADOW & ELEVATION SYSTEM
+     7-level shadow scale for consistent depth hierarchy
+     Usage: Use --shadow-{size} for standard elevations
+            Use --shadow-gold-{size} for brand accent shadows
+     ============================================ */
+
+  /* Standard Elevation Shadows (neutral) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+  /* Brand Gold Accent Shadows */
+  --shadow-gold-sm: 0 4px 12px var(--gold-shimmer);
+  --shadow-gold-lg: 0 8px 30px var(--gold-shimmer);
+
+  /* ============================================
+     GOLD COLOR STANDARDIZATION
+     8 gold variants consolidated to 3 semantic tokens
+     Primary source: var(--gold-primary) (used 98x across codebase)
+     Usage: --gold-primary (main brand), --gold-hover (interactions), --gold-shimmer (effects)
+     ============================================ */
+
+  /* Semantic Gold Tokens */
+  --gold-primary: #c9a227; /* Main brand gold - use for primary brand elements */
+  --gold-hover: #d4af37; /* Hover state - brighter for interactive feedback */
+  --gold-shimmer: rgba(201, 162, 39, 0.4); /* Glows, borders, overlays - 40% opacity */
+
+  /* ============================================
+     OVERLAY & OPACITY SYSTEM
+     Standardized opacity variants for backgrounds, borders, and overlays
+     Usage: Replace hardcoded rgba values with these tokens
+     ============================================ */
+
+  /* Dark Overlays (navy/primary) */
+  --overlay-dark-subtle: rgba(10, 22, 40, 0.05);
+  --overlay-dark-light: rgba(10, 22, 40, 0.1);
+  --overlay-dark-medium: rgba(10, 22, 40, 0.2);
+  --overlay-dark-strong: rgba(10, 22, 40, 0.3);
+
+  /* White Overlays */
+  --overlay-white-subtle: rgba(255, 255, 255, 0.05);
+  --overlay-white-light: rgba(255, 255, 255, 0.1);
+  --overlay-white-medium: rgba(255, 255, 255, 0.2);
+
+  /* Brown/Wood Overlays (for inset shadows, document cards) */
+  --overlay-brown-subtle: rgba(139, 69, 19, 0.03);
+  --overlay-brown-light: rgba(139, 69, 19, 0.05);
+  --overlay-brown-medium: rgba(139, 69, 19, 0.08);
+
+  /* Gold Overlays */
+  --overlay-gold-subtle: rgba(201, 162, 39, 0.04);
+  --overlay-gold-light: rgba(201, 162, 39, 0.08);
+  --overlay-gold-medium: rgba(201, 162, 39, 0.15);
+  --overlay-gold-strong: rgba(201, 162, 39, 0.25);
+
+  /* ============================================
+     GRADIENT TOKENS
+     Reusable gradient patterns across components
+     ============================================ */
+
+  /* Fade gradients */
+  --gradient-dark-fade: linear-gradient(
+    to bottom,
+    rgba(10, 22, 40, 1) 0%,
+    rgba(10, 22, 40, 0.95) 100%
+  );
+  --gradient-dark-overlay: linear-gradient(to bottom, transparent 0%, rgba(10, 22, 40, 0.8) 100%);
+
+  /* Decorative gold lines */
+  --gradient-gold-line: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
+  --gradient-gold-subtle: linear-gradient(
+    135deg,
+    var(--overlay-gold-light) 0%,
+    var(--overlay-gold-subtle) 100%
+  );
+
+  /* Divider lines */
+  --gradient-divider: linear-gradient(
+    90deg,
+    transparent,
+    var(--secondary) 20%,
+    var(--secondary) 80%,
+    transparent
+  );
+
+  /* ============================================
+     NAVIGATION DESIGN TOKENS
+     ============================================ */
+
+  /* Colors - Navigation */
+  --nav-heritage-brown: #4a3728;
+  --nav-parchment: #f5f1e8;
+  --nav-ink: #2c2416;
+  --nav-gold: var(--gold-primary);
+  --nav-gold-hover: var(--gold-hover);
+  --nav-gold-rgb: 201, 162, 39;
+
+  /* Background States */
+  --nav-bg-transparent: transparent;
+  --nav-bg-scrolled: rgba(44, 36, 22, 0.97);
+  --nav-bg-mobile-drawer: #0a0f14;
+
+  /* Text Colors */
+  --nav-text-light: rgba(255, 255, 255, 0.7);
+  --nav-text-light-hover: white;
+  --nav-text-dark: #2c2416;
+
+  /* Typography - Desktop */
+  --nav-font-desktop: var(--font-cinzel), 'Cinzel', serif;
+  --nav-size-desktop: 0.75rem;
+  --nav-weight-desktop: 600;
+  --nav-spacing-desktop: 0.12em;
+
+  /* Typography - Mobile */
+  --nav-font-mobile: var(--font-cormorant), 'Cormorant Garamond', serif;
+  --nav-size-mobile: 1.5rem;
+  --nav-weight-mobile: 400;
+  --nav-spacing-mobile: 0;
+
+  /* Spacing */
+  --nav-gap: 2.5rem;
+  --nav-item-padding: 0.75rem 0.5rem;
+  --nav-dropdown-padding: 0.875rem 1.25rem;
+  --nav-mobile-gap: 1rem;
+
+  /* Header Heights */
+  --header-height-transparent: 96px;
+  --header-height-scrolled: 64px;
+  --header-height-mobile: 56px;
+
+  /* ============================================
+     MOTION DESIGN SYSTEM
+     Standardized animation durations and easing curves
+     Usage: Use --duration-{speed} with --ease-{curve} for all animations
+     ============================================ */
+
+  /* Duration Tokens */
+  --duration-instant: 100ms; /* Micro-interactions: toggles, ripples */
+  --duration-fast: 200ms; /* Hovers, focus states, small transitions */
+  --duration-base: 300ms; /* Standard transitions: cards, buttons */
+  --duration-moderate: 400ms; /* Modal opens, dropdowns, panels */
+  --duration-slow: 600ms; /* Hero animations, scroll reveals */
+  --duration-dramatic: 800ms; /* Page transitions, elaborate entrances */
+  --duration-ambient: 2000ms; /* Decorative loops: pulses, glows */
+
+  /* Easing Curve Tokens */
+  --ease-standard: ease; /* Browser default: all-purpose */
+  --ease-out: ease-out; /* Browser ease-out: exits, fades */
+  --ease-in-out: ease-in-out; /* Browser ease-in-out: loops, pulses */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1); /* Material ease: smooth transitions */
+  --ease-decelerate: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slow finish: entrances */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1); /* Bouncy spring: playful motion */
+  --ease-elegant: cubic-bezier(0.05, 0.8, 0.15, 1); /* Dramatic: hero animations */
+
+  /* Navigation-Specific (Legacy - maintained for backwards compatibility) */
+  --nav-ease-spring: var(--ease-spring);
+  --nav-ease-out: var(--ease-smooth);
+  --nav-duration-open: var(--duration-moderate);
+  --nav-duration-close: 280ms; /* Slightly faster close */
+  --nav-duration-hover: var(--duration-base);
+  --nav-stagger: 50ms;
+
+  /* Focus */
+  --nav-focus-ring: 2px solid var(--nav-gold);
+  --nav-focus-offset: 4px;
+
+  /* Touch Targets */
+  --nav-touch-min: 44px;
+  --nav-fab-size: 56px;
+}
+
+/* Reduced motion - respects user accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Override all durations to near-instant for accessibility */
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-moderate: 1ms;
+    --duration-slow: 1ms;
+    --duration-dramatic: 1ms;
+    --duration-ambient: 1ms;
+    --nav-duration-open: 1ms;
+    --nav-duration-close: 1ms;
+    --nav-duration-hover: 1ms;
+    --nav-stagger: 0ms;
+  }
+}
+
+@theme inline {
+  /* Color System */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-burgundy: var(--burgundy);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-text-light: var(--text-light);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+
+  /* Typography */
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: var(--font-merriweather), var(--font-eb-garamond), var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-serif-elegant: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-display: var(--font-eb-garamond), var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-script: var(--font-script), 'Brush Script MT', cursive;
+
+  /* Almanac theme colors */
+  --color-midnight: var(--midnight);
+  --color-gold-leaf: var(--gold-leaf);
+  --color-almanac-midnight: var(--midnight);
+  --color-almanac-gold: var(--gold-leaf);
+  --color-almanac-parchment: var(--almanac-parchment);
+  --color-almanac-success: var(--almanac-success);
+  --color-almanac-warning: var(--almanac-warning);
+  --color-almanac-danger: var(--almanac-danger);
+
+  /* ============================================
+     SPACING & LAYOUT SYSTEM
+     8pt base grid (0.5rem = 8px) with semantic naming
+     Based on codebase analysis: 1rem (309x), 1.5rem (303x), 2rem (208x) most common
+     Usage: Use --space-{size} for component spacing, --layout-{context} for pages
+     ============================================ */
+
+  /* Base Spacing Scale (8pt grid) */
+  --space-3xs: 0.125rem; /* 2px  - Minimal separator, fine details */
+  --space-2xs: 0.25rem; /* 4px  - Badges, tight inline spacing */
+  --space-xs: 0.5rem; /* 8px  - Icon gaps, compact elements */
+  --space-sm: 0.75rem; /* 12px - Small padding, tight layouts */
+  --space-md: 1rem; /* 16px - Base spacing unit (most common) */
+  --space-lg: 1.5rem; /* 24px - Card padding, comfortable spacing */
+  --space-xl: 2rem; /* 32px - Section spacing, large cards */
+  --space-2xl: 2.5rem; /* 40px - Section breaks */
+  --space-3xl: 3rem; /* 48px - Major section spacing */
+  --space-4xl: 4rem; /* 64px - Page section padding */
+  --space-5xl: 5rem; /* 80px - Large page sections */
+  --space-6xl: 6rem; /* 96px - Hero spacing */
+  --space-7xl: 7rem; /* 112px - Maximum vertical rhythm */
+  --space-8xl: 8rem; /* 128px - Rare, dramatic spacing */
+
+  /* Gap Scale (for flex/grid gaps) */
+  --gap-xs: 0.5rem; /* 8px  - Tight icon + text */
+  --gap-sm: 0.75rem; /* 12px - Compact layouts */
+  --gap-md: 1rem; /* 16px - Standard gap (most common) */
+  --gap-lg: 1.5rem; /* 24px - Comfortable card grids */
+  --gap-xl: 2rem; /* 32px - Spacious layouts */
+  --gap-2xl: 2.5rem; /* 40px - Wide grids */
+  --gap-3xl: 3rem; /* 48px - Hero grid spacing */
+  --gap-4xl: 4rem; /* 64px - Maximum grid gaps */
+
+  /* Semantic Layout Tokens */
+  --layout-page-padding-mobile: 1.5rem; /* Mobile horizontal padding */
+  --layout-page-padding-tablet: 2rem; /* Tablet horizontal padding */
+  --layout-page-padding-desktop: clamp(2rem, 5vw, 7.5rem); /* Fluid desktop padding */
+
+  --layout-section-y-mobile: 4rem; /* Mobile vertical section spacing */
+  --layout-section-y-tablet: 5rem; /* Tablet vertical section spacing */
+  --layout-section-y-desktop: 5rem; /* Desktop vertical section spacing */
+
+  /* Card System - Border Colors */
+  --color-card-border: rgba(10, 22, 40, 0.1);
+  --color-card-border-hover: var(--accent);
+
+  /* Card System - Spacing */
+  --spacing-card-sm: 1rem; /* Small cards, compact layouts */
+  --spacing-card-md: 1.5rem; /* Standard cards (most common) */
+  --spacing-card-lg: 2rem; /* Large cards, spacious layouts */
+
+  /* Card System - Border Radius */
+  --radius-card: 2px;
+
+  /* Composite Transitions (Legacy - use duration + easing tokens for new work) */
+  --transition-card: var(--duration-moderate) var(--ease-smooth);
+  --transition-standard: var(--duration-moderate) var(--ease-smooth);
+  --transition-dramatic: var(--duration-slow) var(--ease-decelerate);
+}
+
+/* ============================================
+   SCREEN READER UTILITIES - Accessibility
+   ============================================ */
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focusable variant for skip links */
+.sr-only:not(.focus\:not-sr-only):focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   SKIP LINK - Accessibility
+   ============================================ */
+
+.skip-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold-primary);
+  color: #0d1821;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s ease;
+  white-space: nowrap;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #0d1821;
+  outline-offset: 2px;
+}
+
+.skip-link:focus-visible {
+  top: 0;
+}
+
+/* ============================================
+   FOCUS STATES - Accessibility
+   WCAG 2.1 AA requires visible focus indicators
+   Uses gold accent color to match brand
+   ============================================ */
+
+/* Global focus-visible styles for all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Remove default outline only when focus-visible provides the indicator */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Links - ensure visibility on both light and dark backgrounds */
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* On dark backgrounds, use a brighter gold for better contrast */
+.bg-primary a:focus-visible,
+.bg-primary-dark a:focus-visible,
+[class*='bg-midnight'] a:focus-visible,
+footer a:focus-visible {
+  outline-color: var(--gold-leaf, #c5a059);
+}
+
+/* Buttons - consistent focus ring */
+button:focus-visible,
+[role='button']:focus-visible,
+.btn-large:focus-visible,
+.btn-medium:focus-visible,
+.btn-small:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Form inputs - inner glow style for text fields */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+  border-color: var(--accent);
+}
+
+/* Clickable cards - box-shadow approach for better aesthetics */
+.card-interactive:focus-visible,
+[role='article']:focus-visible,
+.event-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+/* Navigation items */
+nav a:focus-visible,
+nav button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Checkbox and radio - circular focus for radios */
+input[type='checkbox']:focus-visible,
+input[type='radio']:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText;
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================
+   SHARED SECTION DIVIDERS
+   ============================================ */
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+  background: var(--cream);
+}
+
+.section-divider--light {
+  background: var(--cream);
+}
+
+.section-divider--dark {
+  background: var(--primary);
+}
+
+.section-divider--default {
+  background: white;
+}
+
+.section-divider-line {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 157, 58, 0.4), transparent);
+}
+
+.section-divider--dark .section-divider-line {
+  background: linear-gradient(90deg, transparent, rgba(184, 157, 58, 0.5), transparent);
+}
+
+.section-divider-flourish {
+  color: var(--accent);
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.section-divider-flourish--flip {
+  transform: scaleX(-1);
+}
+
+.section-divider-ornament {
+  color: var(--accent);
+  font-size: 0.5rem;
+  opacity: 0.8;
+}
+
+.section-divider--dark .section-divider-flourish,
+.section-divider--dark .section-divider-ornament {
+  opacity: 0.8;
+}
+
+/* ============================================
+   ALMANAC UTILITIES
+   ============================================ */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  nav,
+  footer,
+  .no-print,
+  .mobile-sticky-cta,
+  .watermark-1790,
+  .scroll-indicator {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+/* ============================================
+   ALMANAC ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+.animate-bob {
+  animation: bob 8s ease-in-out infinite;
+}
+
+@keyframes bounce-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s ease-in-out infinite;
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for sequential reveals */
+.stagger-1 {
+  transition-delay: 0.1s;
+}
+.stagger-2 {
+  transition-delay: 0.2s;
+}
+.stagger-3 {
+  transition-delay: 0.3s;
+}
+.stagger-4 {
+  transition-delay: 0.4s;
+}
+.stagger-5 {
+  transition-delay: 0.5s;
+}
+
+/* Fade in from sides */
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale in effect */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Line-by-line reveal for contrast statements */
+.reveal-line {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+}
+
+.reveal-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   BUTTON SCALE SYSTEM
+   ============================================ */
+
+/* Button Scale System - All buttons meet 44px minimum touch target (WCAG 2.1 AAA) */
+.btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  min-height: 44px;
+}
+
+.btn-medium {
+  padding: 0.875rem 2rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  min-height: 44px;
+}
+
+.btn-small {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  min-height: 44px;
+}
+
+/* ============================================
+   TOUCH TARGET UTILITIES
+   Ensure interactive elements meet 44x44px minimum (WCAG 2.1 AAA / Apple HIG)
+   ============================================ */
+
+/* Inline links in body text - expand touch target with pseudo-element */
+.prose a,
+.body-link {
+  position: relative;
+}
+
+.prose a::after,
+.body-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 44px;
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   HOMEPAGE ANIMATIONS
+   ============================================ */
+
+/* Simple fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.7s ease-out forwards;
+}
+
+/* Animation delay utilities */
+.animation-delay-100 {
+  animation-delay: 100ms;
+  opacity: 0;
+}
+.animation-delay-200 {
+  animation-delay: 200ms;
+  opacity: 0;
+}
+.animation-delay-300 {
+  animation-delay: 300ms;
+  opacity: 0;
+}
+.animation-delay-350 {
+  animation-delay: 350ms;
+  opacity: 0;
+}
+.animation-delay-400 {
+  animation-delay: 400ms;
+  opacity: 0;
+}
+.animation-delay-500 {
+  animation-delay: 500ms;
+  opacity: 0;
+}
+.animation-delay-800 {
+  animation-delay: 800ms;
+  opacity: 0;
+}
+
+/* ============================================
+   BACKGROUND EFFECTS
+   ============================================ */
+
+/* Subtle noise texture overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Radial glow for hover effects */
+.bg-radial-glow {
+  background: radial-gradient(circle at center, rgba(184, 157, 58, 0.15) 0%, transparent 70%);
+}
+
+/* Shimmer animation for gold accent bars */
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* ============================================
+   PROCLAMATION FRAME
+   Decorative corner brackets for hero sections
+   ============================================ */
+
+.proclamation-frame {
+  position: relative;
+  padding: 2rem;
+}
+
+/* Top-left and bottom-right corners via parent pseudo-elements */
+.proclamation-frame::before,
+.proclamation-frame::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--accent);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.proclamation-frame::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.proclamation-frame::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Inner element for top-right and bottom-left corners */
+.proclamation-frame-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.proclamation-frame-inner::before,
+.proclamation-frame-inner::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--accent);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.proclamation-frame-inner::before {
+  top: -2rem;
+  right: -2rem;
+  border-left: none;
+  border-bottom: none;
+}
+
+.proclamation-frame-inner::after {
+  bottom: -2rem;
+  left: -2rem;
+  border-right: none;
+  border-top: none;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .proclamation-frame {
+    padding: 3rem;
+  }
+
+  .proclamation-frame::before,
+  .proclamation-frame::after,
+  .proclamation-frame-inner::before,
+  .proclamation-frame-inner::after {
+    width: 80px;
+    height: 80px;
+  }
+
+  .proclamation-frame-inner::before {
+    top: -3rem;
+    right: -3rem;
+  }
+
+  .proclamation-frame-inner::after {
+    bottom: -3rem;
+    left: -3rem;
+  }
+}
+
+/* ============================================
+   DOCUMENT-STYLE CARDS
+   ============================================ */
+
+/* Base document card - parchment appearance */
+.card-document {
+  position: relative;
+  background: linear-gradient(135deg, #fdfbf7 0%, #f8f4ec 50%, #f0e8d8 100%);
+  box-shadow: inset 0 0 30px rgba(139, 69, 19, 0.03);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+  border-radius: var(--radius-card, 2px);
+}
+
+/* Aged document variant - darker edges, more texture */
+.card-document--aged {
+  position: relative;
+  background: linear-gradient(135deg, #faf6ee 0%, #f5efe2 30%, #ebe3d0 70%, #e5dbc5 100%);
+  box-shadow: inset 0 0 40px rgba(139, 69, 19, 0.05);
+  border: 1px solid rgba(139, 69, 19, 0.15);
+}
+
+.card-document--aged::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 60px rgba(139, 69, 19, 0.06);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Featured document variant - gold accent for signature events */
+.card-document--featured {
+  position: relative;
+  background: linear-gradient(135deg, #fdfbf7 0%, #f8f4ec 50%, #f0e8d8 100%);
+  box-shadow:
+    inset 0 0 30px rgba(139, 69, 19, 0.03),
+    0 4px 20px rgba(139, 69, 19, 0.08);
+  border: 2px solid var(--accent, var(--gold-hover));
+  border-radius: var(--radius-card, 2px);
+}
+
+.card-document--featured::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(184, 157, 58, 0.2) 0%,
+    transparent 50%,
+    rgba(184, 157, 58, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================
+   CHAPTER-STYLE DIVIDERS
+   Historical document section breaks
+   ============================================ */
+
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 1rem;
+}
+
+.chapter-divider::before,
+.chapter-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 150px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--secondary) 20%,
+    var(--secondary) 80%,
+    transparent
+  );
+}
+
+/* Dark background variant */
+.chapter-divider--dark {
+  background: var(--primary);
+}
+
+.chapter-divider--dark::before,
+.chapter-divider--dark::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 20%,
+    var(--accent) 80%,
+    transparent
+  );
+  opacity: 0.6;
+}
+
+/* Light background variant */
+.chapter-divider--light {
+  background: var(--cream);
+}
+
+/* Center decorative ornament */
+.chapter-divider-ornament {
+  color: var(--accent);
+  font-size: 1.25rem;
+  opacity: 0.7;
+  line-height: 1;
+}
+
+.chapter-divider--dark .chapter-divider-ornament {
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+/* Alternative ornament styles */
+.chapter-divider-ornament--star {
+  font-size: 1rem;
+}
+
+.chapter-divider-ornament--flourish {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+}
+
+/* Minimal variant - thinner lines, smaller ornament */
+.chapter-divider--minimal {
+  gap: 1rem;
+  padding: 2rem 1rem;
+}
+
+.chapter-divider--minimal::before,
+.chapter-divider--minimal::after {
+  max-width: 100px;
+  opacity: 0.5;
+}
+
+.chapter-divider--minimal .chapter-divider-ornament {
+  font-size: 0.875rem;
+  opacity: 0.5;
+}
+
+/* Wide variant - longer lines for full-width sections */
+.chapter-divider--wide::before,
+.chapter-divider--wide::after {
+  max-width: 200px;
+}
+
+/* Compact variant - less vertical padding */
+.chapter-divider--compact {
+  padding: 1.5rem 1rem;
+}
+
+/* ============================================
+   PULSE-ONCE ANIMATION
+   ============================================ */
+
+@keyframes pulse-once {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-once {
+  animation: pulse-once 1s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-once {
+    animation: none;
+  }
+}
+
+/* ============================================
+   COMPONENT UTILITIES (Style Guide Compliance)
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--accent);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: var(--primary);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--radius-card, 2px);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Typography Utilities */
+.type-h1 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.type-h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.type-h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.3;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--foreground);
+  font-size: 1rem;
+}
+
+.type-caption {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.type-display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 8vw, 6rem);
+}

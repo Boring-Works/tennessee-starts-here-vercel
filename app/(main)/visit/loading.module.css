@@ -1,0 +1,283 @@
+/* ============================================
+   VISIT LOADING PAGE
+   Skeleton loading states matching the visit page structure
+   ============================================ */
+
+.loadingContainer {
+  min-height: 100vh;
+  background: var(--cream);
+}
+
+/* Hero Section */
+.heroSection {
+  background: var(--primary);
+  padding: var(--space-6xl) var(--layout-page-padding-mobile) var(--space-5xl);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    padding: var(--space-7xl) var(--layout-page-padding-tablet) var(--space-5xl);
+  }
+}
+
+.heroContent {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Quick Info Section */
+.infoSection {
+  background: var(--cream);
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .infoSection {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+.infoGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 640px) {
+  .infoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .infoGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Figures Section */
+.figuresSection {
+  background: white;
+  padding: var(--space-5xl) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .figuresSection {
+    padding: var(--space-5xl) var(--layout-page-padding-tablet);
+  }
+}
+
+.figuresContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.figuresGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-xl);
+}
+
+@media (min-width: 640px) {
+  .figuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .figuresGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Contact Section */
+.contactSection {
+  background: var(--cream);
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .contactSection {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+.contactContent {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Skeleton Components */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06) 25%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-card);
+}
+
+.skeletonDark {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-card);
+}
+
+.skeletonCard {
+  background: white;
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-xl);
+}
+
+.skeletonCircle {
+  border-radius: 50%;
+}
+
+/* Skeleton Sizes */
+.skeletonEyebrow {
+  width: 180px;
+  height: 0.75rem;
+  margin: 0 auto var(--space-lg);
+}
+
+.skeletonHeadline {
+  width: 350px;
+  max-width: 100%;
+  height: 3rem;
+  margin: 0 auto var(--space-lg);
+}
+
+.skeletonSubheadline {
+  width: 400px;
+  max-width: 100%;
+  height: 1.25rem;
+  margin: 0 auto;
+}
+
+.skeletonSectionTitle {
+  width: 200px;
+  height: 2rem;
+  margin: 0 auto var(--space-3xl);
+}
+
+.skeletonText {
+  height: 0.875rem;
+  margin-bottom: var(--space-sm);
+}
+
+.skeletonTextShort {
+  width: 60%;
+}
+
+.skeletonTextMedium {
+  width: 80%;
+}
+
+.skeletonButton {
+  width: 120px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+/* Card Skeleton */
+.cardSkeleton {
+  height: 200px;
+}
+
+.cardSkeletonTitle {
+  width: 80px;
+  height: 1.5rem;
+  margin-bottom: var(--space-lg);
+}
+
+.cardSkeletonRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.cardSkeletonLabel {
+  width: 80px;
+  height: 0.875rem;
+}
+
+.cardSkeletonValue {
+  width: 100px;
+  height: 0.875rem;
+}
+
+/* Figure Card Skeleton */
+.figureCardSkeleton {
+  height: 280px;
+  text-align: center;
+}
+
+.figurePortrait {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-lg);
+}
+
+.figureName {
+  width: 140px;
+  height: 1.25rem;
+  margin: 0 auto var(--space-xs);
+}
+
+.figureTitle {
+  width: 180px;
+  height: 0.875rem;
+  margin: 0 auto var(--space-xs);
+}
+
+.figureYears {
+  width: 80px;
+  height: 0.75rem;
+  margin: 0 auto var(--space-md);
+}
+
+.figureHook {
+  width: 90%;
+  height: 0.875rem;
+  margin: 0 auto var(--space-2xs);
+}
+
+.figureHookSecond {
+  width: 70%;
+  height: 0.875rem;
+  margin: 0 auto;
+}
+
+/* Animation */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .skeletonDark {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}

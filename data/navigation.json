@@ -1,0 +1,287 @@
+{
+  "_meta": {
+    "description": "Site navigation structure - single source of truth for all menus",
+    "updated": "2026-02-03",
+    "usage": "import navigation from '@/data/navigation.json'",
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS verify changes with user before committing",
+        "REVIEW the structuralItems.doNotModify list before making changes"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+      },
+      "prohibited": [
+        "Do NOT remove _meta or _aiRules sections",
+        "Do NOT make changes without user awareness",
+        "Do NOT modify top-level mainNav section labels (Visit, Events, Discover, Support)",
+        "Do NOT change utilityNav or mobileNav without explicit developer request"
+      ],
+      "fileSpecific": [
+        "When adding items to mainNav, ALSO add corresponding items to footerNav for consistency",
+        "When removing items from mainNav, ALSO remove from footerNav",
+        "Keep labels under 15 characters and descriptions under 50 characters",
+        "Maintain dropdown limit of 6 items per section",
+        "Use only 1-2 featured items per dropdown section",
+        "Internal links must start with / - external links use full https:// URLs"
+      ],
+      "testingRules": [
+        "Navigation changes should be tested in preview deployment before production",
+        "Verify all href paths point to existing pages",
+        "Check mobile menu renders correctly after changes",
+        "Test dropdown behavior after adding/removing items"
+      ],
+      "syncRules": [
+        "mainNav and footerNav should contain matching page references",
+        "If a page is important enough for mainNav, it should appear in footerNav",
+        "External links should have 'external': true flag set"
+      ],
+      "whenUnsure": "Ask the user for clarification, especially for structural changes"
+    },
+
+    "staffInstructions": {
+      "whenToEdit": [
+        "Adding a new page that needs to appear in navigation",
+        "Renaming a page or changing its URL",
+        "Reordering menu items within a section",
+        "Adding a featured badge to highlight an item"
+      ],
+      "whenNotToEdit": [
+        "Changing page content (edit the page file instead)",
+        "Adding temporary promotions (use the events system)",
+        "Fixing broken links (contact developer - may indicate deeper issue)"
+      ],
+      "howToEdit": "On GitHub: Navigate to data/navigation.json > Click pencil icon > Make changes > Click 'Commit changes'",
+      "testingChanges": "Preview deployments auto-generate - check Vercel before merging to main"
+    },
+
+    "fieldGuide": {
+      "mainNav": {
+        "description": "Primary navigation shown in header. These are the main dropdown menus.",
+        "canStaffEdit": "Yes - can add/remove/reorder dropdown items",
+        "fields": {
+          "label": "Text shown in the menu (keep under 15 characters)",
+          "href": "URL path - must start with / for internal links",
+          "description": "Short helper text shown in dropdown (keep under 50 characters)",
+          "featured": "Set to true to highlight with accent styling",
+          "badge": "Optional short label like 'New' or 'Limited' (keep under 10 characters)"
+        }
+      },
+      "utilityNav": {
+        "description": "Small links in header corner (Contact, Directions)",
+        "canStaffEdit": "Rarely - these are structural. Ask developer first."
+      },
+      "footerNav": {
+        "description": "Links organized by section in the footer",
+        "canStaffEdit": "Yes - should mirror mainNav structure",
+        "fields": {
+          "external": "Set to true if link opens in new tab"
+        }
+      },
+      "mobileNav": {
+        "description": "Call-to-action buttons shown on mobile menu",
+        "canStaffEdit": "Rarely - these are high-priority conversion buttons"
+      }
+    },
+
+    "rules": {
+      "urlFormat": "Internal links start with / (e.g., /visit). External links use full URL (e.g., https://...)",
+      "labelLength": "Keep labels under 15 characters to prevent layout issues",
+      "descriptionLength": "Keep descriptions under 50 characters",
+      "ordering": "Items display in array order - first item appears first in menu",
+      "dropdownLimit": "Keep dropdowns under 6 items for usability",
+      "featuredLimit": "Only 1-2 featured items per dropdown section",
+      "consistency": "If you add to mainNav, also add to footerNav for discoverability"
+    },
+
+    "templates": {
+      "newNavItem": {
+        "description": "Copy this to add a new item to any dropdown",
+        "example": {
+          "label": "Your Page Title",
+          "href": "/your-page-url",
+          "description": "Brief description here"
+        }
+      },
+      "featuredNavItem": {
+        "description": "Use this for important/promotional items",
+        "example": {
+          "label": "Special Event",
+          "href": "/events/special-event",
+          "description": "Don't miss this!",
+          "featured": true,
+          "badge": "New"
+        }
+      },
+      "externalLink": {
+        "description": "Use this for links to other websites",
+        "example": {
+          "label": "Partner Site",
+          "href": "https://example.com",
+          "description": "Visit our partner",
+          "external": true
+        }
+      },
+      "emailLink": {
+        "description": "Use this for email contact links",
+        "example": { "label": "Contact Us", "href": "mailto:info@rockymountmuseum.com" }
+      }
+    },
+
+    "structuralItems": {
+      "doNotModify": [
+        "Top-level mainNav sections (Visit, Events, Discover, Support) - these define site architecture",
+        "utilityNav items - these are fixed structural elements",
+        "mobileNav CTAs - these are conversion-optimized"
+      ],
+      "askDeveloper": "Contact developer before removing entire sections or changing section labels"
+    }
+  },
+
+  "mainNav": [
+    {
+      "label": "Plan Your Visit",
+      "href": "/visit",
+      "dropdown": [
+        {
+          "label": "Hours & What to Expect",
+          "href": "/visit",
+          "description": "Hours, admission & directions"
+        },
+        { "label": "Group Tours", "href": "/groups", "description": "Tour operators & bus groups" },
+        {
+          "label": "Field Trips & Education",
+          "href": "/educators",
+          "description": "Curriculum & standards"
+        },
+        {
+          "label": "Programs & Living History",
+          "href": "/programs",
+          "description": "Demonstrations & activities"
+        }
+      ]
+    },
+    {
+      "label": "Events",
+      "href": "/events",
+      "dropdown": [
+        { "label": "Events Calendar", "href": "/events", "description": "All 2026 events" },
+        { "label": "Lecture Series", "href": "/lectures", "description": "Speaker series" },
+        {
+          "label": "Colonial Independence Day",
+          "href": "/events/colonial-independence-day",
+          "description": "July 4th celebration",
+          "featured": true
+        },
+        {
+          "label": "First Families Reunion",
+          "href": "/events/first-families-reunion",
+          "description": "Annual homecoming"
+        },
+        {
+          "label": "Stitching Independence",
+          "href": "/events/stitching-independence",
+          "description": "Textile arts event"
+        }
+      ]
+    },
+    {
+      "label": "Explore",
+      "href": "/explore",
+      "dropdown": [
+        {
+          "label": "The Original Seven",
+          "href": "/explore",
+          "description": "Interactive heritage map",
+          "variant": "primary",
+          "tagline": "It All Started Here.",
+          "icon": "map"
+        },
+        {
+          "label": "Where Tennessee Began",
+          "href": "/our-story",
+          "description": "The history of Rocky Mount"
+        },
+        {
+          "label": "The 1775 Almanac",
+          "href": "/almanac",
+          "description": "Weather & farming wisdom"
+        },
+        {
+          "label": "Evidence Room",
+          "href": "/evidence",
+          "description": "Primary sources & documents",
+          "variant": "primary",
+          "tagline": "The proof is in the documents.",
+          "icon": "scroll"
+        },
+        {
+          "label": "Historical Timeline",
+          "href": "/evidence/timeline",
+          "description": "Chronological view"
+        }
+      ]
+    },
+    {
+      "label": "Support",
+      "href": "/support",
+      "dropdown": [
+        {
+          "label": "First 250",
+          "href": "/first-250",
+          "description": "Founding member program",
+          "featured": true,
+          "badge": "Limited"
+        },
+        { "label": "Membership", "href": "/membership", "description": "Join the association" },
+        { "label": "Donate", "href": "/support", "description": "Support our mission" }
+      ]
+    }
+  ],
+  "utilityNav": [
+    { "label": "Contact", "href": "mailto:info@rockymountmuseum.com" },
+    {
+      "label": "Directions",
+      "href": "https://maps.google.com/?q=200+Hyder+Hill+Road+Piney+Flats+TN",
+      "external": true
+    }
+  ],
+  "footerNav": {
+    "visit": [
+      { "label": "Plan Your Visit", "href": "/visit" },
+      { "label": "Group Tours", "href": "/groups" },
+      { "label": "Field Trips", "href": "/educators" },
+      { "label": "Programs", "href": "/programs" }
+    ],
+    "events": [
+      { "label": "Events Calendar", "href": "/events" },
+      { "label": "Lecture Series", "href": "/lectures" }
+    ],
+    "explore": [
+      { "label": "The Original Seven", "href": "/explore" },
+      { "label": "Where Tennessee Began", "href": "/our-story" },
+      { "label": "Evidence Room", "href": "/evidence" },
+      { "label": "The 1775 Almanac", "href": "/almanac" }
+    ],
+    "support": [
+      { "label": "Membership", "href": "/membership", "external": true },
+      { "label": "Donate", "href": "/support", "external": true },
+      {
+        "label": "Volunteer",
+        "href": "mailto:info@rockymountmuseum.com?subject=Volunteer%20Inquiry"
+      },
+      { "label": "First 250", "href": "/first-250" }
+    ]
+  },
+  "mobileNav": {
+    "primaryCTA": { "label": "Plan Your Visit", "href": "/visit" },
+    "secondaryCTA": {
+      "label": "Book Tickets",
+      "href": "https://fareharbor.com/embeds/book/rockymountmuseum/",
+      "external": true
+    }
+  }
+}
